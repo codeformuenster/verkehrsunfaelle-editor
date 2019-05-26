@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "plugins": ["react", "react-hooks"],
+  "rules": {
+    "max-len": ["warn", { "code": 80 }],
+    "prefer-promise-reject-errors": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    "react/prop-types": ["warn"],
+    "react/require-default-props": ["off"]
+  }
+}
