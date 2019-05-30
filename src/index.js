@@ -8,16 +8,21 @@ import { Router } from '@reach/router';
 import IndexPage from './pages/IndexPage';
 import UnfallPage from './pages/UnfallPage';
 
+import { KintoProvider } from './contexts/kinto-context';
+
 import Footer from '../src/components/Footer';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    {/* CssBaseline kickstarts an elegant,
+     consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <Router>
-      <IndexPage path="/" tt="yp" />
-      <UnfallPage path="/unfall" tt="was" />
-    </Router>
+    <KintoProvider>
+      <Router>
+        <IndexPage path="/" tt="yp" />
+        <UnfallPage path="/unfall" tt="was" />
+      </Router>
+    </KintoProvider>
     <Footer />
   </ThemeProvider>,
   document.querySelector('#root'),

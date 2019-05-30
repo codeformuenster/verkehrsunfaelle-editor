@@ -12,10 +12,20 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
+    "no-console": ["warn"],
+    "no-unused-vars": ["warn"],
+    "no-debugger": ["warn"],
     "max-len": ["warn", { "code": 80 }],
     "prefer-promise-reject-errors": ["off"],
     "react/jsx-filename-extension": ["off"],
     "react/prop-types": ["warn"],
-    "react/require-default-props": ["off"]
+    "react/require-default-props": ["off"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
