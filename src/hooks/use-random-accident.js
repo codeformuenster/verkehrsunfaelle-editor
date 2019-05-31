@@ -9,7 +9,10 @@ const useRandomAccident = () => {
 
   React.useEffect(() => {
     setIsLoading(true);
-    ky.get('http://localhost:9000/hooks/random-accident')
+    const abortController = new AbortController();
+    ky.get('http://localhost:9000/hooks/random-accident', {
+      signal: abortController.signal,
+    })
       .json()
       .then(accident => {
         setAccident(accident);
@@ -19,6 +22,9 @@ const useRandomAccident = () => {
         setAccident({ error: err });
         setIsLoading(false);
       });
+    return () => {
+      abortController.abort();
+    };
   }, [reloader]);
 
   return { isLoading, accident, reload: () => reload(Math.random()) };

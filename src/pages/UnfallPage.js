@@ -26,103 +26,106 @@ const useStyles = makeStyles(theme => ({
 
 import SaveIcon from '@material-ui/icons/Done';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import WarningIcon from '@material-ui/icons/Warning';
+import CheckIcon from '@material-ui/icons/Check';
 
-import Map from '../components/Map';
+const Map = React.lazy(() => import('../components/Map'));
+const AuthorizationModal = React.lazy(() =>
+  import('../components/AuthorizationModal'),
+);
 
 import '../styles/unfall.css';
 import useRandomAccident from '../hooks/use-random-accident';
+import useAccident from '../hooks/use-accident';
+import { useKinto } from '../contexts/kinto-context';
+
+const LoadingBox = () => (
+  <Box
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    minHeight="50vh"
+  >
+    <CircularProgress />
+  </Box>
+);
 
 export default function UnfallPage() {
-  const { isLoading, accident, reload } = useRandomAccident();
   const classes = useStyles();
-  const [markerPosition, setMarkerPosition] = React.useReducer(
-    (currentPosition, newPosition) => {
-      if (!newPosition) {
-        return currentPosition;
-      }
 
-      let newLat, newLon;
-
-      if (newPosition.target) {
-        const newMarkerPosition = newPosition.target.getLatLng();
-        newLat = newMarkerPosition.lat;
-        newLon = newMarkerPosition.lng;
-      } else {
-        newLat = newPosition.lat;
-        newLon = newPosition.lon;
-      }
-
-      if (newLat === currentPosition.lat && newLon === currentPosition.lon) {
-        return currentPosition;
-      }
-
-      return {
-        lat: newLat,
-        lon: newLon,
-        initial: Boolean(newPosition.reallyInitial),
-      };
-    },
-    { lat: undefined, lon: undefined, initial: true },
+  const { isLoading, accident, reload } = useRandomAccident();
+  const { saveAccident, markerPosition, setMarkerPosition } = useAccident(
+    accident,
   );
 
-  React.useEffect(() => {
-    if (accident.lat && accident.lon) {
-      setMarkerPosition({
-        lat: accident.lat,
-        lon: accident.lon,
-        reallyInitial: true,
-      });
+  const reallySaveAccident = () => {
+    saveAccident();
+    reload();
+  };
+
+  const { setAuthorization, authorizationName } = useKinto();
+
+  const [showAuthModal, setShowAuthModal] = React.useState(false);
+  const handleSaveClick = () => {
+    if (!authorizationName) {
+      setShowAuthModal(true);
+    } else {
+      reallySaveAccident();
     }
-  }, [accident]);
+  };
+
+  const onAuthModalClose = async ({ username, password, save }) => {
+    if (username || password) {
+      await setAuthorization({ username, password });
+    }
+
+    if (save) {
+      reallySaveAccident();
+    }
+    setShowAuthModal(false);
+  };
 
   return (
     <Container>
       <Box my={4}>
         <Typography variant="h4" component="h4" gutterBottom>
-          Verkehrsunfall {String(markerPosition.initial)}
           {isLoading === true ? (
-            <> wird geladen&hellip;</>
+            <>Verkehrsunfall wird geladen&hellip;</>
           ) : (
             <>
-              {' '}
               &ldquo;{accident.place}&rdquo; Höhe &ldquo;{accident.place_near}
               &rdquo;
             </>
           )}
         </Typography>
         {isLoading === true ? (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="50vh"
-          >
-            <CircularProgress />
-          </Box>
+          <LoadingBox />
         ) : (
           <>
             <Grid container spacing={3}>
-              <Grid item xs={8}>
-                <Map
-                  mapLat={accident.lat}
-                  mapLon={accident.lon}
-                  mapZoom={accident.lat ? 17 : 10}
-                  popupContent={
-                    <>
-                      Unfall bei
-                      <br />
-                      &ldquo;{accident.place}&rdquo; Höhe &ldquo;
-                      {accident.place_near}&rdquo;
-                    </>
-                  }
-                  markerLat={markerPosition.lat}
-                  markerLon={markerPosition.lon}
-                  onMarkerDragEnd={setMarkerPosition}
-                />
+              <Grid item md={8} xs={12}>
+                <React.Suspense fallback={<LoadingBox />}>
+                  <Map
+                    mapLat={accident.lat}
+                    mapLon={accident.lon}
+                    mapZoom={accident.lat ? 18 : 10}
+                    popupContent={
+                      <>
+                        Unfall bei
+                        <br />
+                        &ldquo;{accident.place}&rdquo; Höhe &ldquo;
+                        {accident.place_near}&rdquo;
+                      </>
+                    }
+                    markerLat={markerPosition.lat}
+                    markerLon={markerPosition.lon}
+                    onMarkerDragEnd={setMarkerPosition}
+                  />
+                </React.Suspense>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item md={4} xs={12}>
                 <Typography variant="h6" component="h6" gutterBottom>
-                  Unfallort korrigieren {String(markerPosition.initial)}
+                  Unfallort korrigieren
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   Aus den Angaben der Polizei haben wir automatisiert versucht,
@@ -169,15 +172,32 @@ export default function UnfallPage() {
                       variant="contained"
                       className={classes.button}
                       color="primary"
-                      disabled={markerPosition.initial ? true : undefined}
+                      disabled={markerPosition.initial}
+                      onClick={handleSaveClick}
                     >
                       <SaveIcon />
-                      Speichern {markerPosition.initial}
+                      Speichern
+                    </Button>
+                  </Box>
+                  <Box display="flex" justifyContent="center" pb={2}>
+                    <Button variant="contained" className={classes.button}>
+                      <WarningIcon />
+                      Melden
+                    </Button>
+                    <Button variant="contained" className={classes.button}>
+                      <CheckIcon />
+                      Ort in Ordnung
                     </Button>
                   </Box>
                 </Paper>
               </Grid>
             </Grid>
+            <React.Suspense fallback={'...'}>
+              <AuthorizationModal
+                isOpen={showAuthModal}
+                onClose={onAuthModalClose}
+              />
+            </React.Suspense>
           </>
         )}
       </Box>

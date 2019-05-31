@@ -7,10 +7,14 @@ import theme from './theme';
 import { Router } from '@reach/router';
 import IndexPage from './pages/IndexPage';
 import UnfallPage from './pages/UnfallPage';
+import RawDataPage from './pages/RawDataPage';
 
 import { KintoProvider } from './contexts/kinto-context';
 
-import Footer from '../src/components/Footer';
+import Footer from './components/Footer';
+import Topbar from './components/Topbar';
+
+import './styles/general.css';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
@@ -18,9 +22,11 @@ ReactDOM.render(
      consistent, and simple baseline to build upon. */}
     <CssBaseline />
     <KintoProvider>
+      <Topbar />
       <Router>
-        <IndexPage path="/" tt="yp" />
-        <UnfallPage path="/unfall" tt="was" />
+        <IndexPage path="/" />
+        <UnfallPage path="/unfall" />
+        <RawDataPage path="/rohdaten" />
       </Router>
     </KintoProvider>
     <Footer />

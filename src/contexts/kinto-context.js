@@ -6,17 +6,35 @@ import KintoClient from 'kinto-http';
 const KintoContext = React.createContext();
 
 const KintoProvider = ({ children }) => {
-  const client = React.useMemo(
-    () => new KintoClient('http://localhost:8888/v1/'),
-    [],
-  );
-  // React.useEffect(() => {
-  //   client.listBuckets().then(data => {
-  //     console.log('kinto!!', data);
-  //   });
-  // }, [client]);
+  const [authorization, setAuthorization] = React.useState({
+    unauthorized: true,
+  });
+
+  const client = React.useMemo(() => {
+    let opts = undefined;
+    return new KintoClient('http://localhost:8888/v1/', opts);
+  }, []);
+
+  React.useLayoutEffect(() => {
+    if (!authorization.unauthorized) {
+      client.setHeaders({
+        Authorization: `Basic ${btoa(
+          `${authorization.username}:${authorization.password}`,
+        )}`,
+      });
+    }
+  }, [authorization, client]);
+
   return (
-    <KintoContext.Provider value={client}>{children}</KintoContext.Provider>
+    <KintoContext.Provider
+      value={{
+        client,
+        setAuthorization,
+        authorizationName: authorization.username,
+      }}
+    >
+      {children}
+    </KintoContext.Provider>
   );
 };
 
@@ -27,10 +45,6 @@ KintoProvider.propTypes = {
   ]).isRequired,
 };
 
-const useKinto = () => {
-  const kinto = React.useContext(KintoContext);
-
-  return kinto;
-};
+const useKinto = () => React.useContext(KintoContext);
 
 export { useKinto, KintoProvider };
