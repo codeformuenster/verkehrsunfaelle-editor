@@ -10,6 +10,7 @@ import UnfallPage from './pages/UnfallPage';
 import RawDataPage from './pages/RawDataPage';
 
 import { KintoProvider } from './contexts/kinto-context';
+import { AuthorizationProvider } from './contexts/authorization-context';
 
 import Footer from './components/Footer';
 import Topbar from './components/Topbar';
@@ -22,12 +23,14 @@ ReactDOM.render(
      consistent, and simple baseline to build upon. */}
     <CssBaseline />
     <KintoProvider>
-      <Topbar />
-      <Router>
-        <IndexPage path="/" />
-        <UnfallPage path="/unfall" />
-        <RawDataPage path="/rohdaten" />
-      </Router>
+      <AuthorizationProvider>
+        <Topbar />
+        <Router>
+          <IndexPage path="/" />
+          <UnfallPage path="/unfall" />
+          <RawDataPage path="/rohdaten" />
+        </Router>
+      </AuthorizationProvider>
     </KintoProvider>
     <Footer />
   </ThemeProvider>,

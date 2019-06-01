@@ -10,19 +10,26 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import CloseIcon from '@material-ui/icons/Close';
+import PersonIcon from '@material-ui/icons/Person';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+  tabs: {
+    marginBottom: theme.spacing(1),
   },
   button: {
     margin: theme.spacing(1),
   },
   closeButton: {
-    float: 'right',
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
   },
   textField: {
     flexBasis: 200,
@@ -35,97 +42,146 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
     outline: 'none',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  loadingWrap: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '150px',
+  },
+  alert: {
+    color: theme.palette.error.main,
+    margin: theme.spacing(1),
+    textAlign: 'center',
   },
 }));
 
-const AuthorizationForm = ({ onClose, isOpen }) => {
+const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [mode, setMode] = React.useState(0);
+
+  const onTabChange = (_, tab) => {
+    setMode(tab);
+    setUsername('');
+    setPassword('');
+  };
+
+  const submit = () => {
+    if (username !== '' && password !== '') {
+      onClose({
+        username,
+        password,
+        action: mode === 0 ? 'signin' : 'register',
+      });
+      setUsername('');
+      setPassword('');
+    }
+  };
 
   return (
     <Modal
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
       open={isOpen}
+      onBackdropClick={() => onClose()}
     >
-      <div
-        style={{
-          top: `50%`,
-          left: `50%`,
-          transform: `translate(-50%, -50%)`,
-        }}
-        className={classes.paper}
-      >
-        <Button
-          className={classes.closeButton}
-          onClick={() => onClose({ save: false })}
-        >
-          <CloseIcon />
-        </Button>
-        <Typography variant="h6">Anmelden</Typography>
-        <Typography variant="subtitle1">
-          Anonym speichern? Total in Ordnung!
-        </Typography>
-        <TextField
-          className={classes.textField}
-          variant="outlined"
-          type="text"
-          label="Name"
-          fullWidth
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-        <TextField
-          className={classes.textField}
-          variant="outlined"
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label="Passwort"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  edge="end"
-                  aria-label="Toggle password visibility"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <Box display="flex" justifyContent="center" pt={2}>
-          <Button
-            variant="contained"
-            className={classes.button}
-            color="secondary"
-            onClick={() => onClose({ save: true })}
-          >
-            Speichern ohne Anmeldung
-          </Button>
-          <Button
-            variant="contained"
-            className={classes.button}
-            color="primary"
-            disabled={`${username}${password}` === ''}
-            onClick={() => onClose({ username, password, save: true })}
-          >
-            Anmelden &amp; Speichern
-          </Button>
-        </Box>
+      <div className={classes.paper}>
+        {showLoading === true ? (
+          <div className={classes.loadingWrap}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <>
+            <Button className={classes.closeButton} onClick={() => onClose()}>
+              <CloseIcon />
+            </Button>
+            <Tabs
+              value={mode}
+              onChange={onTabChange}
+              variant="fullWidth"
+              indicatorColor="primary"
+              textColor="primary"
+              className={classes.tabs}
+            >
+              <Tab icon={<PersonIcon />} label="Einloggen" />
+              <Tab icon={<PersonAddIcon />} label="Registrieren" />
+            </Tabs>
+            {error && (
+              <Typography variant="h6" className={classes.alert}>
+                {error}
+              </Typography>
+            )}
+            <TextField
+              className={classes.textField}
+              variant="outlined"
+              type="text"
+              label="Name"
+              fullWidth
+              value={username}
+              autoFocus
+              required
+              disabled={showLoading}
+              onChange={e => setUsername(e.target.value)}
+            />
+            <TextField
+              className={classes.textField}
+              variant="outlined"
+              type={showPassword ? 'text' : 'password'}
+              fullWidth
+              label="Passwort"
+              value={password}
+              required
+              disabled={showLoading}
+              onChange={e => setPassword(e.target.value)}
+              onKeyPress={e => {
+                if (e.key === 'Enter') {
+                  submit();
+                }
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      edge="end"
+                      tabIndex="-1"
+                      aria-label="Toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Box display="flex" justifyContent="center" pt={2}>
+              <Button
+                variant="contained"
+                className={classes.button}
+                color="primary"
+                disabled={showLoading || (username === '' || password === '')}
+                onClick={submit}
+              >
+                {mode === 0 ? 'Einloggen' : 'Registrieren'}
+              </Button>
+            </Box>
+          </>
+        )}
       </div>
     </Modal>
   );
 };
 
 AuthorizationForm.propTypes = {
-  isOpen: PropTypes.boolean,
+  isOpen: PropTypes.bool,
+  showLoading: PropTypes.bool,
   onClose: PropTypes.func,
+  error: PropTypes.string,
 };
 
 export default AuthorizationForm;

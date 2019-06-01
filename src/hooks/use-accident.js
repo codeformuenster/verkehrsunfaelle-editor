@@ -2,7 +2,7 @@ import React from 'react';
 import { useKinto } from '../contexts/kinto-context';
 
 const useAccident = accident => {
-  const { client } = useKinto();
+  const kinto = useKinto();
 
   const [markerPosition, setMarkerPosition] = React.useReducer(
     (currentPosition, newPosition) => {
@@ -48,7 +48,7 @@ const useAccident = accident => {
   }, [accident.lat, accident.lon]);
 
   const saveAccident = React.useCallback(() => {
-    return client
+    return kinto
       .bucket('accidents')
       .collection('geometries')
       .createRecord({
@@ -58,15 +58,9 @@ const useAccident = accident => {
         used_geocoder: 'website',
         geocoded_timestamp: new Date(),
       });
-  }, [accident.accident_id, client, markerPosition.lat, markerPosition.lon]);
+  }, [accident.accident_id, kinto, markerPosition.lat, markerPosition.lon]);
 
   return { saveAccident, markerPosition, setMarkerPosition };
 };
 
 export default useAccident;
-
-// const useSaveAccident = () => {
-//   const { client } = useKinto();
-// };
-
-// export { useSaveAccident };
