@@ -57,6 +57,16 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     textAlign: 'center',
   },
+  or: {
+    textAlign: 'center',
+    borderBottom: `1px solid ${theme.palette.text.hint}`,
+    lineHeight: '0.1em',
+    margin: `10px 0 ${theme.spacing(3)}px`,
+    '& span': {
+      background: theme.palette.background.paper,
+      padding: '0 10px',
+    },
+  },
 }));
 
 const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
@@ -116,6 +126,31 @@ const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
               <Typography variant="h6" className={classes.alert}>
                 {error}
               </Typography>
+            )}
+            {mode === 0 && (
+              <>
+                <Box display="flex" justifyContent="center" pt={1} pb={1}>
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      onClose({
+                        username: 'Anonym',
+                        password: 'anon',
+                        action: 'signin',
+                      })
+                    }
+                  >
+                    Anonym einloggen
+                  </Button>
+                </Box>
+                <Typography
+                  variant="body"
+                  component="div"
+                  className={classes.or}
+                >
+                  <span>oder</span>
+                </Typography>
+              </>
             )}
             <TextField
               className={classes.textField}
