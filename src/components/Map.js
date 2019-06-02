@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import Leaflet from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/images/marker-icon-2x.png';
-
-Leaflet.Icon.Default.imagePath = '/static/media/';
 
 const UnfallMap = ({
   mapLat,

@@ -9,9 +9,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '../components/Link';
+import Map from '../components/Map';
+import LoadingBox from '../components/LoadingBox';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -43,23 +44,10 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckIcon from '@material-ui/icons/Check';
 
-const Map = React.lazy(() => import('../components/Map'));
-
 import '../styles/unfall.css';
 import useRandomAccident from '../hooks/use-random-accident';
 import useAccident from '../hooks/use-accident';
 import { useAuthorization } from '../contexts/authorization-context';
-
-const LoadingBox = () => (
-  <Box
-    display="flex"
-    justifyContent="center"
-    alignItems="center"
-    minHeight="50vh"
-  >
-    <CircularProgress />
-  </Box>
-);
 
 export default function UnfallPage() {
   const classes = useStyles();
@@ -94,24 +82,22 @@ export default function UnfallPage() {
         ) : (
           <Grid container spacing={3}>
             <Grid item md={8} xs={12}>
-              <React.Suspense fallback={<LoadingBox />}>
-                <Map
-                  mapLat={accident.lat}
-                  mapLon={accident.lon}
-                  mapZoom={accident.lat ? 18 : 10}
-                  popupContent={
-                    <>
-                      Unfall bei
-                      <br />
-                      &ldquo;{accident.place}&rdquo; Höhe &ldquo;
-                      {accident.place_near}&rdquo;
-                    </>
-                  }
-                  markerLat={markerPosition.lat}
-                  markerLon={markerPosition.lon}
-                  onMarkerDragEnd={setMarkerPosition}
-                />
-              </React.Suspense>
+              <Map
+                mapLat={accident.lat}
+                mapLon={accident.lon}
+                mapZoom={accident.lat ? 18 : 10}
+                popupContent={
+                  <>
+                    Unfall bei
+                    <br />
+                    &ldquo;{accident.place}&rdquo; Höhe &ldquo;
+                    {accident.place_near}&rdquo;
+                  </>
+                }
+                markerLat={markerPosition.lat}
+                markerLon={markerPosition.lon}
+                onMarkerDragEnd={setMarkerPosition}
+              />
             </Grid>
             <Grid item md={4} xs={12}>
               <Typography variant="h6" component="h6" gutterBottom>

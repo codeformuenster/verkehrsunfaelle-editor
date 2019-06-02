@@ -40,6 +40,14 @@ const useStyles = makeStyles(theme => ({
 
 const questionsAndAnswers = [
   {
+    id: 'wer-seid-ihr',
+    question: 'Wer steckt hinter dieser Seite?',
+    answer:
+      'Code for Münster ist ein lockerer Zusammenschluss von Menschen, ' +
+      'die in ihrer Freizeit ehrenamtlich auf mehr Transparenz in der ' +
+      'Gesellschaft und Verwaltung hinwirken wollen.',
+  },
+  {
     id: 'hintergrund',
     question: 'Was ist das hier für eine Seite?',
     answer: 'Durch eine Anfrage auf Frag den Staat...',
@@ -55,13 +63,18 @@ const questionsAndAnswers = [
       </>
     ),
   },
+  {
+    id: 'datenquelle',
+    question: 'Was sind das für Daten und woher kommen Sie?',
+    answer: 'Durch eine Anfrage auf Frag den Staat...',
+  },
 ];
 
 const FaqPage = () => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h4" gutterBottom>
           Häufig gestellte Fragen
