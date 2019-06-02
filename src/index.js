@@ -8,6 +8,7 @@ import { Router } from '@reach/router';
 import IndexPage from './pages/IndexPage';
 import UnfallPage from './pages/UnfallPage';
 import RawDataPage from './pages/RawDataPage';
+import FaqPage from './pages/FaqPage';
 
 import { KintoProvider } from './contexts/kinto-context';
 import { AuthorizationProvider } from './contexts/authorization-context';
@@ -29,6 +30,7 @@ ReactDOM.render(
           <IndexPage path="/" />
           <UnfallPage path="/unfall" />
           <RawDataPage path="/rohdaten" />
+          <FaqPage path="/faq" />
         </Router>
       </AuthorizationProvider>
     </KintoProvider>

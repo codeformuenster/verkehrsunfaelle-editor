@@ -72,6 +72,10 @@ const Topbar = () => {
             Verkehrsunfälle in Münster
           </Typography>
           <Box className={classes.linksBox}>
+            <Link to="/faq" color="inherit">
+              <Button color="inherit">FAQ</Button>
+            </Link>
+            <span className={classes.separator}>|</span>
             <Link to="/rohdaten" color="inherit">
               <Button color="inherit">Rohdaten</Button>
             </Link>
