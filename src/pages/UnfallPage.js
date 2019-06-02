@@ -1,5 +1,5 @@
 import React from 'react';
-
+import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from '../components/Link';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -21,6 +22,19 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(1),
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
+  },
+  box: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBottom: theme.spacing(2),
+  },
+  disabledBox: {
+    opacity: 0.6,
+  },
+  notSignedInBox: {
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(1),
+    margin: theme.spacing(1),
   },
 }));
 
@@ -56,17 +70,10 @@ export default function UnfallPage() {
   );
   const { authorized, engageAuthModal } = useAuthorization();
 
-  const reallySaveAccident = () => {
-    saveAccident();
-    reload();
-  };
-
-  const handleSaveClick = () => {
-    if (!authorized) {
-      engageAuthModal();
-    } else {
-      reallySaveAccident();
-    }
+  const handleSaveClick = (bogus = false) => {
+    saveAccident(bogus).then(() => {
+      reload();
+    });
   };
 
   return (
@@ -141,11 +148,31 @@ export default function UnfallPage() {
                     />
                   </ListItem>
                 </List>
-                <Box display="flex" justifyContent="center" pb={2}>
+                {!authorized && (
+                  <Box className={classes.notSignedInBox}>
+                    <Button onClick={engageAuthModal}>
+                      Bitte Einloggen oder anonym weitermachen
+                    </Button>
+                    <Link
+                      naked
+                      to="/faq"
+                      style={{ display: 'block', textAlign: 'center' }}
+                    >
+                      Wieso?
+                    </Link>
+                  </Box>
+                )}
+                <Box
+                  className={clsx(
+                    classes.box,
+                    !authorized && classes.disabledBox,
+                  )}
+                >
                   <Button
                     variant="contained"
                     className={classes.button}
                     onClick={reload}
+                    disabled={!authorized}
                   >
                     <RefreshIcon />
                     Nächster Unfall
@@ -154,19 +181,34 @@ export default function UnfallPage() {
                     variant="contained"
                     className={classes.button}
                     color="primary"
-                    disabled={markerPosition.initial}
-                    onClick={handleSaveClick}
+                    disabled={!authorized || markerPosition.initial}
+                    onClick={() => handleSaveClick(false)}
                   >
                     <SaveIcon />
                     Speichern
                   </Button>
                 </Box>
-                <Box display="flex" justifyContent="center" pb={2}>
-                  <Button variant="contained" className={classes.button}>
+                <Box
+                  className={clsx(
+                    classes.box,
+                    !authorized && classes.disabledBox,
+                  )}
+                >
+                  <Button
+                    variant="contained"
+                    className={classes.button}
+                    disabled={!authorized}
+                    onClick={() => handleSaveClick(true)}
+                  >
                     <WarningIcon />
                     Melden
                   </Button>
-                  <Button variant="contained" className={classes.button}>
+                  <Button
+                    variant="contained"
+                    className={classes.button}
+                    disabled={!authorized || !markerPosition.initial}
+                    onClick={() => handleSaveClick(false)}
+                  >
                     <CheckIcon />
                     Ort in Ordnung
                   </Button>

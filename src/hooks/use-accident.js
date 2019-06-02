@@ -47,18 +47,19 @@ const useAccident = accident => {
     }
   }, [accident.lat, accident.lon]);
 
-  const saveAccident = React.useCallback(() => {
+  const saveAccident = isBogus => {
     return kinto
       .bucket('accidents')
-      .collection('geometries')
+      .collection('geometries_corrections')
       .createRecord({
         accident_id: accident.accident_id,
+        geometry_id: accident.geometry_id,
         lat: markerPosition.lat,
         lon: markerPosition.lon,
-        used_geocoder: 'website',
-        geocoded_timestamp: new Date(),
+        timestamp: new Date(),
+        bogus: isBogus,
       });
-  }, [accident.accident_id, kinto, markerPosition.lat, markerPosition.lon]);
+  };
 
   return { saveAccident, markerPosition, setMarkerPosition };
 };
