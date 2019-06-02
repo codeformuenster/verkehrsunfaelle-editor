@@ -1,21 +1,20 @@
-# Create React App example
+# Verkehrsunfall Editor Website
 
-## How to use
+This is the React based web editor for crowd sourced crash location correction.
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
+## Development
 
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/create-react-app
-cd create-react-app
-```
+### Preparations
 
-Install it and run:
+- Install [Node.js](http://nodejs.org/) >= 10.16 and [yarn](https://yarnpkg.com/).
+- Install depdendencies by running `yarn` in the root of this (`editor-web`) directory.
 
-```sh
-npm install
-npm start
-```
+### Running in development
 
-## The idea behind the example
+    yarn start
 
-This example demonstrates how you can use [Create React App](https://github.com/facebookincubator/create-react-app).
+## Production build
+
+- Run `yarn build`.
+- Copy the contents of the `build` directory to your webserver.
+- Set up SPA redirects for all paths in `src/index.js`.
