@@ -28,6 +28,18 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
   },
+  betaBadge: {
+    paddingLeft: theme.spacing(0.5),
+    paddingRight: theme.spacing(0.5),
+    backgroundColor: '#ee1020',
+    textTransform: 'uppercase',
+    transform: 'rotate(25grad)',
+    display: 'inline-block',
+    fontSize: '70%',
+    position: 'relative',
+    right: 20,
+    top: -18,
+  },
 }));
 
 const Topbar = () => {
@@ -69,7 +81,8 @@ const Topbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.title}>
-            Verkehrsunfälle in Münster
+            Verkehrsunfälle in Münster{' '}
+            <span className={classes.betaBadge}>Beta</span>
           </Typography>
           <Box className={classes.linksBox}>
             <Link to="/faq" color="inherit">
