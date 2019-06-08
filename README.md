@@ -2,6 +2,10 @@
 
 This is the React based web editor for crowd sourced crash location correction.
 
+## Backend
+
+See repository [codeformuenster/verkehrsunfaelle](https://github.com/codeformuenster/verkehrsunfaelle). You'll need a populated database & services `kinto`, `random-accident` and `postgres` running.
+
 ## Development
 
 ### Preparations
