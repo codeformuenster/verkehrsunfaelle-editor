@@ -144,7 +144,7 @@ const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
                   </Button>
                 </Box>
                 <Typography
-                  variant="body"
+                  variant="body2"
                   component="div"
                   className={classes.or}
                 >

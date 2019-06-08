@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import KintoClient from 'kinto-http';
 
-const SERVER_URL = process.env.REACT_APP_KINTO_URL; //eslint-disable-line no-undef
+const SERVER_URL = process.env.REACT_APP_KINTO_URL; //eslint-disable-line no-undef, max-len
 
 const KintoContext = React.createContext();
 

@@ -50,10 +50,15 @@ const AuthorizationProvider = ({ children }) => {
 
         setAuthSuccess(username);
       })
-      .catch(() => {
-        setError(
-          'Registrierung fehlgeschlagen. Bitte anderen Benutzernamen versuchen',
-        );
+      .catch(err => {
+        if (err.name === 'HTTPError' && err.message === 'Unauthorized') {
+          setError(
+            'Registrierung fehlgeschlagen. ' +
+              'Bitte anderen Benutzernamen versuchen',
+          );
+        } else {
+          setError('Kommunikation mit dem Server war nicht erfolgreich. 💥');
+        }
       });
   };
 
@@ -73,8 +78,12 @@ const AuthorizationProvider = ({ children }) => {
 
         setAuthSuccess(username);
       })
-      .catch(() => {
-        setError('Benutzername oder Passwort falsch.');
+      .catch(err => {
+        if (err.name === 'HTTPError' && err.message === 'Unauthorized') {
+          setError('Benutzername unbekannt oder Passwort falsch.');
+        } else {
+          setError('Kommunikation mit dem Server war nicht erfolgreich. 💥');
+        }
       });
   };
 
