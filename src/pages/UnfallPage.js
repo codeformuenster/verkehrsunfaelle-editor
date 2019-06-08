@@ -172,7 +172,7 @@ export default function UnfallPage() {
                     </Button>
                     <Link
                       naked
-                      to="/faq"
+                      to="/faq#wieso-einloggen"
                       style={{ display: 'block', textAlign: 'center' }}
                     >
                       Wieso?
