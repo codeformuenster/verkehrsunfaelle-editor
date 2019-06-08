@@ -37,6 +37,13 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     margin: theme.spacing(1),
   },
+  errorBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    minHeight: '50vh',
+  },
 }));
 
 import SaveIcon from '@material-ui/icons/Done';
@@ -64,21 +71,45 @@ export default function UnfallPage() {
     });
   };
 
+  let headingText = '';
+
+  if (isLoading === true) {
+    headingText = 'Verkehrsunfall wird geladen';
+  } else if (accident && accident.error) {
+    headingText = (
+      <>
+        <WarningIcon /> Verkehrsunfall konnte nicht geladen werden
+      </>
+    );
+  } else {
+    headingText = (
+      <>
+        &ldquo;{accident.place}&rdquo; Höhe &ldquo;{accident.place_near}
+        &rdquo;
+      </>
+    );
+  }
+
   return (
     <Container>
       <Box my={4}>
         <Typography variant="h4" component="h4" gutterBottom>
-          {isLoading === true ? (
-            <>Verkehrsunfall wird geladen&hellip;</>
-          ) : (
-            <>
-              &ldquo;{accident.place}&rdquo; Höhe &ldquo;{accident.place_near}
-              &rdquo;
-            </>
-          )}
+          {headingText}
         </Typography>
         {isLoading === true ? (
           <LoadingBox />
+        ) : accident.error ? (
+          <Box className={classes.errorBox}>
+            <Typography variant="body2">{accident.error.message}</Typography>
+            <Button
+              variant="contained"
+              className={classes.button}
+              onClick={reload}
+            >
+              <RefreshIcon />
+              Erneut versuchen.
+            </Button>
+          </Box>
         ) : (
           <Grid container spacing={3}>
             <Grid item md={8} xs={12}>
