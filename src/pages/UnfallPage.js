@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '../components/Link';
@@ -48,17 +51,66 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     minHeight: '50vh',
   },
+  placeName: {
+    '& q': {
+      fontFamily: 'monospace',
+      fontSize: '80%',
+      '&:before': { content: '"\\201E"' },
+      '&:after': { content: '"\\201C"' },
+    },
+    '& .missingValueTooltip': {
+      textDecorationLine: 'underline',
+      textDecorationStyle: 'dotted',
+    },
+  },
+  listItemCentered: {
+    textAlign: 'center',
+  },
 }));
 
 import SaveIcon from '@material-ui/icons/Done';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckIcon from '@material-ui/icons/Check';
+import InfoIcon from '@material-ui/icons/Info';
 
 import '../styles/unfall.css';
 import useRandomAccident from '../hooks/use-random-accident';
 import useAccident from '../hooks/use-accident';
 import { useAuthorization } from '../contexts/authorization-context';
+
+const PlaceName = ({ place, quotes = false, className }) => {
+  const classes = useStyles();
+
+  if (place === '') {
+    return (
+      <span className={clsx(classes.placeName, className)}>
+        <Tooltip title="Fehlende Angabe" placement="right">
+          <span className="missingValueTooltip">
+            {quotes === true ? <q>&#8213;</q> : <span>&#8213;</span>}{' '}
+            <InfoIcon />
+          </span>
+        </Tooltip>
+      </span>
+    );
+  }
+
+  if (quotes === true) {
+    return (
+      <span className={clsx(classes.placeName, className)}>
+        <q>{place}</q>
+      </span>
+    );
+  }
+
+  return <span className={clsx(classes.placeName, className)}>{place}</span>;
+};
+
+PlaceName.propTypes = {
+  className: PropTypes.string,
+  quotes: PropTypes.boolean,
+  place: PropTypes.string,
+};
 
 export default function UnfallPage() {
   const classes = useStyles();
@@ -93,8 +145,8 @@ export default function UnfallPage() {
   } else {
     headingText = (
       <>
-        &ldquo;{accident.place}&rdquo; Höhe &ldquo;{accident.place_near}
-        &rdquo;
+        Unfall <PlaceName place={accident.place} quotes={true} /> Höhe{' '}
+        <PlaceName place={accident.place_near} quotes={true} />
       </>
     );
   }
@@ -130,8 +182,8 @@ export default function UnfallPage() {
                   <>
                     Unfall bei
                     <br />
-                    &ldquo;{accident.place}&rdquo; Höhe &ldquo;
-                    {accident.place_near}&rdquo;
+                    <PlaceName place={accident.place} quotes={true} /> Höhe{' '}
+                    <PlaceName place={accident.place_near} quotes={true} />
                   </>
                 }
                 markerLat={markerPosition.lat}
@@ -158,21 +210,35 @@ export default function UnfallPage() {
                   component="h6"
                   className={classes.paperHeader}
                 >
-                  Polizeiangaben:
+                  Angaben laut Polizei:
                 </Typography>
                 <List>
-                  <ListItem>
+                  <ListItem className={classes.listItemCentered}>
                     <ListItemText
-                      primary={accident.place}
+                      primaryTypographyProps={{
+                        variant: 'h6',
+                      }}
+                      primary={
+                        <PlaceName place={accident.place} quotes={true} />
+                      }
                       secondary="Unfallort"
                     />
                   </ListItem>
-                  <ListItem>
+                  <ListItem className={classes.listItemCentered}>
                     <ListItemText
-                      primary={accident.place_near}
+                      primaryTypographyProps={{
+                        variant: 'h6',
+                      }}
+                      primary={
+                        <PlaceName place={accident.place_near} quotes={true} />
+                      }
                       secondary="Unfallhöhe"
                     />
                   </ListItem>
+                  <ListSubheader>
+                    Quelle: {accident.source_file}, Zeile{' '}
+                    {accident.source_row_number}
+                  </ListSubheader>
                 </List>
                 {!authorized && (
                   <Box className={classes.notSignedInBox}>
