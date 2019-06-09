@@ -4,6 +4,9 @@ import { useKinto } from '../contexts/kinto-context';
 const useAccident = accident => {
   const kinto = useKinto();
 
+  const [error, setError] = React.useState(null);
+  const [working, setWorking] = React.useState(false);
+
   const [markerPosition, setMarkerPosition] = React.useReducer(
     (currentPosition, newPosition) => {
       if (!newPosition) {
@@ -48,20 +51,38 @@ const useAccident = accident => {
   }, [accident.lat, accident.lon]);
 
   const saveAccident = isBogus => {
-    return kinto
-      .bucket('accidents')
-      .collection('geometries_corrections')
-      .createRecord({
-        accident_id: accident.accident_id,
-        geometry_id: accident.geometry_id,
-        lat: markerPosition.lat,
-        lon: markerPosition.lon,
-        timestamp: new Date(),
-        bogus: isBogus,
-      });
+    setWorking(true);
+
+    // wrap with Promise.. maybe I'm doing something wrong, or kinto http js
+    // excutes .then even if there was some error?!
+    return new window.Promise((resolve, reject) => {
+      kinto
+        .bucket('accidents')
+        .collection('geometries_corrections')
+        .createRecord({
+          accident_id: accident.accident_id,
+          geometry_id: accident.geometry_id,
+          lat: markerPosition.lat,
+          lon: markerPosition.lon,
+          timestamp: new Date(),
+          bogus: isBogus,
+        })
+        .then(() => {
+          if (error !== null) {
+            setError(null);
+          }
+          setWorking(false);
+          return resolve();
+        })
+        .catch(err => {
+          setError(err);
+          setWorking(false);
+          return reject(err);
+        });
+    });
   };
 
-  return { saveAccident, markerPosition, setMarkerPosition };
+  return { saveAccident, markerPosition, setMarkerPosition, working, error };
 };
 
 export default useAccident;

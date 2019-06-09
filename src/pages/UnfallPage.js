@@ -37,6 +37,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     margin: theme.spacing(1),
   },
+  saveErrorBox: {
+    backgroundColor: '#ce5a4e',
+    textAlign: 'center',
+  },
   errorBox: {
     display: 'flex',
     justifyContent: 'center',
@@ -60,9 +64,14 @@ export default function UnfallPage() {
   const classes = useStyles();
 
   const { isLoading, accident, reload } = useRandomAccident();
-  const { saveAccident, markerPosition, setMarkerPosition } = useAccident(
-    accident,
-  );
+  const {
+    saveAccident,
+    markerPosition,
+    setMarkerPosition,
+    working,
+    error: saveAccidentError,
+  } = useAccident(accident);
+
   const { authorized, engageAuthModal } = useAuthorization();
 
   const handleSaveClick = (bogus = false) => {
@@ -179,57 +188,77 @@ export default function UnfallPage() {
                     </Link>
                   </Box>
                 )}
-                <Box
-                  className={clsx(
-                    classes.box,
-                    !authorized && classes.disabledBox,
-                  )}
-                >
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    onClick={reload}
-                    disabled={!authorized}
-                  >
-                    <RefreshIcon />
-                    Nächster Unfall
-                  </Button>
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    color="primary"
-                    disabled={!authorized || markerPosition.initial}
-                    onClick={() => handleSaveClick(false)}
-                  >
-                    <SaveIcon />
-                    Speichern
-                  </Button>
-                </Box>
-                <Box
-                  className={clsx(
-                    classes.box,
-                    !authorized && classes.disabledBox,
-                  )}
-                >
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    disabled={!authorized}
-                    onClick={() => handleSaveClick(true)}
-                  >
-                    <WarningIcon />
-                    Melden
-                  </Button>
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    disabled={!authorized || !markerPosition.initial}
-                    onClick={() => handleSaveClick(false)}
-                  >
-                    <CheckIcon />
-                    Ort in Ordnung
-                  </Button>
-                </Box>
+                {working === true ? (
+                  <LoadingBox minHeight="140px" />
+                ) : (
+                  <>
+                    {saveAccidentError && (
+                      <Box
+                        className={clsx(
+                          classes.box,
+                          classes.notSignedInBox,
+                          classes.saveErrorBox,
+                        )}
+                      >
+                        <Typography variant="body2">
+                          <WarningIcon /> Korrektur konnte nicht gespeichert
+                          werden. Bitte probieren Sie es später noch ein mal.
+                        </Typography>
+                      </Box>
+                    )}
+                    <Box
+                      className={clsx(
+                        classes.box,
+                        !authorized && classes.disabledBox,
+                      )}
+                    >
+                      <Button
+                        variant="contained"
+                        className={classes.button}
+                        onClick={reload}
+                        disabled={!authorized}
+                      >
+                        <RefreshIcon />
+                        Nächster Unfall
+                      </Button>
+                      <Button
+                        variant="contained"
+                        className={classes.button}
+                        color="primary"
+                        disabled={!authorized || markerPosition.initial}
+                        onClick={() => handleSaveClick(false)}
+                      >
+                        <SaveIcon />
+                        Speichern
+                      </Button>
+                    </Box>
+                    <Box
+                      className={clsx(
+                        classes.box,
+                        !authorized && classes.disabledBox,
+                      )}
+                    >
+                      <Button
+                        variant="contained"
+                        className={classes.button}
+                        disabled={!authorized}
+                        onClick={() => handleSaveClick(true)}
+                      >
+                        <WarningIcon />
+                        Melden
+                      </Button>
+                      <Button
+                        variant="contained"
+                        className={classes.button}
+                        disabled={!authorized || !markerPosition.initial}
+                        onClick={() => handleSaveClick(false)}
+                      >
+                        <CheckIcon />
+                        Ort in Ordnung
+                      </Button>
+                    </Box>
+                  </>
+                )}
               </Paper>
             </Grid>
           </Grid>
