@@ -31,7 +31,7 @@ ReactDOM.render(
         <Suspense fallback={<LoadingBox />}>
           <Router>
             <IndexPage path="/" />
-            <UnfallPage path="/unfall" />
+            <UnfallPage path="/korrektur" />
             <RawDataPage path="/rohdaten" />
             <FaqPage path="/faq" />
           </Router>

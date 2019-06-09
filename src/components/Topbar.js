@@ -8,6 +8,8 @@ import Box from '@material-ui/core/Box';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Link from './Link';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import { useAuthorization } from '../contexts/authorization-context';
 
@@ -19,10 +21,34 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   linksBox: {
-    marginRight: theme.spacing(2),
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      alignItems: 'center',
+      display: 'flex',
+    },
+  },
+  mobileLinks: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
   title: {
-    flexGrow: 1,
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('md')]: {
+      flexGrow: 1,
+      display: 'flex',
+    },
+  },
+  mobileTitle: {
+    [theme.breakpoints.down('md')]: {
+      flexGrow: 1,
+      display: 'flex',
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
   separator: {
     marginRight: theme.spacing(1),
@@ -33,21 +59,39 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(0.5),
     backgroundColor: '#ee1020',
     textTransform: 'uppercase',
-    transform: 'rotate(25grad)',
+    transform: 'rotate(-40grad)',
     display: 'inline-block',
-    fontSize: '70%',
-    position: 'relative',
-    right: 20,
-    top: -18,
+    fontSize: '0.9rem',
+    fontWeight: '700',
+    position: 'absolute',
+    left: 0,
+    top: 6,
   },
 }));
+
+const links = [
+  {
+    label: 'FAQ',
+    to: '/faq',
+  },
+  {
+    label: 'Rohdaten',
+    to: '/rohdaten',
+  },
+  {
+    label: 'Korrektur',
+    to: '/korrektur',
+  },
+];
 
 const Topbar = () => {
   const classes = useStyles();
   const { authorized, username, engageAuthModal, signout } = useAuthorization();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileAnchorEl, setMobileAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileAnchorEl);
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -55,6 +99,14 @@ const Topbar = () => {
 
   const onProfileMenuClick = event => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileAnchorEl(null);
+  };
+
+  const onMobileMenuClick = event => {
+    setMobileAnchorEl(event.currentTarget);
   };
 
   const renderMenu = (
@@ -76,26 +128,65 @@ const Topbar = () => {
     </Menu>
   );
 
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      {links.map(l => (
+        <MenuItem key={`${l.to}-mobile`}>
+          <Link to={l.to} color="inherit" onClick={handleMobileMenuClose}>
+            {l.label}
+          </Link>
+        </MenuItem>
+      ))}
+    </Menu>
+  );
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.title}>
-            Verkehrsunfälle in Münster{' '}
-            <span className={classes.betaBadge}>Beta</span>
+            Verkehrsunfälle in Münster
           </Typography>
+          <Typography
+            variant="h6"
+            color="inherit"
+            className={classes.mobileTitle}
+          >
+            Verkehrsunfälle
+            <br />
+            in Münster
+          </Typography>
+          <span className={classes.betaBadge}>Beta</span>
+          <Box className={classes.mobileLinks}>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+              onClick={onMobileMenuClick}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
           <Box className={classes.linksBox}>
-            <Link to="/faq" color="inherit">
-              <Button color="inherit">FAQ</Button>
-            </Link>
-            <span className={classes.separator}>|</span>
-            <Link to="/rohdaten" color="inherit">
-              <Button color="inherit">Rohdaten</Button>
-            </Link>
-            <span className={classes.separator}>|</span>
-            <Link to="/unfall" color="inherit">
-              <Button color="inherit">Korrektur</Button>
-            </Link>
+            {links.map((l, index) => (
+              <>
+                <Link key={l.to} to={l.to} color="inherit">
+                  <Button color="inherit">{l.label}</Button>
+                </Link>
+                {index !== links.length - 1 && (
+                  <span className={classes.separator}>|</span>
+                )}
+              </>
+            ))}
+          </Box>
+          <Box>
             <span className={classes.separator}>|</span>
             <Button
               color="inherit"
@@ -117,6 +208,7 @@ const Topbar = () => {
         </Toolbar>
       </AppBar>
       {renderMenu}
+      {renderMobileMenu}
     </div>
   );
 };
