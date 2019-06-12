@@ -7,6 +7,7 @@ import theme from './theme';
 import { Router } from '@reach/router';
 
 import IndexPage from './pages/IndexPage';
+import NotFoundPage from './pages/NotFoundPage';
 const UnfallPage = React.lazy(() => import('./pages/UnfallPage'));
 const RawDataPage = React.lazy(() => import('./pages/RawDataPage'));
 const FaqPage = React.lazy(() => import('./pages/FaqPage'));
@@ -34,6 +35,7 @@ ReactDOM.render(
             <UnfallPage path="/korrektur" />
             <RawDataPage path="/rohdaten" />
             <FaqPage path="/faq" />
+            <NotFoundPage default />
           </Router>
         </Suspense>
       </AuthorizationProvider>

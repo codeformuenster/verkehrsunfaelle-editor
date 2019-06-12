@@ -151,7 +151,9 @@ const Topbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.title}>
-            Verkehrsunfälle in Münster
+            <Link to="/" color="inherit">
+              Verkehrsunfälle in Münster
+            </Link>
           </Typography>
           <Typography
             variant="h6"

@@ -7,26 +7,26 @@ import Button from '@material-ui/core/Button';
 
 import Link from '../components/Link';
 
-export default function IndexPage() {
+export default function IndexPage({ uri }) {
   return (
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h4" gutterBottom>
-          Verkehrsunfälle in Münster
+          Seite nicht gefunden
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Wir wollen Verkehrsunfälle in Münster besser verstehen, dafür brauchen
-          wir eine maschinenlesbare Datengrundlage.
+          Unter der Adresse <Typography variant="caption">{uri}</Typography>{' '}
+          existiert leider keine Seite. :(
         </Typography>
-        <Typography variant="body1" gutterBottom>
-          Diese Seite soll dabei helfen, den Datensatz zu verbessern. Jeder kann
-          dabei mithelfen, Fehler des Computers bei der Erkennung des
-          Unfallortes zu verbessern.
+        <Typography variant="body1">
+          Am besten, du gehst zurück zur Hauptseite.
         </Typography>
+      </Box>
+      <Box mb={4}>
         <Typography align="center">
-          <Link naked to="/korrektur">
+          <Link naked to="/">
             <Button variant="contained" color="primary">
-              Loslegen!
+              Zurück zur Hauptseite
             </Button>
           </Link>
         </Typography>
