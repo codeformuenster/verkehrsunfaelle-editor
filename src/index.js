@@ -1,4 +1,12 @@
 import React, { Suspense } from 'react';
+import * as Sentry from '@sentry/browser';
+
+const SENTRY_DSN = process.env.REACT_APP_SENTRY_DSN; //eslint-disable-line no-undef, max-len
+
+if (SENTRY_DSN) {
+  Sentry.init({ dsn: SENTRY_DSN });
+}
+
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
