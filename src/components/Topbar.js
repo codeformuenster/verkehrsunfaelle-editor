@@ -178,14 +178,14 @@ const Topbar = () => {
           </Box>
           <Box className={classes.linksBox}>
             {links.map((l, index) => (
-              <>
-                <Link key={l.to} to={l.to} color="inherit">
+              <React.Fragment key={l.to}>
+                <Link to={l.to} color="inherit">
                   <Button color="inherit">{l.label}</Button>
                 </Link>
                 {index !== links.length - 1 && (
                   <span className={classes.separator}>|</span>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </Box>
           <Box>
