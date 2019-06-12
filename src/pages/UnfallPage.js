@@ -173,7 +173,7 @@ export default function UnfallPage() {
           </Box>
         ) : (
           <Grid container spacing={3}>
-            <Grid item md={8} xs={12}>
+            <Grid item md={8} sm={7} xs={12}>
               <Map
                 mapLat={accident.lat}
                 mapLon={accident.lon}
@@ -191,7 +191,7 @@ export default function UnfallPage() {
                 onMarkerDragEnd={setMarkerPosition}
               />
             </Grid>
-            <Grid item md={4} xs={12}>
+            <Grid item md={4} sm={5} xs={12}>
               <Typography variant="h6" component="h6" gutterBottom>
                 Unfallort korrigieren
               </Typography>

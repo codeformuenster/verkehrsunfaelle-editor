@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -34,3 +34,7 @@ export default function IndexPage({ uri }) {
     </Container>
   );
 }
+
+IndexPage.propTypes = {
+  uri: PropTypes.string,
+};
