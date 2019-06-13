@@ -24,7 +24,7 @@ export default function IndexPage() {
           Unfallortes zu verbessern.
         </Typography>
         <Typography align="center">
-          <Link naked to="/korrektur">
+          <Link to="/korrektur">
             <Button variant="contained" color="primary">
               Loslegen!
             </Button>
