@@ -20,6 +20,14 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
+  toolbar: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+    },
+  },
   linksBox: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -49,6 +57,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.9rem',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.typography.fontSize.h6,
+    },
   },
   separator: {
     marginRight: theme.spacing(1),
@@ -64,8 +78,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.9rem',
     fontWeight: '700',
     position: 'absolute',
-    left: 0,
-    top: 6,
+    left: -6,
+    top: 3,
+    [theme.breakpoints.up('md')]: {
+      top: 6,
+    },
   },
 }));
 
@@ -87,58 +104,60 @@ const links = [
 const Topbar = () => {
   const classes = useStyles();
   const { authorized, username, engageAuthModal, signout } = useAuthorization();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileAnchorEl, setMobileAnchorEl] = React.useState(null);
+  const [userMenuIsOpen, setUserMenuOpen] = React.useState(false);
+  const [mobileMenuIsOpen, setMobileMenuOpen] = React.useState(false);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileAnchorEl);
+  const userMenuAnchorEl = React.useRef(null);
+  const mobileMenuAnchorEl = React.useRef(null);
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  const onUserMenuClose = React.useCallback(() => {
+    setUserMenuOpen(false);
+  }, [setUserMenuOpen]);
 
-  const onProfileMenuClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
+  const onMobileMenuClose = React.useCallback(() => {
+    setMobileMenuOpen(false);
+  }, [setMobileMenuOpen]);
 
-  const handleMobileMenuClose = () => {
-    setMobileAnchorEl(null);
-  };
+  const onSignOut = React.useCallback(() => {
+    setMobileMenuOpen(false);
+    signout();
+  }, [signout, setMobileMenuOpen]);
 
-  const onMobileMenuClick = event => {
-    setMobileAnchorEl(event.currentTarget);
-  };
+  const onUserMenuOpen = React.useCallback(() => {
+    if (authorized) {
+      setUserMenuOpen(true);
+    } else {
+      engageAuthModal();
+    }
+  }, [authorized, setUserMenuOpen, engageAuthModal]);
 
-  const renderMenu = (
+  const onMobileMenuOpen = React.useCallback(() => {
+    setMobileMenuOpen(true);
+  }, [setMobileMenuOpen]);
+
+  const renderUserMenu = (
     <Menu
-      anchorEl={anchorEl}
+      anchorEl={userMenuAnchorEl.current}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
+      open={userMenuIsOpen}
+      onClose={onUserMenuClose}
     >
-      <MenuItem
-        onClick={() => {
-          signout();
-          handleMenuClose();
-        }}
-      >
-        Ausloggen
-      </MenuItem>
+      <MenuItem onClick={onSignOut}>Ausloggen</MenuItem>
     </Menu>
   );
 
   const renderMobileMenu = (
     <Menu
-      anchorEl={mobileAnchorEl}
+      anchorEl={mobileMenuAnchorEl.current}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      open={mobileMenuIsOpen}
+      onClose={onMobileMenuClose}
     >
       {links.map(l => (
         <MenuItem key={`${l.to}-mobile`}>
-          <Link to={l.to} color="inherit" onClick={handleMobileMenuClose}>
+          <Link to={l.to} color="inherit" onClick={onMobileMenuClose}>
             {l.label}
           </Link>
         </MenuItem>
@@ -149,7 +168,7 @@ const Topbar = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Typography variant="h6" color="inherit" className={classes.title}>
             <Link to="/" color="inherit">
               Verkehrsunfälle in Münster
@@ -160,18 +179,21 @@ const Topbar = () => {
             color="inherit"
             className={classes.mobileTitle}
           >
-            Verkehrsunfälle
-            <br />
-            in Münster
+            <Link to="/" color="inherit">
+              Verkehrsunfälle
+              <br />
+              in Münster
+            </Link>
           </Typography>
           <span className={classes.betaBadge}>Beta</span>
           <Box className={classes.mobileLinks}>
             <IconButton
+              ref={mobileMenuAnchorEl}
               edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
-              onClick={onMobileMenuClick}
+              onClick={onMobileMenuOpen}
             >
               <MenuIcon />
             </IconButton>
@@ -191,8 +213,9 @@ const Topbar = () => {
           <Box>
             <span className={classes.separator}>|</span>
             <Button
+              ref={userMenuAnchorEl}
               color="inherit"
-              onClick={authorized ? onProfileMenuClick : engageAuthModal}
+              onClick={onUserMenuOpen}
             >
               {authorized === true ? (
                 <>
@@ -209,7 +232,7 @@ const Topbar = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMenu}
+      {renderUserMenu}
       {renderMobileMenu}
     </div>
   );
