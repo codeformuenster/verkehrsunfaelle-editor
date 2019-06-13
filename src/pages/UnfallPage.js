@@ -246,7 +246,7 @@ export default function UnfallPage() {
                       Bitte Einloggen oder anonym weitermachen
                     </Button>
                     <Link
-                      naked
+                      color="inherit"
                       to="/faq#wieso-einloggen"
                       style={{ display: 'block', textAlign: 'center' }}
                     >

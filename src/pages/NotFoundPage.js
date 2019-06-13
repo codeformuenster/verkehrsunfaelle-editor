@@ -24,7 +24,7 @@ export default function IndexPage({ uri }) {
       </Box>
       <Box mb={4}>
         <Typography align="center">
-          <Link naked to="/">
+          <Link color="inherit" to="/">
             <Button variant="contained" color="primary">
               Zurück zur Hauptseite
             </Button>

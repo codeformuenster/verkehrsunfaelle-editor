@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import { Link as ReachLink } from '@reach/router';
 import MuiLink from '@material-ui/core/Link';
 
-function LinkComposed(props) {
-  return (
-    <ReachLink
-      getProps={({ isCurrent }) => {
-        return isCurrent
-          ? { className: `${props.className} current-path-link` }
-          : null;
-      }}
-      {...props}
-    />
-  );
-}
+const LinkComposed = React.forwardRef((props, ref) => (
+  <ReachLink
+    ref={ref}
+    getProps={({ isCurrent }) => {
+      return isCurrent
+        ? { className: `${props.className} current-path-link` }
+        : null;
+    }}
+    {...props}
+  />
+));
+
+LinkComposed.displayName = 'LinkComposed';
 
 // eslint-disable react/require-default-props
 LinkComposed.propTypes = {
@@ -24,11 +25,7 @@ LinkComposed.propTypes = {
 // eslint-enable react/require-default-props
 
 function Link(props) {
-  const { className, naked, ...other } = props;
-
-  if (naked) {
-    return <LinkComposed className={className} {...other} />;
-  }
+  const { className, ...other } = props;
 
   return <MuiLink component={LinkComposed} className={className} {...other} />;
 }
@@ -36,7 +33,6 @@ function Link(props) {
 Link.propTypes = {
   className: PropTypes.string,
   to: PropTypes.string,
-  naked: PropTypes.bool,
 };
 
 export default Link;
