@@ -118,11 +118,6 @@ const Topbar = () => {
     setMobileMenuOpen(false);
   }, [setMobileMenuOpen]);
 
-  const onSignOut = React.useCallback(() => {
-    setMobileMenuOpen(false);
-    signout();
-  }, [signout, setMobileMenuOpen]);
-
   const onUserMenuOpen = React.useCallback(() => {
     if (authorized) {
       setUserMenuOpen(true);
@@ -135,6 +130,10 @@ const Topbar = () => {
     setMobileMenuOpen(true);
   }, [setMobileMenuOpen]);
 
+  React.useLayoutEffect(() => {
+    onUserMenuClose();
+  }, [authorized, onUserMenuClose]);
+
   const renderUserMenu = (
     <Menu
       anchorEl={userMenuAnchorEl.current}
@@ -143,7 +142,7 @@ const Topbar = () => {
       open={userMenuIsOpen}
       onClose={onUserMenuClose}
     >
-      <MenuItem onClick={onSignOut}>Ausloggen</MenuItem>
+      <MenuItem onClick={signout}>Ausloggen</MenuItem>
     </Menu>
   );
 

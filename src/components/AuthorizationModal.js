@@ -50,7 +50,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '150px',
+    height: 150,
+    width: 150,
   },
   alert: {
     color: theme.palette.error.main,
