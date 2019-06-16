@@ -113,6 +113,12 @@ const AuthorizationProvider = ({ children }) => {
     }
   };
 
+  React.useEffect(() => {
+    if (state.authorized === false) {
+      checkCredentials('Anonym', 'anon');
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <AuthorizationContext.Provider
       value={{ ...state, engageAuthModal, signout }}
