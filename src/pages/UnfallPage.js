@@ -29,13 +29,13 @@ const useStyles = makeStyles(theme => ({
   },
   crashMap: {
     height: '40vh',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('lg')]: {
       height: '70vh',
     },
   },
   mainGrid: {
     flexDirection: 'column-reverse',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('lg')]: {
       flexDirection: 'unset',
     },
   },
@@ -100,7 +100,7 @@ export default function UnfallPage() {
           />
         </Box>
         <Grid container spacing={1} className={classes.mainGrid}>
-          <Grid item md={8} sm={7} xs={12}>
+          <Grid item lg={8} xs={12}>
             {shouldSpin === true ? (
               <LoadingBox className={classes.crashMap} />
             ) : accident.error ? (
@@ -140,7 +140,7 @@ export default function UnfallPage() {
               />
             )}
           </Grid>
-          <Grid item md={4} sm={5} xs={12}>
+          <Grid item lg={4} xs={12}>
             <UnfallBox
               accident={accident}
               loading={shouldSpin}
