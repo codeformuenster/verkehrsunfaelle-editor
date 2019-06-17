@@ -14,9 +14,15 @@ const UnfallMap = ({
   markerLon,
   popupContent,
   onMarkerDragEnd,
+  className,
 }) => {
   return (
-    <Map center={[mapLat, mapLon]} zoom={mapZoom} maxZoom={18}>
+    <Map
+      center={[mapLat, mapLon]}
+      zoom={mapZoom}
+      maxZoom={18}
+      className={className}
+    >
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' // eslint-disable-line max-len
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -47,6 +53,7 @@ UnfallMap.propTypes = {
     PropTypes.string,
   ]),
   onMarkerDragEnd: PropTypes.func,
+  className: PropTypes.string,
 };
 
 UnfallMap.defaultProps = {

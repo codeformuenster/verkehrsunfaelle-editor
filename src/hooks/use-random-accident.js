@@ -5,7 +5,11 @@ const SERVER_URL = process.env.REACT_APP_RANDOM_ACCIDENT_URL; //eslint-disable-l
 
 const useRandomAccident = () => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [accident, setAccident] = React.useState({ error: false });
+  const [accident, setAccident] = React.useState({
+    error: false,
+    place: '―',
+    place_near: '―',
+  });
 
   const [reloader, reload] = React.useState(0);
 
