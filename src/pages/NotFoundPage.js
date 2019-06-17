@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import Typo from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 
@@ -11,25 +11,23 @@ export default function IndexPage({ uri }) {
   return (
     <Container maxWidth="sm">
       <Box my={4}>
-        <Typography variant="h4" component="h4" gutterBottom>
+        <Typo variant="h4" component="h4" gutterBottom>
           Seite nicht gefunden
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Unter der Adresse <Typography variant="caption">{uri}</Typography>{' '}
-          existiert leider keine Seite. :(
-        </Typography>
-        <Typography variant="body1">
-          Am besten, du gehst zurück zur Hauptseite.
-        </Typography>
+        </Typo>
+        <Typo variant="body1" gutterBottom>
+          Unter der Adresse <Typo variant="caption">{uri}</Typo> existiert
+          leider keine Seite. :(
+        </Typo>
+        <Typo variant="body1">Am besten, du gehst zurück zur Hauptseite.</Typo>
       </Box>
       <Box mb={4}>
-        <Typography align="center">
+        <Typo align="center">
           <Link color="inherit" to="/">
             <Button variant="contained" color="primary">
               Zurück zur Hauptseite
             </Button>
           </Link>
-        </Typography>
+        </Typo>
       </Box>
     </Container>
   );
