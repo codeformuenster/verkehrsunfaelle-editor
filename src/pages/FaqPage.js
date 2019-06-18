@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -31,6 +32,7 @@ const useStyles = makeStyles(theme => ({
   answer: {
     paddingLeft: theme.spacing(2),
     paddingTop: theme.spacing(3),
+    textAlign: 'justify',
     '&:before': {
       content: '"Antwort: "',
       marginTop: '-24px',
@@ -42,10 +44,19 @@ const questionsAndAnswers = [
   {
     id: 'wer-seid-ihr',
     question: 'Wer steckt hinter dieser Seite?',
-    answer:
-      'Code for Münster ist ein lockerer Zusammenschluss von Menschen, ' +
-      'die in ihrer Freizeit ehrenamtlich auf mehr Transparenz in der ' +
-      'Gesellschaft und Verwaltung hinwirken wollen.',
+    answer: (
+      <>
+        Code for Münster ist ein lockerer Zusammenschluss von Menschen, die in
+        ihrer Freizeit ehrenamtlich auf mehr Transparenz in der Gesellschaft und
+        Verwaltung hinwirken wollen.
+        <br />
+        Weitere Informationen unter{' '}
+        <Link target="_blank" href="https://codeformuenster.org/">
+          codeformuenster.org
+        </Link>
+        .
+      </>
+    ),
   },
   {
     id: 'hintergrund',
