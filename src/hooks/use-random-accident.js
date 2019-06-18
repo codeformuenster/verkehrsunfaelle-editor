@@ -3,6 +3,15 @@ import ky from 'ky';
 
 const SERVER_URL = process.env.REACT_APP_RANDOM_ACCIDENT_URL; //eslint-disable-line no-undef, max-len
 
+if (!window.AbortController) {
+  window.AbortController = function() {
+    this.signal = {
+      addEventListener: () => {},
+    };
+    this.abort = () => {};
+  };
+}
+
 const useRandomAccident = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [accident, setAccident] = React.useState({
@@ -15,7 +24,7 @@ const useRandomAccident = () => {
 
   React.useEffect(() => {
     setIsLoading(true);
-    const abortController = new AbortController();
+    const abortController = new window.AbortController();
     ky.get(`${SERVER_URL}/random-accident`, {
       signal: abortController.signal,
     })
