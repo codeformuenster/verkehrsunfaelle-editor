@@ -39,10 +39,17 @@ const useStyles = makeStyles(theme => ({
       flexDirection: 'unset',
     },
   },
-  helpButton: {
+  infoButton: {
     marginLeft: 'auto',
     [theme.breakpoints.up('lg')]: {
-      marginLeft: theme.spacing(3),
+      display: 'none',
+    },
+  },
+  infoBox: {
+    display: 'none',
+    padding: theme.spacing(2),
+    [theme.breakpoints.up('lg')]: {
+      display: 'block',
     },
   },
 }));
@@ -70,6 +77,24 @@ export default function UnfallPage() {
     });
   };
 
+  const information = (
+    <>
+      <Typography variant="h6" component="h6">
+        Unfallort korrigieren
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        Für jeden Unfall wird von der Polizei auch der Unfallort erhoben. Die
+        Angaben umfassen einen &quot;Unfallort&quot; und eine
+        &quot;Unfallhöhe&quot;. Aus den Angaben der Polizei haben wir
+        automatisiert versucht, den Ort herauszufinden.
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        Du kannst eine Korrektur vorschlagen, in dem du in der Karte den Marker
+        verschiebst und rechts auf &quot;Speichern&quot; klickst.
+      </Typography>
+    </>
+  );
+
   return (
     <Container>
       <Box my={{ xs: 1, sm: 2 }}>
@@ -79,23 +104,8 @@ export default function UnfallPage() {
           </Typography>
           <InfoButton
             icon="help"
-            information={
-              <>
-                <Typography variant="h6" component="h6">
-                  Unfallort korrigieren
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                  Aus den Angaben der Polizei haben wir automatisiert versucht,
-                  den Ort herauszufinden.
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                  Du kannst eine Korrektur vorschlagen, in dem du in der Karte
-                  den Marker verschiebst und rechts auf &quot;Speichern&quot;
-                  klickst.
-                </Typography>
-              </>
-            }
-            className={classes.helpButton}
+            information={information}
+            className={classes.infoButton}
             dialog
           />
         </Box>
@@ -148,6 +158,9 @@ export default function UnfallPage() {
               onNextClick={reload}
               saveError={saveAccidentError}
             />
+            <Box className={classes.infoBox} mt={2}>
+              {information}
+            </Box>
           </Grid>
         </Grid>
       </Box>
