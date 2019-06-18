@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -60,13 +61,34 @@ const InfoButton = ({ icon, information, className, dialog, size }) => {
     );
   } else {
     return (
-      <Tooltip title={information}>
-        {icon === 'help' ? (
-          <HelpIcon fontSize={size} />
-        ) : (
-          <InfoIcon fontSize={size} />
-        )}
-      </Tooltip>
+      <ClickAwayListener onClickAway={handleClose}>
+        <span>
+          <Tooltip
+            PopperProps={{
+              disablePortal: true,
+            }}
+            onClose={handleClose}
+            open={open}
+            disableFocusListener
+            disableHoverListener
+            disableTouchListener
+            title={information}
+          >
+            <IconButton
+              color="inherit"
+              aria-label={icon === 'help' ? 'Hilfe' : 'Info'}
+              className={className}
+              onClick={handleOpen}
+            >
+              {icon === 'help' ? (
+                <HelpIcon fontSize={size} />
+              ) : (
+                <InfoIcon fontSize={size} />
+              )}
+            </IconButton>
+          </Tooltip>
+        </span>
+      </ClickAwayListener>
     );
   }
 };
