@@ -74,7 +74,7 @@ export default function UnfallPage() {
     <Container>
       <Box my={{ xs: 1, sm: 2 }}>
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" component="h6" display="inline">
+          <Typography variant="h5" component="h5" display="inline">
             Unfallort korrigieren
           </Typography>
           <InfoButton

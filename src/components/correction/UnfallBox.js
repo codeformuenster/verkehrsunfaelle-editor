@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   actionButton: {
     borderRadius: 0,
   },
+  infoButton: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 const UnfallBox = ({
@@ -103,6 +106,7 @@ const UnfallBox = ({
         <InfoButton
           icon="info"
           size="small"
+          className={classes.infoButton}
           // eslint-disable-next-line max-len
           information={`Quelle: ${accident.source_file}, Zeile ${accident.source_row_number}`}
         />
