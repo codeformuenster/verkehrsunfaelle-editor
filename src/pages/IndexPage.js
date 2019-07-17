@@ -15,13 +15,14 @@ export default function IndexPage() {
           Verkehrsunfälle in Münster
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Wir wollen Verkehrsunfälle in Münster besser verstehen, dafür brauchen
-          wir eine maschinenlesbare Datengrundlage.
+          Wir wollen Verkehrsunfälle in Münster besser verstehen. Dafür brauchen
+          wir eine Datengrundlage, mit der auch Computer problemlos arbeiten 
+          können.          
         </Typography>
         <Typography variant="body1" gutterBottom>
           Diese Seite soll dabei helfen, den Datensatz zu verbessern. Jeder kann
           dabei mithelfen, Fehler des Computers bei der Erkennung des
-          Unfallortes zu verbessern.
+          Unfallortes zu korrigieren. Es ist ganz einfach und macht sogar Spaß!
         </Typography>
         <Typography align="center">
           <Link to="/korrektur">
