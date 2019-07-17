@@ -54,7 +54,7 @@ const questionsAndAnswers = [
           zu visualisieren und einfach zugänglich zu machen
         </Link>
         . Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
-        schwer maschinenlesbaren Format aufgenommen (z.B.: 'Kappenberger Damm, Höhe Kriegerweg').
+        schwer maschinenlesbaren Format aufgenommen (z.B.: &apos;Kappenberger Damm, Höhe Kriegerweg&apos;).
         Wir haben es uns nun zur Aufgabe gemacht alle Unfälle durchzugehen
         und den korrekten Ort einzupflegen. Da es so viele Unfälle sind,
         setzen wir mit diesem Unfalleditor auf Deine Hilfe. Danke!
