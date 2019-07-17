@@ -47,17 +47,18 @@ const questionsAndAnswers = [
     answer: (
       <>
         Leider ist die Datenqualität der Verkehrunfallstatistik der Polizei
-        Münster nicht die allerbeste. Nach mehreren Versuchen ist es uns gelungen,
-        die zwischen den Jahren unterschiedlichen Spaltennamen und Formate in
-        eine Datenbank zu laden, um sie{' '}
+        Münster nicht die allerbeste. Nach mehreren Versuchen ist es uns
+        gelungen, die zwischen den Jahren unterschiedlichen Spaltennamen und
+        Formate in eine Datenbank zu laden, um sie{' '}
         <Link target="_blank" href="https://crashes.codeformuenster.org">
           zu visualisieren und einfach zugänglich zu machen
         </Link>
         . Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
-        schwer maschinenlesbaren Format aufgenommen (z.B.: &apos;Kappenberger Damm, Höhe Kriegerweg&apos;).
-        Wir haben es uns nun zur Aufgabe gemacht alle Unfälle durchzugehen
-        und den korrekten Ort einzupflegen. Da es so viele Unfälle sind,
-        setzen wir mit diesem Unfalleditor auf Deine Hilfe. Danke!
+        schwer maschinenlesbaren Format aufgenommen (z.B.: &apos;Kappenberger
+        Damm, Höhe Kriegerweg&apos;). Wir haben es uns nun zur Aufgabe gemacht
+        alle Unfälle durchzugehen und den korrekten Ort einzupflegen. Da es so
+        viele Unfälle sind, setzen wir mit diesem Unfalleditor auf Deine Hilfe.
+        Danke!
       </>
     ),
   },
@@ -66,15 +67,16 @@ const questionsAndAnswers = [
     question: 'Wer steckt hinter dieser Seite?',
     answer: (
       <>
-        &quot;Code for Münster&quot; ist ein lockerer Zusammenschluss von Menschen, die in
-        ihrer Freizeit ehrenamtlich auf mehr Transparenz in der Gesellschaft und
-        Verwaltung hinwirken wollen. Dazu versuchen sie Datenschätze der öffentlichen
-        Hand (Stadt, Stadtwerke, etc.) für die Allgemeinheit zu öffnen. Von
-        diesen offenen Daten und Anwendungen, die auf diesen offenen Daten aufbauen
-        (z.B. dieser Unfalldateneditor) profitiert dann die Stadtgesellschaft.
+        &quot;Code for Münster&quot; ist ein lockerer Zusammenschluss von
+        Menschen, die in ihrer Freizeit ehrenamtlich auf mehr Transparenz in der
+        Gesellschaft und Verwaltung hinwirken wollen. Dazu versuchen sie
+        Datenschätze der öffentlichen Hand (Stadt, Stadtwerke, etc.) für die
+        Allgemeinheit zu öffnen. Von diesen offenen Daten und Anwendungen, die
+        auf diesen offenen Daten aufbauen (z.B. dieser Unfalldateneditor)
+        profitiert dann die Stadtgesellschaft.
         <br />
-        Klingt interessant? Komm gerne vorbei, wir sind immer offen für neue Leute!
-        Weitere Informationen unter{' '}
+        Klingt interessant? Komm gerne vorbei, wir sind immer offen für neue
+        Leute! Weitere Informationen unter{' '}
         <Link target="_blank" href="https://codeformuenster.org/">
           codeformuenster.org
         </Link>
@@ -87,20 +89,20 @@ const questionsAndAnswers = [
     question: 'Wieso muss ich mich einloggen?',
     answer: (
       <>
-        Musst du nicht! Du kannst deine Korrekturen auch anonym machen.
-        Dazu einfach im Login-Fenster auf &quot;Anonym einloggen&quot; klicken.
+        Musst du nicht! Du kannst deine Korrekturen auch anonym machen. Dazu
+        einfach im Login-Fenster auf &quot;Anonym einloggen&quot; klicken.
         <br />
         <br />
         Wenn Du Dich aber einloggst, dann erscheinst Du auch (wenn Du möchtest)
-        in der Highscore-Liste. Schaffst Du es, am meisten Unfälle zu korrigieren?
-        Die ersten drei der Rangliste am 1.1.2020 bekommen jeweils ein
-        Bier o.ä. von uns ausgegeben!
+        in der Highscore-Liste. Schaffst Du es, am meisten Unfälle zu
+        korrigieren? Die ersten drei der Rangliste am 1.1.2020 bekommen jeweils
+        ein Bier o.ä. von uns ausgegeben!
         <br />
         <br />
-        Der Grund für das Einloggen ist,
-        dass wir Missbrauch vermeiden wollen. Wir überprüfen stichprobenweise,
-        ob die Korrekturen richtig sind. Falls jemand falsche Korrekturen
-        eingibt, können wir einfach alle Korrekturen von diesem/r NutzerIn ablehnen.
+        Der Grund für das Einloggen ist, dass wir Missbrauch vermeiden wollen.
+        Wir überprüfen stichprobenweise, ob die Korrekturen richtig sind. Falls
+        jemand falsche Korrekturen eingibt, können wir einfach alle Korrekturen
+        von diesem/r NutzerIn ablehnen.
       </>
     ),
   },
@@ -109,17 +111,29 @@ const questionsAndAnswers = [
     question: 'Was sind das für Daten und woher kommen sie?',
     answer: (
       <>
-      Dank einer Anfrage bei der Polizei Münster über{' '}
-      <Link target="_blank" href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/">
-        &quot;Frag den Staat&quot;
-      </Link> sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis
-      2014 gekommen. Die Daten ab 2015 haben wir dankenswerterweise über{' '}
-      <Link target="_blank" href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html">
-        den ADFC
-      </Link> bekommen. Die Rohdaten lassen sich{' '}
-      <Link target="_blank" href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken">
-       hier herunterladen (dort Ordner Rohdaten auswählen)
-      </Link>.
+        Dank einer Anfrage bei der Polizei Münster über{' '}
+        <Link
+          target="_blank"
+          href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/"
+        >
+          &quot;Frag den Staat&quot;
+        </Link>{' '}
+        sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis 2014
+        gekommen. Die Daten ab 2015 haben wir dankenswerterweise über{' '}
+        <Link
+          target="_blank"
+          href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html"
+        >
+          den ADFC
+        </Link>{' '}
+        bekommen. Die Rohdaten lassen sich{' '}
+        <Link
+          target="_blank"
+          href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken"
+        >
+          hier herunterladen (dort Ordner Rohdaten auswählen)
+        </Link>
+        .
       </>
     ),
   },
@@ -128,53 +142,55 @@ const questionsAndAnswers = [
     question: 'Und was habe ich davon?',
     answer: (
       <>
-        Kurz gesagt: Mittelfristig bekommst Du eine sicherere Verkehrsinfrastruktur,
-        weil es mit den Unfalldaten möglich ist, besonders gefährliche Orte
-        zu identifizieren und dann hoffentlich zu entschärfen.
-        Und Du kannst ein Bier gewinnen!
+        Kurz gesagt: Mittelfristig bekommst Du eine sicherere
+        Verkehrsinfrastruktur, weil es mit den Unfalldaten möglich ist,
+        besonders gefährliche Orte zu identifizieren und dann hoffentlich zu
+        entschärfen. Und Du kannst ein Bier gewinnen!
         <br />
         <br />
-        Lange Antwort:
-        In Münster gibt es im Vergleich zu anderen NRW-Städten viele Verkehrsunfälle.
-        Trotz der seit 2007 bestehenden Ordnungspartnerschaft{' '}
+        Lange Antwort: In Münster gibt es im Vergleich zu anderen NRW-Städten
+        viele Verkehrsunfälle. Trotz der seit 2007 bestehenden
+        Ordnungspartnerschaft{' '}
         <Link target="_blank" href="https://www.sicher-durch-muenster.de/">
           &quot;Sicher durch Münster&quot;
-        </Link>, die für eine Reduktion von Verkehrsunfällen sorgen sollte,
-        verringert sich die hohe Unfallanzahl seit über 10 Jahren nicht,
-        teilweise stieg sie sogar an.
+        </Link>
+        , die für eine Reduktion von Verkehrsunfällen sorgen sollte, verringert
+        sich die hohe Unfallanzahl seit über 10 Jahren nicht, teilweise stieg
+        sie sogar an.
         <br />
         <br />
-        Was steckt hinter dieser Entwicklung? Bei welchen Unfallarten kann
-        man von einer Verbesserung der Lage sprechen, bei welchen muss man
-        von einer Verschlechterung sprechen? Wo könnten welche Maßnahmen
-        für eine Unfallreduktion sorgen? Welche Maßnahmen sind teuer aber wirkungslos?
+        Was steckt hinter dieser Entwicklung? Bei welchen Unfallarten kann man
+        von einer Verbesserung der Lage sprechen, bei welchen muss man von einer
+        Verschlechterung sprechen? Wo könnten welche Maßnahmen für eine
+        Unfallreduktion sorgen? Welche Maßnahmen sind teuer aber wirkungslos?
         <br />
         <br />
-        Solche Fragen werden seit Jahren von der interessierten Stadtöffentlichkeit,
-        insbesondere durch BefürworterInnen des Radverkehrs gestellt (z.B. ADFC).
-        Sie lassen sich auch teilweise durch die von der Polizei Münster
-        gesammelten Unfalldaten beantworten. Dazu musste man sich bisher
-        jedoch entweder auf die polizeiliche Interpretation verlassen oder
-        sich durch große Excel-Tabellen an Rohdaten wühlen.
+        Solche Fragen werden seit Jahren von der interessierten
+        Stadtöffentlichkeit, insbesondere durch BefürworterInnen des Radverkehrs
+        gestellt (z.B. ADFC). Sie lassen sich auch teilweise durch die von der
+        Polizei Münster gesammelten Unfalldaten beantworten. Dazu musste man
+        sich bisher jedoch entweder auf die polizeiliche Interpretation
+        verlassen oder sich durch große Excel-Tabellen an Rohdaten wühlen.
         <br />
         <br />
         Um es der interessierten Stadtöffentlichkeit zu ermöglichen,
-        faktenbasiert an der Diskussion teilzunehmen, haben wir von
-        &quot;Code For Münster&quot; eine{' '}
+        faktenbasiert an der Diskussion teilzunehmen, haben wir von &quot;Code
+        For Münster&quot; eine{' '}
         <Link target="_blank" href="https://crashes.codeformuenster.org">
           interaktive räumliche Unfalldatenvisualisierung
-        </Link> erstellt. Für diese Visualisierung brauchen wir aber eine
-        bessere Datenqualität, insbesondere bei den Unfallorten. Deshalb
-        haben wir diesen Unfalleditor entwickelt.
+        </Link>{' '}
+        erstellt. Für diese Visualisierung brauchen wir aber eine bessere
+        Datenqualität, insbesondere bei den Unfallorten. Deshalb haben wir
+        diesen Unfalleditor entwickelt.
         <br />
         <br />
         Letztlich können durch unsere Projekte zivilgesellschaftliche
-        Organisationen sowohl Fragen nach Unfallschwerpunkten neu bewerten
-        als auch Trends in den Daten offenlegen, die von der
-        Ordnungspartnerschaft &quot;Sicher durch Münster&quot; so bisher
-        nicht entdeckt oder kommuniziert wurden.
+        Organisationen sowohl Fragen nach Unfallschwerpunkten neu bewerten als
+        auch Trends in den Daten offenlegen, die von der Ordnungspartnerschaft
+        &quot;Sicher durch Münster&quot; so bisher nicht entdeckt oder
+        kommuniziert wurden.
       </>
-    )
+    ),
   },
   {
     id: 'noch-eine-frage',
@@ -182,15 +198,15 @@ const questionsAndAnswers = [
     answer: (
       <>
         Super! Schick Deine Frage doch gerne per e-Mail an{' '}
-        <Link href="mailto:muenster@codefor.de">
-          muenster@codefor.de
-        </Link> oder komm uns einfach mal besuchen (siehe{' '}
+        <Link href="mailto:muenster@codefor.de">muenster@codefor.de</Link> oder
+        komm uns einfach mal besuchen (siehe{' '}
         <Link target="_blank" href="https://codeformuenster.org/">
-        codeformuenster.org
-        </Link>).
+          codeformuenster.org
+        </Link>
+        ).
       </>
     ),
-  }
+  },
 ];
 
 const FaqPage = () => {
