@@ -89,11 +89,15 @@ const questionsAndAnswers = [
       <>
         Musst du nicht! Du kannst deine Korrekturen auch anonym machen.
         Dazu einfach im Login-Fenster auf &quot;Anonym einloggen&quot; klicken.
+        <br />
+        <br />
         Wenn Du Dich aber einloggst, dann erscheinst Du auch (wenn Du möchtest)
         in der Highscore-Liste. Schaffst Du es, am meisten Unfälle zu korrigieren?
-        <br />
         Die ersten drei der Rangliste am 1.1.2020 bekommen jeweils ein
-        Bier o.ä. von uns ausgegeben! Der Grund für das Einloggen ist,
+        Bier o.ä. von uns ausgegeben!
+        <br />
+        <br />
+        Der Grund für das Einloggen ist,
         dass wir Missbrauch vermeiden wollen. Wir überprüfen stichprobenweise,
         ob die Korrekturen richtig sind. Falls jemand falsche Korrekturen
         eingibt, können wir einfach alle Korrekturen von diesem/r NutzerIn ablehnen.
@@ -109,12 +113,12 @@ const questionsAndAnswers = [
       <Link target="_blank" href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/">
         &quot;Frag den Staat&quot;
       </Link>
-      sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis 2014 gekommen.
+       sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis 2014 gekommen.
       Die Daten ab 2015 haben wir dankenswerterweise über{' '}
       <Link target="_blank" href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html">
         den ADFC
       </Link>
-      bekommen. Die Rohdaten lassen sich{' '}
+       bekommen. Die Rohdaten lassen sich{' '}
       <Link target="_blank" href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken">
        hier herunterladen (dort Ordner Rohdaten auswählen)
       </Link>
@@ -164,7 +168,7 @@ const questionsAndAnswers = [
         <Link target="_blank" href="https://crashes.codeformuenster.org">
           interaktive räumliche Unfalldatenvisualisierung
         </Link>
-        erstellt. Für diese Visualisierung brauchen wir aber eine bessere
+         erstellt. Für diese Visualisierung brauchen wir aber eine bessere
         Datenqualität, insbesondere bei den Unfallorten. Deshalb haben wir
         diesen Unfalleditor entwickelt.
         <br />
@@ -186,7 +190,7 @@ const questionsAndAnswers = [
         <Link href="mailto:muenster@codefor.de">
           muenster@codefor.de
         </Link>
-        oder komm uns einfach mal besuchen (siehe{' '}
+         oder komm uns einfach mal besuchen (siehe{' '}
         <Link target="_blank" href="https://codeformuenster.org/">
         codeformuenster.org
         </Link>
