@@ -117,12 +117,10 @@ const questionsAndAnswers = [
       Die Daten ab 2015 haben wir dankenswerterweise über{' '}
       <Link target="_blank" href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html">
         den ADFC
-      </Link>
-       bekommen. Die Rohdaten lassen sich{' '}
+      </Link> bekommen. Die Rohdaten lassen sich{' '}
       <Link target="_blank" href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken">
        hier herunterladen (dort Ordner Rohdaten auswählen)
-      </Link>
-      .
+      </Link>.
       </>
     ),
   },
@@ -142,8 +140,7 @@ const questionsAndAnswers = [
         Trotz der seit 2007 bestehenden Ordnungspartnerschaft{' '}
         <Link target="_blank" href="https://www.sicher-durch-muenster.de/">
           &quot;Sicher durch Münster&quot;
-        </Link>
-        , die für eine Reduktion von Verkehrsunfällen sorgen sollte,
+        </Link>, die für eine Reduktion von Verkehrsunfällen sorgen sollte,
         verringert sich die hohe Unfallanzahl seit über 10 Jahren nicht,
         teilweise stieg sie sogar an.
         <br />
@@ -167,10 +164,9 @@ const questionsAndAnswers = [
         &quot;Code For Münster&quot; eine{' '}
         <Link target="_blank" href="https://crashes.codeformuenster.org">
           interaktive räumliche Unfalldatenvisualisierung
-        </Link>
-         erstellt. Für diese Visualisierung brauchen wir aber eine bessere
-        Datenqualität, insbesondere bei den Unfallorten. Deshalb haben wir
-        diesen Unfalleditor entwickelt.
+        </Link> erstellt. Für diese Visualisierung brauchen wir aber eine
+        bessere Datenqualität, insbesondere bei den Unfallorten. Deshalb
+        haben wir diesen Unfalleditor entwickelt.
         <br />
         <br />
         Letztlich können durch unsere Projekte zivilgesellschaftliche
@@ -189,12 +185,10 @@ const questionsAndAnswers = [
         Super! Schick Deine Frage doch gerne per e-Mail an{' '}
         <Link href="mailto:muenster@codefor.de">
           muenster@codefor.de
-        </Link>
-         oder komm uns einfach mal besuchen (siehe{' '}
+        </Link> oder komm uns einfach mal besuchen (siehe{' '}
         <Link target="_blank" href="https://codeformuenster.org/">
         codeformuenster.org
-        </Link>
-        ).
+        </Link>).
       </>
     ),
   }
