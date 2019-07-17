@@ -112,9 +112,8 @@ const questionsAndAnswers = [
       Dank einer Anfrage bei der Polizei Münster über{' '}
       <Link target="_blank" href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/">
         &quot;Frag den Staat&quot;
-      </Link>
-       sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis 2014 gekommen.
-      Die Daten ab 2015 haben wir dankenswerterweise über{' '}
+      </Link> sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis
+      2014 gekommen. Die Daten ab 2015 haben wir dankenswerterweise über{' '}
       <Link target="_blank" href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html">
         den ADFC
       </Link> bekommen. Die Rohdaten lassen sich{' '}
