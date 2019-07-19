@@ -112,28 +112,32 @@ const questionsAndAnswers = [
     answer: (
       <>
         Dank einer Anfrage bei der Polizei Münster über{' '}
+        {/* eslint-disable max-len */}
         <Link
           target="_blank"
           href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/"
         >
           &quot;Frag den Staat&quot;
         </Link>{' '}
+        {/* eslint-enable max-len */}
         sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis 2014
         gekommen. Die Daten ab 2015 haben wir dankenswerterweise über{' '}
+        {/* eslint-disable max-len */}
         <Link
           target="_blank"
           href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html"
         >
           den ADFC
         </Link>{' '}
-        bekommen. Die Rohdaten lassen sich{' '}
+        {/* eslint-enable max-len */}
+        bekommen. Die Rohdaten lassen sich {/* eslint-disable max-len */}
         <Link
           target="_blank"
           href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken"
         >
           hier herunterladen (dort Ordner Rohdaten auswählen)
         </Link>
-        .
+        {/* eslint-enable max-len */}.
       </>
     ),
   },
