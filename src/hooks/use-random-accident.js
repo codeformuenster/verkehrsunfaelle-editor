@@ -1,7 +1,7 @@
 import React from 'react';
 import ky from 'ky';
 
-const SERVER_URL = process.env.REACT_APP_RANDOM_ACCIDENT_URL; //eslint-disable-line no-undef, max-len
+const SERVER_URL = process.env.REACT_APP_DATA_HELPERS_URL; //eslint-disable-line no-undef, max-len
 
 if (!window.AbortController) {
   window.AbortController = function() {
