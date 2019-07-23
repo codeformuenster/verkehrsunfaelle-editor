@@ -18,6 +18,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import PersonIcon from '@material-ui/icons/Person';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
+import useUserCredentials from '../hooks/use-user-credentials';
+
 const useStyles = makeStyles(theme => ({
   tabs: {
     marginBottom: theme.spacing(1),
@@ -73,25 +75,30 @@ const useStyles = makeStyles(theme => ({
 const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState(false);
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const {
+    username,
+    password,
+    setUsername,
+    setPassword,
+    usernameValid,
+    credentialsValid,
+    resetCredentials,
+  } = useUserCredentials();
   const [mode, setMode] = React.useState(0);
 
   const onTabChange = (_, tab) => {
     setMode(tab);
-    setUsername('');
-    setPassword('');
+    resetCredentials();
   };
 
   const submit = () => {
-    if (username !== '' && password !== '') {
+    if (credentialsValid) {
       onClose({
         username,
         password,
         action: mode === 0 ? 'signin' : 'register',
       });
-      setUsername('');
-      setPassword('');
+      resetCredentials();
     }
   };
 
@@ -158,6 +165,8 @@ const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
               variant="outlined"
               type="text"
               label="Name"
+              error={!usernameValid}
+              helperText={'Erlaubte Zeichen sind a-zA-Z0-9@_-.'}
               fullWidth
               value={username}
               autoFocus
@@ -200,7 +209,7 @@ const AuthorizationForm = ({ onClose, isOpen, showLoading, error }) => {
                 variant="contained"
                 className={classes.button}
                 color="primary"
-                disabled={showLoading || (username === '' || password === '')}
+                disabled={showLoading || !credentialsValid}
                 onClick={submit}
               >
                 {mode === 0 ? 'Einloggen' : 'Registrieren'}
