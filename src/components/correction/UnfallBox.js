@@ -52,7 +52,7 @@ const UnfallBox = ({
   saveError,
 }) => {
   const classes = useStyles();
-  const { authorized, engageAuthModal } = useAuthorization();
+  const { authorized, username, engageAuthModal } = useAuthorization();
 
   let actionBox = null;
 
@@ -77,7 +77,7 @@ const UnfallBox = ({
             disabled={!authorized}
             onClick={onSaveClick}
           >
-            <SaveIcon /> Unfall speichern
+            <SaveIcon /> {username === 'Anonym' ? 'Anonym' : 'Unfall'} speichern
           </Button>
         </>
       );
