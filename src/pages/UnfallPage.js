@@ -15,7 +15,6 @@ import PlaceName from '../components/correction/PlaceName';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
 
-import useRandomAccident from '../hooks/use-random-accident';
 import useAccident from '../hooks/use-accident';
 
 const useStyles = makeStyles(theme => ({
@@ -57,24 +56,18 @@ const useStyles = makeStyles(theme => ({
 export default function UnfallPage() {
   const classes = useStyles();
 
-  const { isLoading, accident, reload } = useRandomAccident();
   const {
+    accident,
     saveAccident,
-    markerPosition,
-    setMarkerPosition,
-    working,
-    error: saveAccidentError,
-  } = useAccident(accident);
-
-  const shouldSpin = React.useMemo(() => isLoading || working, [
+    reloadAccident,
+    saveError,
+    accidentPosition,
+    setAccidentPosition,
     isLoading,
-    working,
-  ]);
+  } = useAccident();
 
   const handleSaveClick = (bogus = false) => {
-    saveAccident(bogus).then(() => {
-      reload();
-    });
+    saveAccident(bogus);
   };
 
   const information = (
@@ -111,7 +104,7 @@ export default function UnfallPage() {
         </Box>
         <Grid container spacing={1} className={classes.mainGrid}>
           <Grid item lg={8} xs={12}>
-            {shouldSpin === true ? (
+            {isLoading === true ? (
               <LoadingBox className={classes.crashMap} />
             ) : accident.error ? (
               <Box className={classes.errorBox}>
@@ -121,7 +114,7 @@ export default function UnfallPage() {
                 <Button
                   variant="contained"
                   className={classes.button}
-                  onClick={reload}
+                  onClick={reloadAccident}
                 >
                   <RefreshIcon />
                   Erneut versuchen.
@@ -144,19 +137,19 @@ export default function UnfallPage() {
                     <PlaceName place={accident.place_near} quotes={true} />
                   </>
                 }
-                markerLat={markerPosition.lat}
-                markerLon={markerPosition.lon}
-                onMarkerDragEnd={setMarkerPosition}
+                markerLat={accidentPosition.lat}
+                markerLon={accidentPosition.lon}
+                onMarkerDragEnd={setAccidentPosition}
               />
             )}
           </Grid>
           <Grid item lg={4} xs={12}>
             <UnfallBox
               accident={accident}
-              loading={shouldSpin}
+              loading={isLoading}
               onSaveClick={() => handleSaveClick(false)}
-              onNextClick={reload}
-              saveError={saveAccidentError}
+              onNextClick={reloadAccident}
+              saveError={saveError}
             />
             <Box className={classes.infoBox} mt={2}>
               {information}

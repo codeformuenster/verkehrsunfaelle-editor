@@ -1,12 +1,8 @@
 import React from 'react';
 import { useKinto } from '../contexts/kinto-context';
+import useDataHelper from './use-data-helper';
 
-const useAccident = accident => {
-  const kinto = useKinto();
-
-  const [error, setError] = React.useState(null);
-  const [working, setWorking] = React.useState(false);
-
+const useAccidentPosition = initialPosition => {
   const [markerPosition, setMarkerPosition] = React.useReducer(
     (currentPosition, newPosition) => {
       if (!newPosition) {
@@ -41,17 +37,37 @@ const useAccident = accident => {
   );
 
   React.useEffect(() => {
-    if (accident.lat && accident.lon) {
+    if (initialPosition.lat && initialPosition.lon) {
       setMarkerPosition({
-        lat: accident.lat,
-        lon: accident.lon,
+        lat: initialPosition.lat,
+        lon: initialPosition.lon,
         reallyInitial: true,
       });
     }
-  }, [accident.lat, accident.lon]);
+  }, [initialPosition.lat, initialPosition.lon]);
+
+  return [markerPosition, setMarkerPosition];
+};
+
+const useAccident = () => {
+  const kinto = useKinto();
+
+  const [saveError, setSaveError] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const [
+    { isLoading: randomAccidentIsLoading, response: accident },
+    reloadAccident,
+  ] = useDataHelper('random-accident');
+
+  React.useEffect(() => {
+    setIsLoading(randomAccidentIsLoading);
+  }, [randomAccidentIsLoading]);
+
+  const [accidentPosition, setAccidentPosition] = useAccidentPosition(accident);
 
   const saveAccident = isBogus => {
-    setWorking(true);
+    setIsLoading(true);
 
     // wrap with Promise.. maybe I'm doing something wrong, or kinto http js
     // excutes .then even if there was some error?!
@@ -62,27 +78,36 @@ const useAccident = accident => {
         .createRecord({
           accident_id: accident.accident_id,
           geometry_id: accident.geometry_id,
-          lat: markerPosition.lat,
-          lon: markerPosition.lon,
+          lat: accidentPosition.lat,
+          lon: accidentPosition.lon,
           timestamp: new Date(),
           bogus: isBogus,
         })
         .then(() => {
-          if (error !== null) {
-            setError(null);
+          // reset error
+          if (saveError !== null) {
+            setSaveError(null);
           }
-          setWorking(false);
+          reloadAccident();
           return resolve();
         })
         .catch(err => {
-          setError(err);
-          setWorking(false);
+          setSaveError(err);
+          setIsLoading(false);
           return reject(err);
         });
     });
   };
 
-  return { saveAccident, markerPosition, setMarkerPosition, working, error };
+  return {
+    accident,
+    saveAccident,
+    accidentPosition,
+    setAccidentPosition,
+    isLoading,
+    reloadAccident,
+    saveError,
+  };
 };
 
 export default useAccident;
