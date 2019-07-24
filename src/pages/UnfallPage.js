@@ -128,7 +128,7 @@ export default function UnfallPage() {
                 className={classes.crashMap}
                 mapLat={accident.lat}
                 mapLon={accident.lon}
-                mapZoom={accident.lat ? 18 : 10}
+                mapZoom={accident.lat ? 17 : 10}
                 popupContent={
                   <>
                     Unfall bei

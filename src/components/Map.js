@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/images/marker-icon-2x.png';
+
+const { BaseLayer } = LayersControl;
 
 const UnfallMap = ({
   mapLat,
@@ -23,10 +25,21 @@ const UnfallMap = ({
       maxZoom={18}
       className={className}
     >
-      <TileLayer
-        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' // eslint-disable-line max-len
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <LayersControl position="topright">
+        <BaseLayer checked name="OpenTopoMap">
+          <TileLayer
+            attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+            maxZoom={17}
+          />
+        </BaseLayer>
+        <BaseLayer name="OpenStreetMap">
+          <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a>-Mitwirkende'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </BaseLayer>
+      </LayersControl>
       {markerLat && markerLon && (
         <Marker
           position={[markerLat, markerLon]}
