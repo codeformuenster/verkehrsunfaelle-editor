@@ -16,7 +16,7 @@ const useDataHelper = helperName => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [response, setResponse] = React.useState({ error: false });
 
-  const [reloader, reload] = React.useState(0);
+  const [reloader, reload] = React.useState(true);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -38,7 +38,7 @@ const useDataHelper = helperName => {
     };
   }, [helperName, reloader]);
 
-  return [{ isLoading, response }, () => reload(Math.random())];
+  return [{ isLoading, response }, () => reload(!reloader)];
 };
 
 export default useDataHelper;
