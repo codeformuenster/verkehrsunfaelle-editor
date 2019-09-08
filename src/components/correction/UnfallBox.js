@@ -12,16 +12,22 @@ import PlaceName from './PlaceName';
 import SaveIcon from '@material-ui/icons/Done';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
+import MetaDisplay from './MetaDisplay';
 
 import { useAuthorization } from '../../contexts/authorization-context';
+
+import useMetadata from '../../hooks/use-metadata';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   paperHeader: {
     fontWeight: theme.typography.fontWeightRegular,
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px 0`,
+    padding: `${theme.spacing(0.5)}px ${theme.spacing(2)}px 0`,
     fontSize: '1rem',
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px 0`,
+    },
   },
   saveErrorBox: {
     backgroundColor: theme.palette.error.main,
@@ -38,9 +44,41 @@ const useStyles = makeStyles(theme => ({
   },
   actionButton: {
     borderRadius: 0,
+    fontSize: theme.typography.fontSize * 0.8,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.fontSize,
+    },
   },
   infoButton: {
     marginLeft: theme.spacing(1),
+    padding: theme.spacing(0.5),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(1.5),
+    },
+  },
+  infoHeader: {
+    color: theme.palette.text.primary,
+  },
+  infoDefinitionList: {
+    color: theme.palette.text.primary,
+  },
+  infoDefinitionTitle: {
+    fontWeight: 500,
+  },
+  infoDefinition: {
+    marginLeft: '10%',
+  },
+  accidentProperty: {
+    fontSize: theme.typography.h6.fontSize,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.h5.fontSize,
+    },
+  },
+  accidentPropertySmaller: {
+    fontSize: theme.typography.subtitle1.fontSize,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.h6.fontSize,
+    },
   },
 }));
 
@@ -53,6 +91,7 @@ const UnfallBox = ({
 }) => {
   const classes = useStyles();
   const { authorized, username, engageAuthModal } = useAuthorization();
+  const { getMetadata } = useMetadata();
 
   let actionBox = null;
 
@@ -99,6 +138,55 @@ const UnfallBox = ({
     );
   }
 
+  const information = (
+    <>
+      <Typography variant="h6" component="h6" className={classes.infoHeader}>
+        Unfalldetails
+      </Typography>
+      <dl className={classes.infoDefinitionList}>
+        <dt className={classes.infoDefinitionTitle}>Kategorie</dt>
+        <dd className={classes.infoDefinition}>
+          <MetaDisplay
+            {...getMetadata('accident_category', accident.accident_category)}
+          />{' '}
+          {accident.accident_type}
+        </dd>
+        {/* <dt className={classes.infoDefinitionTitle}>Typ</dt>
+        <dd className={classes.infoDefinition}>
+          <MetaDisplay
+            {...getMetadata('accident_type', accident.accident_type)}
+          />
+        </dd> */}
+        <dt className={classes.infoDefinitionTitle}>Ursache(n)</dt>
+        <dd className={classes.infoDefinition}>
+          <MetaDisplay
+            {...getMetadata('accident_cause', [
+              accident.cause_1_4,
+              accident.cause_2,
+              accident.cause_3,
+              accident.cause_other,
+              accident.cause_02,
+            ])}
+          />
+        </dd>
+        <dt className={classes.infoDefinitionTitle}>Beteiligte</dt>
+        <dd className={classes.infoDefinition}>
+          <MetaDisplay
+            {...getMetadata('traffic_involvement', [
+              accident.participants_01,
+              accident.participants_02,
+            ])}
+          />
+        </dd>
+      </dl>
+    </>
+  );
+
+  const categoryText = getMetadata(
+    'accident_category',
+    accident.accident_category,
+  );
+
   return (
     <Paper elevation={2}>
       <Typography variant="h6" component="h6" className={classes.paperHeader}>
@@ -107,30 +195,64 @@ const UnfallBox = ({
           icon="info"
           size="small"
           className={classes.infoButton}
-          // eslint-disable-next-line max-len
-          information={`Quelle: ${accident.source_file}, Zeile ${accident.source_row_number}`}
+          information={information}
+          dialog
         />
       </Typography>
       <Grid container spacing={0}>
         <Grid item xs={12} sm={6}>
-          <Box textAlign="center">
-            <Typography variant="h5">
-              <PlaceName place={accident.place} quotes={true} />
-            </Typography>
-            <Typography variant="caption" color="textSecondary">
-              Unfallort
-            </Typography>
-          </Box>
+          <Typography
+            variant="h6"
+            align="center"
+            className={classes.accidentProperty}
+          >
+            <PlaceName place={accident.place} quotes={true} />
+          </Typography>
+          <Typography
+            variant="caption"
+            component="h6"
+            color="textSecondary"
+            align="center"
+          >
+            Unfallort
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Box textAlign="center">
-            <Typography variant="h5">
-              <PlaceName place={accident.place_near} quotes={true} />
-            </Typography>
-            <Typography variant="caption" color="textSecondary">
-              Unfallhöhe
-            </Typography>
-          </Box>
+          <Typography
+            variant="h6"
+            align="center"
+            className={classes.accidentProperty}
+          >
+            <PlaceName place={accident.place_near} quotes={true} />
+          </Typography>
+          <Typography
+            variant="caption"
+            component="h6"
+            color="textSecondary"
+            align="center"
+          >
+            Unfallhöhe
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            className={classes.accidentPropertySmaller}
+          >
+            <PlaceName
+              place={categoryText ? categoryText.title : ''}
+              quotes={true}
+            />
+          </Typography>
+          <Typography
+            variant="caption"
+            component="h6"
+            color="textSecondary"
+            align="center"
+          >
+            Kategorie
+          </Typography>
         </Grid>
         {saveError && (
           <Grid item xs={12}>
