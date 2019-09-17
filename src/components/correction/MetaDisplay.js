@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 const MetaDisplayInner = ({ id, title, description, category }) => {
@@ -25,6 +26,13 @@ const MetaDisplayInner = ({ id, title, description, category }) => {
   );
 };
 
+MetaDisplayInner.propTypes = {
+  id: PropTypes.string,
+  title:  PropTypes.string,
+  description: PropTypes.string,
+  category: PropTypes.string,
+}
+
 const MetaDisplay = ({ results, ...props }) => {
   if ((props.id === null || typeof props.id === 'undefined') && !results) {
     return null;
@@ -45,5 +53,10 @@ const MetaDisplay = ({ results, ...props }) => {
 
   return <MetaDisplayInner {...props} />;
 };
+
+MetaDisplay.propTypes = {
+  results: PropTypes.arrayOf(PropTypes.object),
+  id: PropTypes.string,
+}
 
 export default MetaDisplay;

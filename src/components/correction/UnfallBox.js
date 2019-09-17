@@ -88,6 +88,7 @@ const UnfallBox = ({
   accident,
   loading,
   saveError,
+  hideNext,
 }) => {
   const classes = useStyles();
   const { authorized, username, engageAuthModal } = useAuthorization();
@@ -101,14 +102,16 @@ const UnfallBox = ({
     } else {
       actionBox = (
         <>
-          <Button
-            variant="outlined"
-            className={classes.actionButton}
-            onClick={onNextClick}
-            disabled={!authorized}
-          >
-            <RefreshIcon /> Nächster Unfall
-          </Button>
+          {!hideNext && (
+            <Button
+              variant="outlined"
+              className={classes.actionButton}
+              onClick={onNextClick}
+              disabled={!authorized}
+            >
+              <RefreshIcon /> Nächster Unfall
+            </Button>
+          )}
           <Button
             color="primary"
             variant="outlined"
@@ -278,6 +281,7 @@ UnfallBox.propTypes = {
   onSaveClick: PropTypes.func,
   onNextClick: PropTypes.func,
   accident: PropTypes.object,
+  hideNext: PropTypes.bool,
 };
 
 UnfallBox.defaultProps = {

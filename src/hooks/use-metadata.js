@@ -2,6 +2,9 @@ import React from 'react';
 import useDataHelper from './use-data-helper';
 
 const toKV = arr => {
+  if (!arr) {
+    return {};
+  }
   const kvObj = {};
   for (const c of arr) {
     kvObj[c.key] = { ...c, id: c.key };

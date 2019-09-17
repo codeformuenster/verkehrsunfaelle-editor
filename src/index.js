@@ -17,6 +17,7 @@ import { Router } from '@reach/router';
 import IndexPage from './pages/IndexPage';
 import NotFoundPage from './pages/NotFoundPage';
 const UnfallPage = React.lazy(() => import('./pages/UnfallPage'));
+const RandomUnfallPage = React.lazy(() => import('./pages/RandomUnfallPage'));
 const RawDataPage = React.lazy(() => import('./pages/RawDataPage'));
 const FaqPage = React.lazy(() => import('./pages/FaqPage'));
 
@@ -40,7 +41,8 @@ ReactDOM.render(
         <Suspense fallback={<LoadingBox />}>
           <Router>
             <IndexPage path="/" />
-            <UnfallPage path="/korrektur" />
+            <RandomUnfallPage path="/korrektur" />
+            <UnfallPage path="/korrektur/:accidentId" />
             <RawDataPage path="/rohdaten" />
             <FaqPage path="/faq" />
             <NotFoundPage default />

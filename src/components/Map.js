@@ -28,6 +28,7 @@ const UnfallMap = ({
       <LayersControl position="topright">
         <BaseLayer checked name="OpenTopoMap">
           <TileLayer
+            // eslint-disable-next-line max-len
             attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
             url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
             maxZoom={17}
@@ -35,6 +36,7 @@ const UnfallMap = ({
         </BaseLayer>
         <BaseLayer name="OpenStreetMap">
           <TileLayer
+            // eslint-disable-next-line max-len
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a>-Mitwirkende'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
