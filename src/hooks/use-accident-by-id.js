@@ -7,8 +7,7 @@ const reloadAccident = () => {};
 
 const useAccident = accidentId => {
   const [{ isLoading: accidentIsLoading, response: accident }] = useDataHelper(
-    'accident-by-id',
-    { id: accidentId },
+    `accident-by-id?id=${accidentId}`,
   );
 
   const [isSaved, setIsSaved] = React.useState(false);

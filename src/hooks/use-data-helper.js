@@ -12,7 +12,7 @@ if (!window.AbortController) {
   };
 }
 
-const useDataHelper = (helperName, urlParams = {}) => {
+const useDataHelper = helperName => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [response, setResponse] = React.useState({ error: false });
 
@@ -22,7 +22,6 @@ const useDataHelper = (helperName, urlParams = {}) => {
     setIsLoading(true);
     const abortController = new window.AbortController();
     ky.get(`${SERVER_URL}/${helperName}`, {
-      searchParams: new URLSearchParams(urlParams),
       signal: abortController.signal,
     })
       .json()
@@ -37,7 +36,7 @@ const useDataHelper = (helperName, urlParams = {}) => {
     return () => {
       abortController.abort();
     };
-  }, [helperName, reloader, urlParams]);
+  }, [helperName, reloader]);
 
   return [{ isLoading, response }, () => reload(!reloader)];
 };
