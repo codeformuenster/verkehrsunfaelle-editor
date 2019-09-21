@@ -77,18 +77,15 @@ const Toplist = ({ numCollapsed = 3 }) => {
           </Typography>
         </Typography>
         {displayToplist.map(({ principal, count }, index) => (
-          <>
-            <Typography
-              key={`${principal}${count}`}
-              className={classes.toplistItem}
-            >
+          <React.Fragment key={`${principal}${count}`}>
+            <Typography className={classes.toplistItem}>
               <PlaceIcon place={index + 1} />{' '}
               {principal.replace('account:', '')}
               <Typography component="span" className={classes.count}>
                 {count}
               </Typography>
             </Typography>
-          </>
+          </React.Fragment>
         ))}
         {toplist.length > numCollapsed && (
           <Box align="center">
