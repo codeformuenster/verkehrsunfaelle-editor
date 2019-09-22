@@ -27,11 +27,11 @@ const MetaDisplayInner = ({ id, title, description, category }) => {
 };
 
 MetaDisplayInner.propTypes = {
-  id: PropTypes.string,
-  title:  PropTypes.string,
+  id: PropTypes.number,
+  title: PropTypes.string,
   description: PropTypes.string,
   category: PropTypes.string,
-}
+};
 
 const MetaDisplay = ({ results, ...props }) => {
   if ((props.id === null || typeof props.id === 'undefined') && !results) {
@@ -56,7 +56,7 @@ const MetaDisplay = ({ results, ...props }) => {
 
 MetaDisplay.propTypes = {
   results: PropTypes.arrayOf(PropTypes.object),
-  id: PropTypes.string,
-}
+  id: PropTypes.number,
+};
 
 export default MetaDisplay;

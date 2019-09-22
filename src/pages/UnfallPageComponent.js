@@ -74,7 +74,7 @@ const UnfallPageComponent = ({
   setAccidentPosition,
   isLoading,
   hideNext,
-  isSaved,
+  isSaved = false,
 }) => {
   const classes = useStyles();
 
@@ -211,9 +211,12 @@ UnfallPageComponent.propTypes = {
     lon: PropTypes.number,
   }),
   accident: PropTypes.shape({
-    error: PropTypes.shape({
-      message: PropTypes.string,
-    }),
+    error: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.shape({
+        message: PropTypes.string,
+      }),
+    ]),
     lat: PropTypes.number,
     lon: PropTypes.number,
     place: PropTypes.string,
