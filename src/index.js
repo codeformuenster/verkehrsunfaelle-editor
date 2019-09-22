@@ -12,7 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
 
-import { Router } from '@reach/router';
+import { Router, LocationProvider } from '@reach/router';
 
 import IndexPage from './pages/IndexPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -51,6 +51,13 @@ ReactDOM.render(
       </AuthorizationProvider>
     </KintoProvider>
     <Footer />
+    <LocationProvider>
+      {() => {
+        if (window.fathom) {
+          window.fathom('trackPageview');
+        }
+      }}
+    </LocationProvider>
   </ThemeProvider>,
   document.querySelector('#root'),
 );

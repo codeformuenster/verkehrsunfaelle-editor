@@ -509,6 +509,9 @@ module.exports = function(webpackEnv) {
           {
             inject: true,
             template: paths.appHtml,
+            templateParameters: {
+              'FathomSiteId': ''
+            }
           },
           isEnvProduction
             ? {
@@ -524,6 +527,9 @@ module.exports = function(webpackEnv) {
                   minifyCSS: true,
                   minifyURLs: true,
                 },
+                templateParameters: {
+                  'FathomSiteId': 'NLSTH'
+                }
               }
             : undefined,
         ),
