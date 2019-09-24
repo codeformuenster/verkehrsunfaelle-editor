@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Map from '../components/Map';
 import UnfallBox from '../components/correction/UnfallBox';
-import LoadingBox from '../components/LoadingBox';
 import InfoButton from '../components/InfoButton';
 import Link from '../components/Link';
 
@@ -117,9 +116,7 @@ const UnfallPageComponent = ({
           </Box>
           <Grid container spacing={1} className={classes.mainGrid}>
             <Grid item lg={8} xs={12}>
-              {isLoading === true ? (
-                <LoadingBox className={classes.crashMap} />
-              ) : accident.error ? (
+              {accident.error ? (
                 <Box className={classes.errorBox}>
                   <Typography variant="h5" component="h5" gutterBottom>
                     <WarningIcon /> Verkehrsunfall konnte nicht geladen werden
@@ -156,6 +153,7 @@ const UnfallPageComponent = ({
                   markerLat={accidentPosition.lat}
                   markerLon={accidentPosition.lon}
                   onMarkerDragEnd={setAccidentPosition}
+                  loading={isLoading}
                 />
               )}
             </Grid>
