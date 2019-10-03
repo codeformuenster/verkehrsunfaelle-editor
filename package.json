@@ -1,5 +1,7 @@
 {
   "private": true,
+  "version": "0.1.0",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true node scripts/start.js",
     "build": "node scripts/build.js",
