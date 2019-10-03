@@ -50,7 +50,11 @@ const questionsAndAnswers = [
         Münster nicht die allerbeste. Nach mehreren Versuchen ist es uns
         gelungen, die zwischen den Jahren unterschiedlichen Spaltennamen und
         Formate in eine Datenbank zu laden, um sie{' '}
-        <Link target="_blank" href="https://crashes.codeformuenster.org">
+        <Link
+          target="_blank"
+          href="https://crashes.codeformuenster.org"
+          rel="noopener"
+        >
           zu visualisieren und einfach zugänglich zu machen
         </Link>
         . Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
@@ -77,7 +81,11 @@ const questionsAndAnswers = [
         <br />
         Klingt interessant? Komm gerne vorbei, wir sind immer offen für neue
         Leute! Weitere Informationen unter{' '}
-        <Link target="_blank" href="https://codeformuenster.org/">
+        <Link
+          target="_blank"
+          rel="noopener"
+          href="https://codeformuenster.org/"
+        >
           codeformuenster.org
         </Link>
         .
@@ -115,6 +123,7 @@ const questionsAndAnswers = [
         {/* eslint-disable max-len */}
         <Link
           target="_blank"
+          rel="noopener"
           href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/"
         >
           &quot;Frag den Staat&quot;
@@ -125,6 +134,7 @@ const questionsAndAnswers = [
         {/* eslint-disable max-len */}
         <Link
           target="_blank"
+          rel="noopener"
           href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html"
         >
           den ADFC
@@ -133,6 +143,7 @@ const questionsAndAnswers = [
         bekommen. Die Rohdaten lassen sich {/* eslint-disable max-len */}
         <Link
           target="_blank"
+          rel="noopener"
           href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken"
         >
           hier herunterladen (dort Ordner Rohdaten auswählen)
@@ -155,7 +166,11 @@ const questionsAndAnswers = [
         Lange Antwort: In Münster gibt es im Vergleich zu anderen NRW-Städten
         viele Verkehrsunfälle. Trotz der seit 2007 bestehenden
         Ordnungspartnerschaft{' '}
-        <Link target="_blank" href="https://www.sicher-durch-muenster.de/">
+        <Link
+          target="_blank"
+          rel="noopener"
+          href="https://www.sicher-durch-muenster.de/"
+        >
           &quot;Sicher durch Münster&quot;
         </Link>
         , die für eine Reduktion von Verkehrsunfällen sorgen sollte, verringert
@@ -180,7 +195,11 @@ const questionsAndAnswers = [
         Um es der interessierten Stadtöffentlichkeit zu ermöglichen,
         faktenbasiert an der Diskussion teilzunehmen, haben wir von &quot;Code
         For Münster&quot; eine{' '}
-        <Link target="_blank" href="https://crashes.codeformuenster.org">
+        <Link
+          target="_blank"
+          rel="noopener"
+          href="https://crashes.codeformuenster.org"
+        >
           interaktive räumliche Unfalldatenvisualisierung
         </Link>{' '}
         erstellt. Für diese Visualisierung brauchen wir aber eine bessere
@@ -204,7 +223,11 @@ const questionsAndAnswers = [
         Super! Schick Deine Frage doch gerne per e-Mail an{' '}
         <Link href="mailto:muenster@codefor.de">muenster@codefor.de</Link> oder
         komm uns einfach mal besuchen (siehe{' '}
-        <Link target="_blank" href="https://codeformuenster.org/">
+        <Link
+          target="_blank"
+          rel="noopener"
+          href="https://codeformuenster.org/"
+        >
           codeformuenster.org
         </Link>
         ).

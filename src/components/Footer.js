@@ -12,7 +12,11 @@ const Footer = () => (
       flexDirection={{ xs: 'column', sm: 'row' }}
     >
       Ein Projekt von{' '}
-      <MuiLink href="https://codeformuenster.org/">
+      <MuiLink
+        href="https://codeformuenster.org/"
+        target="_blank"
+        rel="noopener"
+      >
         <img
           alt="Code for Münster"
           src="https://codeformuenster.org/img/cfm_logo.png"
@@ -24,12 +28,17 @@ const Footer = () => (
         <MuiLink
           href="https://github.com/codeformuenster/verkehrsunfaelle-editor"
           target="_blank"
+          rel="noopener"
         >
           Quellcode (Version{' '}
           {/* eslint-disable no-undef */ process.env.REACT_APP_VERSION})
         </MuiLink>
         <span>|</span>
-        <MuiLink href="https://codeformuenster.org/impressum/" target="_blank">
+        <MuiLink
+          href="https://codeformuenster.org/impressum/"
+          target="_blank"
+          rel="noopener"
+        >
           Impressum
         </MuiLink>
       </Box>

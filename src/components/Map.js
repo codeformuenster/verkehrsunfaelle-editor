@@ -70,7 +70,7 @@ const UnfallMap = ({
           <BaseLayer checked name="OpenTopoMap">
             <TileLayer
               // eslint-disable-next-line max-len
-              attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org" target="_blank" rel="noopener noreferrer">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC-BY-SA</a>)'
+              attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org" target="_blank" rel="noopener">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC-BY-SA</a>)'
               url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
               maxZoom={17}
             />
@@ -78,14 +78,14 @@ const UnfallMap = ({
           <BaseLayer name="OpenStreetMap">
             <TileLayer
               // eslint-disable-next-line max-len
-              attribution='&amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende'
+              attribution='&amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
           </BaseLayer>
           <BaseLayer name="DOP 2018">
             <WMSTileLayer
               // eslint-disable-next-line max-len
-              attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener noreferrer">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener noreferrer">Datenquellen</a>'
+              attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener">Datenquellen</a>'
               url="https://www.wms.nrw.de/geobasis/wms_nw_dop"
               version="1.3.0"
               layers="nw_dop_rgb"
