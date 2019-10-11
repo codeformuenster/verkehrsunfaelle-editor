@@ -24,7 +24,7 @@ const Footer = () => (
       </MuiLink>
     </Box>
     <Box justifyContent="center" display="flex">
-      <Box display="flex" justifyContent="space-between" style={{ width: 300 }}>
+      <Box display="flex" justifyContent="space-between" fontSize={{ xs: '75%', sm: '100%'}}>
         <MuiLink
           href="https://github.com/codeformuenster/verkehrsunfaelle-editor"
           target="_blank"
@@ -33,13 +33,13 @@ const Footer = () => (
           Quellcode (Version{' '}
           {/* eslint-disable no-undef */ process.env.REACT_APP_VERSION})
         </MuiLink>
-        <span>|</span>
+        <Box component="span" mx={1}>|</Box>
         <MuiLink
           href="https://codeformuenster.org/impressum/"
           target="_blank"
           rel="noopener"
         >
-          Impressum
+          Impressum &amp; Datenschutz
         </MuiLink>
       </Box>
     </Box>
