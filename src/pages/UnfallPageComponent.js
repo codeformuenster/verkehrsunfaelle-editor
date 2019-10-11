@@ -136,9 +136,9 @@ const UnfallPageComponent = ({
               ) : (
                 <Map
                   className={classes.crashMap}
-                  mapLat={accident.lat}
-                  mapLon={accident.lon}
-                  mapZoom={accident.lat ? 17 : 10}
+                  mapLat={accident.lat ? accident.lat : 51.96}
+                  mapLon={accident.lon ? accident.lon : 7.62}
+                  mapZoom={accident.lat ? 17 : 11}
                   popupContent={
                     <>
                       Unfall bei

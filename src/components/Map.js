@@ -45,79 +45,71 @@ const UnfallMap = ({
   const [maxZoom, setMaxZoom] = React.useState(17);
 
   return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-    `,
-        }}
-      ></style>
-      <Map
-        center={[mapLat, mapLon]}
-        zoom={mapZoom}
-        maxZoom={19}
-        className={className}
-        onBaselayerchange={({ name }) => {
-          setMaxZoom(name === 'OpenTopoMap' ? 17 : 19);
-        }}
-        onZoomend={({ target: map }) => {
-          if (map.getZoom() > maxZoom) {
-            map.setZoom(maxZoom);
-          }
-        }}
-      >
-        <LayersControl position="topright">
-          <BaseLayer checked name="OpenTopoMap">
-            <TileLayer
-              // eslint-disable-next-line max-len
-              attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org" target="_blank" rel="noopener">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC-BY-SA</a>)'
-              url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-              maxZoom={17}
-            />
-          </BaseLayer>
-          <BaseLayer name="OpenStreetMap">
-            <TileLayer
-              // eslint-disable-next-line max-len
-              attribution='&amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-          </BaseLayer>
-          <BaseLayer name="DOP 2018">
+    <Map
+      center={[mapLat, mapLon]}
+      zoom={mapZoom}
+      maxZoom={19}
+      className={className}
+      onBaselayerchange={({ name }) => {
+        setMaxZoom(name === 'OpenTopoMap' ? 17 : 19);
+      }}
+      onZoomend={({ target: map }) => {
+        if (map.getZoom() > maxZoom) {
+          map.setZoom(maxZoom);
+        }
+      }}
+    >
+      <LayersControl position="topright">
+        <BaseLayer checked name="OpenTopoMap">
+          <TileLayer
+            // eslint-disable-next-line max-len
+            attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org" target="_blank" rel="noopener">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC-BY-SA</a>)'
+            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+            maxZoom={17}
+          />
+        </BaseLayer>
+        <BaseLayer name="OpenStreetMap">
+          <TileLayer
+            // eslint-disable-next-line max-len
+            attribution='&amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </BaseLayer>
+        <BaseLayer name="DOP 2018">
+          <WMSTileLayer
+            // eslint-disable-next-line max-len
+            attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener">Datenquellen</a>'
+            url="https://www.wms.nrw.de/geobasis/wms_nw_dop"
+            version="1.3.0"
+            layers="nw_dop_rgb"
+            crs={CRS.EPSG4326}
+          />
+        </BaseLayer>
+        {['2014', '2011', '2008'].map(year => (
+          <BaseLayer name={`DOP ${year}`} key={year}>
             <WMSTileLayer
               // eslint-disable-next-line max-len
-              attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener">Datenquellen</a>'
-              url="https://www.wms.nrw.de/geobasis/wms_nw_dop"
+              attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener noreferrer">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener noreferrer">Datenquellen</a>'
+              url="https://www.wms.nrw.de/geobasis/wms_nw_hist_dop"
               version="1.3.0"
-              layers="nw_dop_rgb"
+              layers={`nw_hist_dop_${year}`}
               crs={CRS.EPSG4326}
             />
           </BaseLayer>
-          {['2014', '2011', '2008'].map(year => (
-            <BaseLayer name={`DOP ${year}`} key={year}>
-              <WMSTileLayer
-                // eslint-disable-next-line max-len
-                attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener noreferrer">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener noreferrer">Datenquellen</a>'
-                url="https://www.wms.nrw.de/geobasis/wms_nw_hist_dop"
-                version="1.3.0"
-                layers={`nw_hist_dop_${year}`}
-                crs={CRS.EPSG4326}
-              />
-            </BaseLayer>
-          ))}
-        </LayersControl>
-        {markerLat && markerLon && (
-          <Marker
-            position={[markerLat, markerLon]}
-            draggable={true}
-            autoPan={true}
-            onDragEnd={onMarkerDragEnd}
-          >
-            <Popup>{popupContent}</Popup>
-          </Marker>
-        )}
-        {loading && <LoadingBox className={classes.loadingOverlay} />}
-      </Map>
-    </>
+        ))}
+      </LayersControl>
+      {markerLat && markerLon && (
+        <Marker
+          position={[markerLat, markerLon]}
+          draggable={true}
+          autoPan={true}
+          onDragEnd={onMarkerDragEnd}
+        >
+          <Popup>{popupContent}</Popup>
+        </Marker>
+      )}
+      {loading && <LoadingBox className={classes.loadingOverlay} />}
+    </Map>
   );
 };
 
