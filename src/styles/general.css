@@ -5,3 +5,13 @@
 .current-path-link span {
   text-decoration: underline;
 }
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.page-main {
+  flex: 1;
+}

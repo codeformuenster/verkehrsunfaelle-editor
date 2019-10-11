@@ -35,22 +35,24 @@ ReactDOM.render(
     {/* CssBaseline kickstarts an elegant,
      consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <KintoProvider>
-      <AuthorizationProvider>
-        <Topbar />
-        <Suspense fallback={<LoadingBox />}>
-          <Router>
-            <IndexPage path="/" />
-            <RandomUnfallPage path="/korrektur" />
-            <UnfallPage path="/korrektur/:accidentId" />
-            <RawDataPage path="/rohdaten" />
-            <FaqPage path="/faq" />
-            <NotFoundPage default />
-          </Router>
-        </Suspense>
-      </AuthorizationProvider>
-    </KintoProvider>
-    <Footer />
+    <div className="page">
+      <KintoProvider>
+        <AuthorizationProvider>
+          <Topbar />
+          <Suspense fallback={<LoadingBox />}>
+            <Router className="page-main">
+              <IndexPage path="/" />
+              <RandomUnfallPage path="/korrektur" />
+              <UnfallPage path="/korrektur/:accidentId" />
+              <RawDataPage path="/rohdaten" />
+              <FaqPage path="/faq" />
+              <NotFoundPage default />
+            </Router>
+          </Suspense>
+        </AuthorizationProvider>
+      </KintoProvider>
+      <Footer />
+    </div>
     <LocationProvider>
       {() => {
         if (window.fathom) {

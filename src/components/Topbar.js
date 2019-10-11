@@ -17,9 +17,6 @@ import CircleIcon from '@material-ui/icons/RadioButtonUnchecked';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
   toolbar: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
@@ -165,7 +162,7 @@ const Topbar = () => {
   );
 
   return (
-    <div className={classes.root}>
+    <>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" color="inherit" className={classes.title}>
@@ -233,7 +230,7 @@ const Topbar = () => {
       </AppBar>
       {renderUserMenu}
       {renderMobileMenu}
-    </div>
+    </>
   );
 };
 
