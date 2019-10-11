@@ -7,15 +7,27 @@ const useAccidentPosition = initialPosition => {
         return currentPosition;
       }
 
-      let newLat, newLon;
+      const { target, lat, lon, reallyInitial } = newPosition;
 
-      if (newPosition.target) {
-        const newMarkerPosition = newPosition.target.getLatLng();
+      let newLat,
+        newLon,
+        newInitial = Boolean(reallyInitial);
+
+      if (lat === null && lon === null) {
+        return {
+          lat: null,
+          lon: null,
+          initial: newInitial,
+        };
+      }
+
+      if (target) {
+        const newMarkerPosition = target.getLatLng();
         newLat = newMarkerPosition.lat;
         newLon = newMarkerPosition.lng;
       } else {
-        newLat = newPosition.lat;
-        newLon = newPosition.lon;
+        newLat = lat;
+        newLon = lon;
       }
 
       if (newLat === currentPosition.lat && newLon === currentPosition.lon) {
@@ -28,20 +40,18 @@ const useAccidentPosition = initialPosition => {
       return {
         lat: newLat,
         lon: newLon,
-        initial: Boolean(newPosition.reallyInitial),
+        initial: newInitial,
       };
     },
     { lat: undefined, lon: undefined, initial: true },
   );
 
   React.useEffect(() => {
-    if (initialPosition.lat && initialPosition.lon) {
-      setMarkerPosition({
-        lat: initialPosition.lat,
-        lon: initialPosition.lon,
-        reallyInitial: true,
-      });
-    }
+    setMarkerPosition({
+      lat: initialPosition.lat,
+      lon: initialPosition.lon,
+      reallyInitial: true,
+    });
   }, [initialPosition.lat, initialPosition.lon]);
 
   return [markerPosition, setMarkerPosition];
