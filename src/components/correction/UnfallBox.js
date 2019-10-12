@@ -116,7 +116,7 @@ const UnfallBox = ({
             color="primary"
             variant="outlined"
             className={classes.actionButton}
-            disabled={!authorized}
+            disabled={typeof onSaveClick === 'undefined'}
             onClick={onSaveClick}
           >
             <SaveIcon /> {username === 'Anonym' ? 'Anonym' : 'Unfall'} speichern
