@@ -151,7 +151,7 @@ const UnfallPageComponent = ({
                     </>
                   }
                   markerLat={accidentPosition.lat}
-                  markerLon={accidentPosition.lon}
+                  markerLon={accidentPosition.lng}
                   onMarkerDragEnd={setAccidentPosition}
                   loading={isLoading}
                 />
@@ -206,7 +206,7 @@ UnfallPageComponent.propTypes = {
   saveError: PropTypes.object,
   accidentPosition: PropTypes.shape({
     lat: PropTypes.number,
-    lon: PropTypes.number,
+    lng: PropTypes.number,
   }),
   accident: PropTypes.shape({
     error: PropTypes.oneOfType([

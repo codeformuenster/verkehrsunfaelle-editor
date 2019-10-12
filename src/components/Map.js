@@ -11,6 +11,9 @@ import {
 import { CRS } from 'leaflet';
 import { makeStyles } from '@material-ui/core/styles';
 import LoadingBox from './LoadingBox';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
@@ -20,13 +23,28 @@ import './layers-toggle.css';
 
 const { BaseLayer } = LayersControl;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   loadingOverlay: {
     position: 'relative',
     zIndex: 1000,
     minHeight: 'unset',
     height: '100%',
     backgroundColor: 'rgba(255,255,255,0.7)',
+  },
+  missingPositionOverlay: {
+    '@media (max-width:629px)': {
+      position: 'relative',
+      left: '50%',
+      transform: 'translateX(-50%)',
+    },
+    '@media (min-width:630px)': {
+      position: 'absolute',
+      right: 5,
+      top: 40,
+    },
+    zIndex: 1000,
+    maxWidth: 300,
+    padding: theme.spacing(2),
   },
 }));
 
@@ -43,6 +61,10 @@ const UnfallMap = ({
 }) => {
   const classes = useStyles();
   const [maxZoom, setMaxZoom] = React.useState(17);
+  const [mapCenter, setMapCenter] = React.useState({
+    lat: mapLat,
+    lng: mapLon,
+  });
 
   return (
     <Map
@@ -57,6 +79,9 @@ const UnfallMap = ({
         if (map.getZoom() > maxZoom) {
           map.setZoom(maxZoom);
         }
+      }}
+      onMoveend={({ target: map }) => {
+        setMapCenter(map.getCenter());
       }}
     >
       <LayersControl position="topright">
@@ -109,6 +134,23 @@ const UnfallMap = ({
         </Marker>
       )}
       {loading && <LoadingBox className={classes.loadingOverlay} />}
+      {!loading && markerLat === null && (
+        <Paper className={classes.missingPositionOverlay}>
+          <Typography variant="h6">Fehlender Ort</Typography>
+          <Typography variant="body1" gutterBottom>
+            Dieser Unfall hat noch keinen maschinenlesbaren Ort.
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              onMarkerDragEnd({ ...mapCenter, reallyInitial: true });
+            }}
+          >
+            Marker hinzufügen
+          </Button>
+        </Paper>
+      )}
     </Map>
   );
 };
