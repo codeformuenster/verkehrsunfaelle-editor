@@ -18,7 +18,7 @@ const useSaveAccident = ({ reloadAccident, accident, accidentPosition }) => {
         .collection('geometries_corrections')
         .createRecord({
           accident_id: accident.accident_id,
-          geometry_id: accident.geometry_id,
+          geometry_id: accident.geometry_id ? accident.geometry_id : 'missing',
           lat: accidentPosition.lat,
           lon: accidentPosition.lon,
           timestamp: new Date(),
