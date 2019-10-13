@@ -6584,6 +6584,12 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
+leaflet-control-geocoder@hacki-mc-hack/leaflet-control-geocoder#searchInputId:
+  version "1.10.0"
+  resolved "https://codeload.github.com/hacki-mc-hack/leaflet-control-geocoder/tar.gz/5ceb73f5514096a4866c95442d4557c072ea71c5"
+  optionalDependencies:
+    open-location-code "^1.0.0"
+
 leaflet@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.5.1.tgz#9afb9d963d66c870066b1342e7a06f92840f46bf"
@@ -7483,6 +7489,11 @@ onetime@^2.0.0:
   integrity sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   dependencies:
     mimic-fn "^1.0.0"
+
+open-location-code@^1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/open-location-code/-/open-location-code-1.0.3.tgz#5ea1a34ee5221c6cafa04392e1bd906fd7488f7e"
+  integrity sha1-XqGjTuUiHGyvoEOS4b2Qb9dIj34=
 
 open@^6.3.0:
   version "6.4.0"

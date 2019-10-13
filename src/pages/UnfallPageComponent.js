@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Map from '../components/Map';
+import Map from '../components/map/Map';
 import UnfallBox from '../components/correction/UnfallBox';
 import InfoButton from '../components/InfoButton';
 import Link from '../components/Link';
@@ -149,6 +149,11 @@ const UnfallPageComponent = ({
                       /> Höhe{' '}
                       <PlaceName place={accident.place_near} quotes={true} />
                     </>
+                  }
+                  searchString={
+                    accident.place && accident.place_near
+                      ? `${accident.place.trim()} ${accident.place_near.trim()}`
+                      : ''
                   }
                   markerLat={accidentPosition.lat}
                   markerLon={accidentPosition.lng}

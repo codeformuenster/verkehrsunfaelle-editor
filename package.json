@@ -49,6 +49,7 @@
     "kinto-http": "^4.7.3",
     "ky": "^0.15.0",
     "leaflet": "^1.5.1",
+    "leaflet-control-geocoder": "hacki-mc-hack/leaflet-control-geocoder#searchInputId",
     "mini-css-extract-plugin": "0.8.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.5.0",

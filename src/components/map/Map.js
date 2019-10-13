@@ -10,10 +10,11 @@ import {
 } from 'react-leaflet';
 import { CRS } from 'leaflet';
 import { makeStyles } from '@material-ui/core/styles';
-import LoadingBox from './LoadingBox';
+import LoadingBox from '../LoadingBox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Geocoder from './Geocoder';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
@@ -55,6 +56,7 @@ const UnfallMap = ({
   markerLat,
   markerLon,
   popupContent,
+  searchString,
   onMarkerDragEnd,
   className,
   loading,
@@ -123,6 +125,13 @@ const UnfallMap = ({
           </BaseLayer>
         ))}
       </LayersControl>
+      <Geocoder
+        position="topleft"
+        placeholder="Suche ..."
+        errorMessage="Nichts gefunden."
+        searchString={searchString}
+        onSearchResultSelect={onMarkerDragEnd}
+      />
       {markerLat && markerLon && (
         <Marker
           position={[markerLat, markerLon]}
@@ -166,6 +175,7 @@ UnfallMap.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  searchString: PropTypes.string,
   onMarkerDragEnd: PropTypes.func,
   className: PropTypes.string,
   loading: PropTypes.bool,
