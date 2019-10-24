@@ -62,7 +62,7 @@ const questionsAndAnswers = [
         >
           zu visualisieren und einfach zugänglich
         </Link>
-        zu machen (Folien eines Vortrages auf dem &quot;Forum Citizen Science 2019&quot;
+         zu machen (Folien eines Vortrages auf dem &quot;Forum Citizen Science 2019&quot;
         mit weiteren Infos und Quellen zum Projekt{' '}
         <Link
           target="_blank"
