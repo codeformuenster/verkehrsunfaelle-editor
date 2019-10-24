@@ -46,11 +46,11 @@ const questionsAndAnswers = [
     question: 'Was ist das hier für eine Seite?',
     answer: (
       <>
-				In Münster gibt es im Vergleich zu anderen NRW-Städten viele
-				Verkehrsunfälle. Um es der interessierten Stadtöffentlichkeit zu
-				ermöglichen, gut informiert an der Diskussion zur Verbesserung
-				der Lage teilzunehmen, wollen wir die Daten zu den
-				Verkehrsunfällen möglichst leicht zugänglich machen.
+        In Münster gibt es im Vergleich zu anderen NRW-Städten viele
+        Verkehrsunfälle. Um es der interessierten Stadtöffentlichkeit zu
+        ermöglichen, gut informiert an der Diskussion zur Verbesserung
+        der Lage teilzunehmen, wollen wir die Daten zu den
+        Verkehrsunfällen möglichst leicht zugänglich machen.
         Leider ist die Datenqualität der Verkehrunfallstatistik der Polizei
         Münster nicht die allerbeste. Nach mehreren Versuchen ist es uns
         gelungen, die zwischen den Jahren unterschiedlichen Spaltennamen und
@@ -65,13 +65,13 @@ const questionsAndAnswers = [
         zu machen (Folien eines Vortrages auf dem &quot;Forum Citizen Science 2019&quot;
         mit weiteren Infos und Quellen zum Projekt{' '}
         <Link
-					target="_blank"
-					href="https://github.com/codeformuenster/crashes-shiny/blob/master/doc/vortrag_forum_citizen_science_september_2019/PVI_Terstiege_SichererRadfahren_26Sep.pdf"
-					rel="noopener"
-				>
-				finden sich hier
-				</Link>
-				). Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
+          target="_blank"
+          href="https://github.com/codeformuenster/crashes-shiny/blob/master/doc/vortrag_forum_citizen_science_september_2019/PVI_Terstiege_SichererRadfahren_26Sep.pdf"
+          rel="noopener"
+        >
+          finden sich hier
+        </Link>
+        ). Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
         schwer maschinenlesbaren Format aufgenommen (z.B.: &apos;Kappenberger
         Damm, Höhe Kriegerweg&apos;). Wir haben es uns nun zur Aufgabe gemacht
         alle Unfälle durchzugehen und den korrekten Ort einzupflegen. Da es so
@@ -219,13 +219,13 @@ const questionsAndAnswers = [
         erstellt (Folien eines Vortrages auf dem &quot;Forum Citizen Science 2019&quot;
         mit weiteren Infos und Quellen zum Projekt{' '}
         <Link
-					target="_blank"
-					href="https://github.com/codeformuenster/crashes-shiny/blob/master/doc/vortrag_forum_citizen_science_september_2019/PVI_Terstiege_SichererRadfahren_26Sep.pdf"
-					rel="noopener"
-				>
-				finden sich hier
-				</Link>
-				). Für diese Visualisierung brauchen wir aber eine bessere
+          target="_blank"
+          href="https://github.com/codeformuenster/crashes-shiny/blob/master/doc/vortrag_forum_citizen_science_september_2019/PVI_Terstiege_SichererRadfahren_26Sep.pdf"
+          rel="noopener"
+        >
+          finden sich hier
+        </Link>
+        ). Für diese Visualisierung brauchen wir aber eine bessere
         Datenqualität, insbesondere bei den Unfallorten. Deshalb haben wir
         diesen Unfalleditor entwickelt.
         <br />
