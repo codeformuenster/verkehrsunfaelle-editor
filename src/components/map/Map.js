@@ -7,6 +7,7 @@ import {
   Marker,
   Popup,
   LayersControl,
+  LayerGroup,
 } from 'react-leaflet';
 import { CRS } from 'leaflet';
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,6 +50,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const DOPOverlay = () => (
+  <WMSTileLayer
+    url="https://www.wms.nrw.de/geobasis/wms_nw_dop_overlay"
+    version="1.3.0"
+    // eslint-disable-next-line max-len
+    layers="nw_dop_overlay_bab_anschlussstellen,nw_dop_overlay_unbefahrbare_wege,nw_dop_overlay_ortsstrassen_beschriftung,nw_dop_overlay_kreisstrassen_beschriftung,nw_dop_overlay_ortsstrassen,nw_dop_overlay_kreisstrassen,nw_dop_overlay_landstrassen,nw_dop_overlay_landstrassen_beschriftung,nw_dop_overlay_bundesstrassen_beschriftung_2,nw_dop_overlay_bundesstrassen_beschriftung_1,nw_dop_overlay_bundesstrassen,nw_dop_overlay_autobahn_beschriftung_2,nw_dop_overlay_autobahn_beschriftung_1,nw_dop_overlay_autobahn"
+    transparent="true"
+    format="png"
+    styles="default"
+    crs={CRS.EPSG4326}
+  />
+);
+
 const UnfallMap = ({
   mapLat,
   mapLon,
@@ -87,7 +101,7 @@ const UnfallMap = ({
       }}
     >
       <LayersControl position="topright">
-        <BaseLayer checked name="OpenTopoMap">
+        <BaseLayer name="topografisch">
           <TileLayer
             // eslint-disable-next-line max-len
             attribution='Kartendaten: &amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: &copy; <a href="http://opentopomap.org" target="_blank" rel="noopener">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC-BY-SA</a>)'
@@ -95,33 +109,39 @@ const UnfallMap = ({
             maxZoom={17}
           />
         </BaseLayer>
-        <BaseLayer name="OpenStreetMap">
+        <BaseLayer checked name="OpenStreetMap">
           <TileLayer
             // eslint-disable-next-line max-len
             attribution='&amp;copy <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png"
           />
         </BaseLayer>
-        <BaseLayer name="DOP 2018">
-          <WMSTileLayer
-            // eslint-disable-next-line max-len
-            attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener">Datenquellen</a>'
-            url="https://www.wms.nrw.de/geobasis/wms_nw_dop"
-            version="1.3.0"
-            layers="nw_dop_rgb"
-            crs={CRS.EPSG4326}
-          />
-        </BaseLayer>
-        {['2014', '2011', '2008'].map(year => (
-          <BaseLayer name={`DOP ${year}`} key={year}>
+        <BaseLayer name="Luftbild 2018">
+          <LayerGroup>
             <WMSTileLayer
               // eslint-disable-next-line max-len
-              attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener noreferrer">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener noreferrer">Datenquellen</a>'
-              url="https://www.wms.nrw.de/geobasis/wms_nw_hist_dop"
+              attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener">Datenquellen</a>'
+              url="https://www.wms.nrw.de/geobasis/wms_nw_dop"
               version="1.3.0"
-              layers={`nw_hist_dop_${year}`}
+              layers="nw_dop_rgb"
               crs={CRS.EPSG4326}
             />
+            <DOPOverlay />
+          </LayerGroup>
+        </BaseLayer>
+        {['2014', '2011', '2008'].map(year => (
+          <BaseLayer name={`Luftbild ${year}`} key={year}>
+            <LayerGroup>
+              <WMSTileLayer
+                // eslint-disable-next-line max-len
+                attribution='&amp;copy <a href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank" rel="noopener noreferrer">Bundesamt für Kartographie und Geodäsie</a>, <a href="https://sg.geodatenzentrum.de/web_public/Datenquellen_TopPlus_Open.pdf" target="_blank" rel="noopener noreferrer">Datenquellen</a>'
+                url="https://www.wms.nrw.de/geobasis/wms_nw_hist_dop"
+                version="1.3.0"
+                layers={`nw_hist_dop_${year}`}
+                crs={CRS.EPSG4326}
+              />
+              <DOPOverlay />
+            </LayerGroup>
           </BaseLayer>
         ))}
       </LayersControl>
