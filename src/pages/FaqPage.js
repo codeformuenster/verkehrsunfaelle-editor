@@ -6,6 +6,8 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
+import useScrollTo from '../hooks/use-scroll-to';
+
 const useStyles = makeStyles(theme => ({
   qnaBox: {},
   qna: {
@@ -260,6 +262,7 @@ const questionsAndAnswers = [
 ];
 
 const FaqPage = () => {
+  useScrollTo();
   const classes = useStyles();
 
   return (
