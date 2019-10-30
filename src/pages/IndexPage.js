@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import MuiLink from '@material-ui/core/Link';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -46,7 +47,15 @@ export default function IndexPage() {
           <Typography variant="body1" align="justify" gutterBottom>
             Wir wollen Verkehrsunfälle in Münster besser verstehen. Dafür
             brauchen wir eine Datengrundlage, mit der auch Computer problemlos
-            arbeiten können.
+            arbeiten können. Die Daten lassen sich auf{' '}
+            <MuiLink
+              href="https://crashes.codeformuenster.org/"
+              rel="noopener"
+              target="_blank"
+            >
+              crashes.codeformuenster.org
+            </MuiLink>{' '}
+            erkunden.
           </Typography>
           <Typography variant="body1" align="justify" gutterBottom>
             Diese Seite soll dabei helfen, den Datensatz zu verbessern. Jeder

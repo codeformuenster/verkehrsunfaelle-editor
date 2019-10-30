@@ -48,13 +48,13 @@ const questionsAndAnswers = [
       <>
         In Münster gibt es im Vergleich zu anderen NRW-Städten viele
         Verkehrsunfälle. Um es der interessierten Stadtöffentlichkeit zu
-        ermöglichen, gut informiert an der Diskussion zur Verbesserung
-        der Lage teilzunehmen, wollen wir die Daten zu den
-        Verkehrsunfällen möglichst leicht zugänglich machen.
-        Leider ist die Datenqualität der Verkehrunfallstatistik der Polizei
-        Münster nicht die allerbeste. Nach mehreren Versuchen ist es uns
-        gelungen, die zwischen den Jahren unterschiedlichen Spaltennamen und
-        Formate in eine Datenbank zu laden, um sie{' '}
+        ermöglichen, gut informiert an der Diskussion zur Verbesserung der Lage
+        teilzunehmen, wollen wir die Daten zu den Verkehrsunfällen möglichst
+        leicht zugänglich machen. Leider ist die Datenqualität der
+        Verkehrunfallstatistik der Polizei Münster nicht die allerbeste. Nach
+        mehreren Versuchen ist es uns gelungen, die zwischen den Jahren
+        unterschiedlichen Spaltennamen und Formate in eine Datenbank zu laden,
+        um sie{' '}
         <Link
           target="_blank"
           href="https://crashes.codeformuenster.org"
@@ -62,10 +62,11 @@ const questionsAndAnswers = [
         >
           zu visualisieren und einfach zugänglich
         </Link>
-         zu machen (Folien eines Vortrages auf dem &quot;Forum Citizen Science 2019&quot;
-        mit weiteren Infos und Quellen zum Projekt{' '}
+        zu machen (Folien eines Vortrages auf dem &quot;Forum Citizen Science
+        2019&quot; mit weiteren Infos und Quellen zum Projekt{' '}
         <Link
           target="_blank"
+          // eslint-disable-next-line max-len
           href="https://github.com/codeformuenster/crashes-shiny/blob/master/doc/vortrag_forum_citizen_science_september_2019/PVI_Terstiege_SichererRadfahren_26Sep.pdf"
           rel="noopener"
         >
@@ -134,35 +135,33 @@ const questionsAndAnswers = [
     answer: (
       <>
         Dank einer Anfrage bei der Polizei Münster über{' '}
-        {/* eslint-disable max-len */}
         <Link
           target="_blank"
           rel="noopener"
+          // eslint-disable-next-line max-len
           href="https://fragdenstaat.de/anfrage/rohdaten-der-verkehrsunfallstatistik-munster/"
         >
           &quot;Frag den Staat&quot;
         </Link>{' '}
-        {/* eslint-enable max-len */}
         sind wir an Rohdaten der Verkehrsunfälle der Jahre 2007 bis 2014
         gekommen. Die Daten ab 2015 haben wir dankenswerterweise über{' '}
-        {/* eslint-disable max-len */}
         <Link
           target="_blank"
           rel="noopener"
+          // eslint-disable-next-line max-len
           href="https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland.html"
         >
           den ADFC
         </Link>{' '}
-        {/* eslint-enable max-len */}
-        bekommen. Die Rohdaten lassen sich {/* eslint-disable max-len */}
+        bekommen. Die Rohdaten lassen sich
         <Link
           target="_blank"
           rel="noopener"
+          // eslint-disable-next-line max-len
           href="https://github.com/codeformuenster/open-data/tree/master/Unfallstatistiken"
         >
           hier herunterladen (dort Ordner Rohdaten auswählen)
         </Link>
-        {/* eslint-enable max-len */}.
       </>
     ),
   },
@@ -174,7 +173,7 @@ const questionsAndAnswers = [
         Kurz gesagt: Mittelfristig bekommst Du eine sicherere
         Verkehrsinfrastruktur, weil es mit den Unfalldaten möglich ist,
         besonders gefährliche Orte zu identifizieren und dann hoffentlich zu
-        entschärfen. Und Du kannst ein Bier gewinnen!
+        entschärfen. Und Du kannst ein Bier, Kaffee oder Softdrink gewinnen!
         <br />
         <br />
         Lange Antwort: In Münster gibt es im Vergleich zu anderen NRW-Städten
@@ -216,10 +215,11 @@ const questionsAndAnswers = [
         >
           interaktive räumliche Unfalldatenvisualisierung
         </Link>{' '}
-        erstellt (Folien eines Vortrages auf dem &quot;Forum Citizen Science 2019&quot;
-        mit weiteren Infos und Quellen zum Projekt{' '}
+        erstellt (Folien eines Vortrages auf dem &quot;Forum Citizen Science
+        2019&quot; mit weiteren Infos und Quellen zum Projekt{' '}
         <Link
           target="_blank"
+          // eslint-disable-next-line max-len
           href="https://github.com/codeformuenster/crashes-shiny/blob/master/doc/vortrag_forum_citizen_science_september_2019/PVI_Terstiege_SichererRadfahren_26Sep.pdf"
           rel="noopener"
         >
