@@ -70,14 +70,18 @@ const useStyles = makeStyles(theme => ({
   },
   accidentProperty: {
     fontSize: theme.typography.h6.fontSize,
+    lineHeight: 1,
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.h5.fontSize,
+      lineHeight: 1.6,
     },
   },
   accidentPropertySmaller: {
     fontSize: theme.typography.subtitle1.fontSize,
+    lineHeight: 1,
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.h6.fontSize,
+      lineHeight: 1.6,
     },
   },
 }));
