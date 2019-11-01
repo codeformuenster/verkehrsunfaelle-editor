@@ -15,6 +15,7 @@ import LoadingBox from '../LoadingBox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import MuiLink from '@material-ui/core/Link';
 import Geocoder from './Geocoder';
 
 import 'leaflet/dist/leaflet.css';
@@ -47,6 +48,9 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1000,
     maxWidth: 300,
     padding: theme.spacing(2),
+  },
+  searchLinkSpan: {
+    cursor: 'pointer',
   },
 }));
 
@@ -81,6 +85,17 @@ const UnfallMap = ({
     center: [mapLat, mapLon],
     zoom: mapZoom,
   });
+  const [expandSearchOnce, setExpandSearchOnce] = React.useState(undefined);
+  const [missingPositionDismissed, setDismissPositionMissing] = React.useState(
+    false,
+  );
+
+  // make this a one shot state
+  React.useEffect(() => {
+    if (expandSearchOnce === true) {
+      setExpandSearchOnce(undefined);
+    }
+  }, [expandSearchOnce]);
 
   React.useEffect(() => {
     setViewportState({
@@ -88,6 +103,14 @@ const UnfallMap = ({
       zoom: mapZoom,
     });
   }, [mapLat, mapLon, mapZoom]);
+
+  // once the accident has a position on the map, reset the state for
+  // dismissing the missing poisition overlay
+  React.useEffect(() => {
+    if (markerLat !== null) {
+      setDismissPositionMissing(false);
+    }
+  }, [markerLat]);
 
   return (
     <Map
@@ -155,6 +178,7 @@ const UnfallMap = ({
         position="topleft"
         placeholder="Suche ..."
         errorMessage="Nichts gefunden."
+        expandOnce={expandSearchOnce}
         searchString={searchString}
         onSearchResultSelect={clickedSearchResultCenter => {
           onMarkerDragEnd(clickedSearchResultCenter);
@@ -172,11 +196,25 @@ const UnfallMap = ({
         </Marker>
       )}
       {loading && <LoadingBox className={classes.loadingOverlay} />}
-      {!loading && markerLat === null && (
+      {!loading && markerLat === null && missingPositionDismissed === false && (
         <Paper className={classes.missingPositionOverlay}>
           <Typography variant="h6">Fehlender Ort</Typography>
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1">
             Dieser Unfall hat noch keinen maschinenlesbaren Ort.
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Benutze die{' '}
+            <MuiLink
+              className={classes.searchLinkSpan}
+              component="span"
+              onClick={() => {
+                setExpandSearchOnce(true);
+                setDismissPositionMissing(true);
+              }}
+            >
+              Suche
+            </MuiLink>
+            , oder füge einen Marker in der Kartenmitte hinzu.
           </Typography>
           <Button
             variant="contained"

@@ -36,6 +36,10 @@ class Geocoder extends MapControl {
 
   updateLeafletElement(fromProps, toProps) {
     document.getElementById(searchInputId).value = toProps.searchString;
+    if (this.props.expandOnce === true) {
+      this.leafletElement._expand();
+      this.leafletElement._geocode(true);
+    }
   }
 }
 
