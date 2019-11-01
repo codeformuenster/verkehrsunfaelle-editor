@@ -76,16 +76,22 @@ const UnfallMap = ({
   loading,
 }) => {
   const classes = useStyles();
-  const [maxZoom, setMaxZoom] = React.useState(17);
-  const [mapCenter, setMapCenter] = React.useState({
-    lat: mapLat,
-    lng: mapLon,
+  const [maxZoom, setMaxZoom] = React.useState(19);
+  const [viewportState, setViewportState] = React.useState({
+    center: [mapLat, mapLon],
+    zoom: mapZoom,
   });
+
+  React.useEffect(() => {
+    setViewportState({
+      center: [mapLat, mapLon],
+      zoom: mapZoom,
+    });
+  }, [mapLat, mapLon, mapZoom]);
 
   return (
     <Map
-      center={[mapLat, mapLon]}
-      zoom={mapZoom}
+      viewport={viewportState}
       maxZoom={19}
       className={className}
       onBaselayerchange={({ name }) => {
@@ -96,8 +102,8 @@ const UnfallMap = ({
           map.setZoom(maxZoom);
         }
       }}
-      onMoveend={({ target: map }) => {
-        setMapCenter(map.getCenter());
+      onViewportChanged={viewport => {
+        setViewportState(viewport);
       }}
     >
       <LayersControl position="topright">
@@ -150,7 +156,10 @@ const UnfallMap = ({
         placeholder="Suche ..."
         errorMessage="Nichts gefunden."
         searchString={searchString}
-        onSearchResultSelect={onMarkerDragEnd}
+        onSearchResultSelect={clickedSearchResultCenter => {
+          onMarkerDragEnd(clickedSearchResultCenter);
+          setViewportState({ center: clickedSearchResultCenter, zoom: 17 });
+        }}
       />
       {markerLat && markerLon && (
         <Marker
@@ -173,7 +182,13 @@ const UnfallMap = ({
             variant="contained"
             color="primary"
             onClick={() => {
-              onMarkerDragEnd({ ...mapCenter, reallyInitial: true });
+              const [lat, lng] = viewportState.center;
+              onMarkerDragEnd({
+                lat,
+                lng,
+                reallyInitial: true,
+              });
+              setViewportState({ ...viewportState, zoom: 17 });
             }}
           >
             Marker hinzufügen

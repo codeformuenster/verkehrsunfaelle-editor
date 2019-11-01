@@ -29,9 +29,6 @@ class Geocoder extends MapControl {
 
     geocoder.on('markgeocode', ({ geocode: { center } }) => {
       this.props.onSearchResultSelect(center);
-      this.props.leaflet.map.options.zoom = 17;
-      this.props.leaflet.map.options.center = center;
-      this.props.leaflet.map.flyTo(center, 17, { animate: false });
     });
 
     return geocoder;
