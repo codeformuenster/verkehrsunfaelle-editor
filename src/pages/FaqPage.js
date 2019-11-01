@@ -155,7 +155,7 @@ const questionsAndAnswers = [
         >
           den ADFC
         </Link>{' '}
-        bekommen. Die Rohdaten lassen sich
+        bekommen. Die Rohdaten lassen sich{' '}
         <Link
           target="_blank"
           rel="noopener"
@@ -164,6 +164,10 @@ const questionsAndAnswers = [
         >
           hier herunterladen (dort Ordner Rohdaten auswählen)
         </Link>
+        . Über den tatsächlichen Prozess zur Datenaufnahme können wir leider
+        keine Aussagen treffen. Solltest du wissen, wie eine Unfallaufnahme bei
+        der Polizei Münster abläuft und wie die Angaben dann in den
+        Excel-Tabellen landet, würden wir uns sehr über eine Nachricht freuen!
       </>
     ),
   },
