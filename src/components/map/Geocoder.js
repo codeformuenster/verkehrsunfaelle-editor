@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { MapControl, withLeaflet } from 'react-leaflet';
 import GeocoderPlugin from 'leaflet-control-geocoder';
+import AccidentsPhoton from './photon-muenster-accidents';
 
 import 'leaflet-control-geocoder/Control.Geocoder.css';
 
@@ -10,7 +11,8 @@ class Geocoder extends MapControl {
   createLeafletElement(props) {
     const geocoder = new GeocoderPlugin({
       ...props,
-      geocoder: new GeocoderPlugin.Photon({
+      geocoder: new AccidentsPhoton({
+        nameProperties: ['name', 'street', 'housenumber', 'town', 'city'],
         geocodingQueryParams: {
           lat: 51.96,
           lon: 7.62,
