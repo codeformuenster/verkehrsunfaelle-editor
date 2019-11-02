@@ -18,7 +18,7 @@ import IndexPage from './pages/IndexPage';
 import NotFoundPage from './pages/NotFoundPage';
 const UnfallPage = React.lazy(() => import('./pages/UnfallPage'));
 const RandomUnfallPage = React.lazy(() => import('./pages/RandomUnfallPage'));
-const RawDataPage = React.lazy(() => import('./pages/RawDataPage'));
+const DataPage = React.lazy(() => import('./pages/DataPage'));
 const FaqPage = React.lazy(() => import('./pages/FaqPage'));
 
 import { KintoProvider } from './contexts/kinto-context';
@@ -44,7 +44,7 @@ ReactDOM.render(
               <IndexPage path="/" />
               <RandomUnfallPage path="/korrektur" />
               <UnfallPage path="/korrektur/:accidentId" />
-              <RawDataPage path="/rohdaten" />
+              <DataPage path="/daten" />
               <FaqPage path="/faq" />
               <NotFoundPage default />
             </Router>

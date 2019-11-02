@@ -89,8 +89,8 @@ const links = [
     to: '/faq',
   },
   {
-    label: 'Rohdaten',
-    to: '/rohdaten',
+    label: 'Daten',
+    to: '/daten',
   },
   {
     label: 'Korrektur',

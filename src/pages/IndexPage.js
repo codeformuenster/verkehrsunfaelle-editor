@@ -76,7 +76,7 @@ export default function IndexPage() {
         <Box my={4}>
           <Typography variant="body1" align="justify">
             <Stats />
-            &nbsp;<Link to="/rohdaten">Mehr Informationen&hellip;</Link>
+            &nbsp;<Link to="/daten">Mehr Informationen&hellip;</Link>
           </Typography>
         </Box>
       </Container>
