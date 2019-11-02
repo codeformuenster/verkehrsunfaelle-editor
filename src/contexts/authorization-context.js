@@ -66,7 +66,6 @@ const AuthorizationProvider = ({ children }) => {
     setIsLoading(true);
     const authString = `Basic ${btoa(`${username}:${password}`)}`;
     ky.get(`${kinto.remote}/accounts/${username}`, {
-      retry: 0,
       headers: new Headers({
         Authorization: authString,
       }),
