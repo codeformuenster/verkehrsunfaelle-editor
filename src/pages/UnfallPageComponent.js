@@ -12,11 +12,20 @@ import Map from '../components/map/Map';
 import UnfallBox from '../components/correction/UnfallBox';
 import InfoButton from '../components/InfoButton';
 import Link from '../components/Link';
+import ErrorBoundary from 'react-error-boundary';
+import * as Sentry from '@sentry/browser';
 
 import PlaceName from '../components/correction/PlaceName';
 
 import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@material-ui/icons/Error';
+
+const onError = error => {
+  if (Sentry) {
+    Sentry.captureException(error);
+  }
+};
 
 const useStyles = makeStyles(theme => ({
   errorBox: {
@@ -63,6 +72,47 @@ const useStyles = makeStyles(theme => ({
     transform: 'translate(-50%, -50%)',
   },
 }));
+
+const ErroredMap = ({
+  reloadAccident,
+  message,
+  headline = (
+    <>
+      <WarningIcon /> Verkehrsunfall konnte nicht geladen werden
+    </>
+  ),
+}) => {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.errorBox}>
+      <Typography variant="h5" component="h5" gutterBottom>
+        {headline}
+      </Typography>
+      <Button
+        variant="contained"
+        className={classes.button}
+        onClick={reloadAccident}
+      >
+        <RefreshIcon />
+        Erneut versuchen.
+      </Button>
+      <Typography variant="subtitle1" color="textSecondary">
+        {message}
+      </Typography>
+    </Box>
+  );
+};
+
+ErroredMap.propTypes = {
+  message: PropTypes.string.isRequired,
+  reloadAccident: PropTypes.func.isRequired,
+  headline: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+};
 
 const UnfallPageComponent = ({
   accident,
@@ -117,49 +167,57 @@ const UnfallPageComponent = ({
           <Grid container spacing={1} className={classes.mainGrid}>
             <Grid item lg={8} xs={12}>
               {accident.error ? (
-                <Box className={classes.errorBox}>
-                  <Typography variant="h5" component="h5" gutterBottom>
-                    <WarningIcon /> Verkehrsunfall konnte nicht geladen werden
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    onClick={reloadAccident}
-                  >
-                    <RefreshIcon />
-                    Erneut versuchen.
-                  </Button>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {accident.error.message}
-                  </Typography>
-                </Box>
-              ) : (
-                <Map
-                  className={classes.crashMap}
-                  mapLat={accident.lat ? accident.lat : 51.96}
-                  mapLon={accident.lon ? accident.lon : 7.62}
-                  mapZoom={accident.lat ? 17 : 11}
-                  popupContent={
-                    <>
-                      Unfall bei
-                      <br />
-                      <PlaceName
-                        place={accident.place}
-                        quotes={true}
-                      /> Höhe{' '}
-                      <PlaceName place={accident.place_near} quotes={true} />
-                    </>
-                  }
-                  searchString={
-                    accident.place && accident.place_near
-                      ? `${accident.place.trim()} ${accident.place_near.trim()}`
-                      : ''
-                  }
-                  markerLat={accidentPosition.lat}
-                  markerLon={accidentPosition.lng}
-                  onMarkerDragEnd={setAccidentPosition}
-                  loading={isLoading}
+                <ErroredMap
+                  reloadAccident={reloadAccident}
+                  message={accident.error.message}
                 />
+              ) : (
+                <ErrorBoundary
+                  onError={onError}
+                  FallbackComponent={({ error }) => (
+                    <ErroredMap
+                      headline={
+                        <>
+                          <ErrorIcon /> Hier ist ein Fehler aufgetreten :(
+                        </>
+                      }
+                      reloadAccident={() => {
+                        if (window && window.location) {
+                          window.location.reload();
+                        }
+                      }}
+                      message={error.message}
+                    />
+                  )}
+                >
+                  <Map
+                    className={classes.crashMap}
+                    mapLat={accident.lat ? accident.lat : 51.96}
+                    mapLon={accident.lon ? accident.lon : 7.62}
+                    mapZoom={accident.lat ? 17 : 11}
+                    popupContent={
+                      <>
+                        Unfall bei
+                        <br />
+                        <PlaceName
+                          place={accident.place}
+                          quotes={true}
+                        /> Höhe{' '}
+                        <PlaceName place={accident.place_near} quotes={true} />
+                      </>
+                    }
+                    searchString={
+                      accident.place && accident.place_near
+                      // eslint-disable-next-line
+                        ? `${accident.place.trim()} ${accident.place_near.trim()}`
+                        : ''
+                    }
+                    markerLat={accidentPosition.lat}
+                    markerLon={accidentPosition.lng}
+                    onMarkerDragEnd={setAccidentPosition}
+                    loading={isLoading}
+                  />
+                </ErrorBoundary>
               )}
             </Grid>
             <Grid item lg={4} xs={12}>
