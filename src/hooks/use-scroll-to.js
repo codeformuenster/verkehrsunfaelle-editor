@@ -11,7 +11,10 @@ const useScrollTo = () => {
         return;
       }
 
-      const element = document.querySelector(window.location.hash);
+      let element
+      try {
+        element = document.querySelector(window.location.hash);
+      } catch (e) {} // eslint-disable-line no-empty
 
       if (!element) {
         timeoutID = window.setTimeout(checkAndScrollTo, 100);
