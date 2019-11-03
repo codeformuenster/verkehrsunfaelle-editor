@@ -13,17 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MuiLink from '@material-ui/core/Link';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({}));
-
-const extractFileName = path => {
-  const pathParts = path.split('/');
-
-  return pathParts[pathParts.length - 1];
-};
-
 const rawLinksBaseUrl =
+  // eslint-disable-next-line max-len
   'https://github.com/codeformuenster/verkehrsunfaelle/releases/download/data-2019-11-03/';
 
 const rawLinks = [
@@ -120,10 +111,8 @@ const DataPage = () => {
     numAccounts,
   } = useStats();
 
-  const classes = useStyles();
-
   return (
-    <Box className={classes.wrapper}>
+    <Box>
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h4" gutterBottom>
@@ -169,6 +158,7 @@ const DataPage = () => {
             Rohdaten
           </Typography>
           <Typography variant="body1" align="justify" gutterBottom>
+            {/* eslint-disable-next-line max-len */}
             Die Kopfzeile für alle Unfall-CSV Dateien befinden sich in Datei{' '}
             <DownloadLink filename="verkehrsunfaelle_raw_headers.csv" />{' '}
             enthalten.
@@ -180,8 +170,8 @@ const DataPage = () => {
             <DownloadLink filename="unfallursachen.csv" /> und{' '}
             <DownloadLink filename="verkehrsbeteiligung.csv" />.
           </Typography>
-          <Paper className={classes.downloadTable}>
-            <Table className={classes.table} aria-label="Rohdaten download">
+          <Paper>
+            <Table aria-label="Rohdaten download">
               <TableHead>
                 <TableRow>
                   <TableCell>Jahr</TableCell>
