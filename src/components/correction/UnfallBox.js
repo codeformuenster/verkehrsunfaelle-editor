@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import InfoButton from '../InfoButton';
 import LoadingBox from '../LoadingBox';
 import Link from '../Link';
@@ -12,6 +13,7 @@ import PlaceName from './PlaceName';
 import SaveIcon from '@material-ui/icons/Done';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
+import LinkIcon from '@material-ui/icons/Link';
 import MetaDisplay from './MetaDisplay';
 
 import { useAuthorization } from '../../contexts/authorization-context';
@@ -84,6 +86,10 @@ const useStyles = makeStyles(theme => ({
       lineHeight: 1.6,
     },
   },
+  miniButtons: {
+    float: 'right',
+    display: 'inline'
+  }
 }));
 
 const UnfallBox = ({
@@ -198,6 +204,7 @@ const UnfallBox = ({
     <Paper elevation={2}>
       <Typography variant="h6" component="h6" className={classes.paperHeader}>
         Angaben laut Polizei:
+        <Box className={classes.miniButtons}>
         <InfoButton
           icon="info"
           size="small"
@@ -205,31 +212,25 @@ const UnfallBox = ({
           information={information}
           dialog
         />
+          <IconButton
+            aria-label="Direktlink zu diesem Unfall"
+            title="Direktlink zu diesem Unfall"
+            component={Link}
+            to={`/korrektur/${accident.accident_id}`}
+            size="small"
+          >
+            <LinkIcon />
+          </IconButton>
+        </Box>
       </Typography>
       <Grid container spacing={0}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <Typography
             variant="h6"
             align="center"
             className={classes.accidentProperty}
           >
-            <PlaceName place={accident.place} quotes={true} />
-          </Typography>
-          <Typography
-            variant="caption"
-            component="h6"
-            color="textSecondary"
-            align="center"
-          >
-            Unfallort
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography
-            variant="h6"
-            align="center"
-            className={classes.accidentProperty}
-          >
+            <PlaceName place={accident.place} quotes={true} /> /{' '}
             <PlaceName place={accident.place_near} quotes={true} />
           </Typography>
           <Typography
@@ -238,7 +239,7 @@ const UnfallBox = ({
             color="textSecondary"
             align="center"
           >
-            Unfallhöhe
+            Unfallort / Unfallhöhe
           </Typography>
         </Grid>
         <Grid item xs={12}>

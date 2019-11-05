@@ -50,6 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
   infoButton: {
     marginLeft: 'auto',
+    padding: theme.spacing(0),
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
@@ -70,6 +71,14 @@ const useStyles = makeStyles(theme => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+  },
+  headline: {
+    fontSize: theme.typography.h6.fontSize,
+    marginBottom: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.h5.fontSize,
+      marginBottom: theme.spacing(0),
+    },
   },
 }));
 
@@ -154,7 +163,11 @@ const UnfallPageComponent = ({
       <Container>
         <Box my={{ xs: 1, sm: 2 }}>
           <Box display="flex" alignItems="center">
-            <Typography variant="h5" component="h5" display="inline">
+            <Typography
+              variant="h5"
+              component="h5"
+              className={classes.headline}
+            >
               Unfallort korrigieren
             </Typography>
             <InfoButton
@@ -208,8 +221,8 @@ const UnfallPageComponent = ({
                     }
                     searchString={
                       accident.place && accident.place_near
-                      // eslint-disable-next-line
-                        ? `${accident.place.trim()} ${accident.place_near.trim()}`
+                        ? // eslint-disable-next-line
+                          `${accident.place.trim()} ${accident.place_near.trim()}`
                         : ''
                     }
                     markerLat={accidentPosition.lat}
