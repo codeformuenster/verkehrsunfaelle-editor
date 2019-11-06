@@ -122,16 +122,14 @@ const UnfallBox = ({
     } else {
       actionBox = (
         <>
-          {!hideNext && (
-            <Button
-              variant="outlined"
-              className={classes.actionButton}
-              onClick={() => onSaveClick(true)}
-            >
-              <WarningIcon className={classes.actionIcon} />
-              Ort unbestimmbar
-            </Button>
-          )}
+          <Button
+            variant="outlined"
+            className={classes.actionButton}
+            onClick={() => onSaveClick(true)}
+          >
+            <WarningIcon className={classes.actionIcon} />
+            Ort unbestimmbar
+          </Button>
           <Button
             color="primary"
             variant="outlined"
