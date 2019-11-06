@@ -15,6 +15,8 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import WarningIcon from '@material-ui/icons/Warning';
 import LinkIcon from '@material-ui/icons/Link';
 import MetaDisplay from './MetaDisplay';
+import Participants from './Participants';
+import TimeOfAccident from './TimeOfAccident';
 
 import { useAuthorization } from '../../contexts/authorization-context';
 
@@ -25,10 +27,14 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   paperHeader: {
     fontWeight: theme.typography.fontWeightRegular,
-    padding: `${theme.spacing(0.5)}px ${theme.spacing(2)}px 0`,
+    padding: `${theme.spacing(0.5)}px ${theme.spacing(0.5)}px 0 ${theme.spacing(
+      2,
+    )}px`,
     fontSize: '1rem',
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px 0`,
+      padding: `${theme.spacing(1)}px ${theme.spacing(1)}px 0 ${theme.spacing(
+        2,
+      )}px`,
     },
   },
   saveErrorBox: {
@@ -52,7 +58,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   infoButton: {
-    marginLeft: theme.spacing(1),
     padding: theme.spacing(0.5),
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(1.5),
@@ -88,8 +93,14 @@ const useStyles = makeStyles(theme => ({
   },
   miniButtons: {
     float: 'right',
-    display: 'inline'
-  }
+    display: 'inline',
+  },
+  actionIcon: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
 }));
 
 const UnfallBox = ({
@@ -119,7 +130,8 @@ const UnfallBox = ({
               onClick={onNextClick}
               disabled={!authorized}
             >
-              <RefreshIcon /> Nächster Unfall
+              <RefreshIcon className={classes.actionIcon} />
+              Nächster Unfall
             </Button>
           )}
           <Button
@@ -129,7 +141,8 @@ const UnfallBox = ({
             disabled={typeof onSaveClick === 'undefined'}
             onClick={onSaveClick}
           >
-            <SaveIcon /> {username === 'Anonym' ? 'Anonym' : 'Unfall'} speichern
+            <SaveIcon className={classes.actionIcon} />
+            {username === 'Anonym' ? 'Anonym' : 'Unfall'} speichern
           </Button>
         </>
       );
@@ -205,13 +218,13 @@ const UnfallBox = ({
       <Typography variant="h6" component="h6" className={classes.paperHeader}>
         Angaben laut Polizei:
         <Box className={classes.miniButtons}>
-        <InfoButton
-          icon="info"
-          size="small"
-          className={classes.infoButton}
-          information={information}
-          dialog
-        />
+          <InfoButton
+            icon="info"
+            size="small"
+            className={classes.infoButton}
+            information={information}
+            dialog
+          />
           <IconButton
             aria-label="Direktlink zu diesem Unfall"
             title="Direktlink zu diesem Unfall"
@@ -242,7 +255,7 @@ const UnfallBox = ({
             Unfallort / Unfallhöhe
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={8}>
           <Typography
             variant="subtitle1"
             align="center"
@@ -260,6 +273,26 @@ const UnfallBox = ({
             align="center"
           >
             Kategorie
+          </Typography>
+        </Grid>
+        <Grid item xs={4} align="center">
+          <Participants {...accident} />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            className={classes.accidentPropertySmaller}
+          >
+            <TimeOfAccident date={accident.date} />
+          </Typography>
+          <Typography
+            variant="caption"
+            component="h6"
+            color="textSecondary"
+            align="center"
+          >
+            Zeitpunkt
           </Typography>
         </Grid>
         {saveError && (
