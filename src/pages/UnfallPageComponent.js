@@ -238,11 +238,12 @@ const UnfallPageComponent = ({
                 onSaveClick={
                   accidentPosition.lat === null
                     ? undefined
-                    : () => handleSaveClick(false)
+                    : bogus => handleSaveClick(bogus)
                 }
                 onNextClick={reloadAccident}
                 saveError={saveError}
                 hideNext={hideNext}
+                positionChanged={accidentPosition.initial}
               />
               <Box className={classes.infoBox} mt={2}>
                 {information}

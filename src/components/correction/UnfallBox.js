@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoButton from '../InfoButton';
 import LoadingBox from '../LoadingBox';
 import Link from '../Link';
+import { Link as ReachLink } from '@reach/router';
 import PlaceName from './PlaceName';
 import SaveIcon from '@material-ui/icons/Done';
 import RefreshIcon from '@material-ui/icons/Refresh';
@@ -53,14 +54,10 @@ const useStyles = makeStyles(theme => ({
   actionButton: {
     borderRadius: 0,
     fontSize: theme.typography.fontSize * 0.8,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.fontSize,
-    },
-  },
-  infoButton: {
     padding: theme.spacing(0.5),
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(1.5),
+      fontSize: theme.typography.fontSize,
+      padding: theme.spacing(1),
     },
   },
   infoDefinitionTitle: {
@@ -89,6 +86,13 @@ const useStyles = makeStyles(theme => ({
     float: 'right',
     display: 'inline',
   },
+  miniButton: {
+    color: theme.palette.text.primary,
+    padding: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(1.5),
+    },
+  },
   actionIcon: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -104,6 +108,7 @@ const UnfallBox = ({
   loading,
   saveError,
   hideNext,
+  positionChanged,
 }) => {
   const classes = useStyles();
   const { authorized, username, engageAuthModal } = useAuthorization();
@@ -121,11 +126,10 @@ const UnfallBox = ({
             <Button
               variant="outlined"
               className={classes.actionButton}
-              onClick={onNextClick}
-              disabled={!authorized}
+              onClick={() => onSaveClick(true)}
             >
-              <RefreshIcon className={classes.actionIcon} />
-              Nächster Unfall
+              <WarningIcon className={classes.actionIcon} />
+              Ort unbestimmbar
             </Button>
           )}
           <Button
@@ -133,10 +137,11 @@ const UnfallBox = ({
             variant="outlined"
             className={classes.actionButton}
             disabled={typeof onSaveClick === 'undefined'}
-            onClick={onSaveClick}
+            onClick={() => onSaveClick(false)}
           >
             <SaveIcon className={classes.actionIcon} />
-            {username === 'Anonym' ? 'Anonym' : 'Unfall'} speichern
+            {positionChanged === true ? 'Position' : 'Änderung'}{' '}
+            {username === 'Anonym' ? 'Anonym ' : null}speichern
           </Button>
         </>
       );
@@ -212,20 +217,30 @@ const UnfallBox = ({
           <InfoButton
             icon="info"
             size="small"
-            className={classes.infoButton}
+            className={classes.miniButton}
             information={information}
             dialogTitle="Unfalldetails"
             dialog
           />
-          <Link to={`/korrektur/${accident.accident_id}`}>
+          {!hideNext && (
             <IconButton
-              aria-label="Direktlink zu diesem Unfall"
-              title="Direktlink zu diesem Unfall"
               size="small"
+              className={classes.miniButton}
+              onClick={onNextClick}
+              aria-label="Nächster Unfall"
             >
-              <LinkIcon />
+              <RefreshIcon fontSize="small" />
             </IconButton>
-          </Link>
+          )}
+          <IconButton
+            component={ReachLink}
+            size="small"
+            className={classes.miniButton}
+            to={`/korrektur/${accident.accident_id}`}
+            aria-label="Direktlink zu diesem Unfall"
+          >
+            <LinkIcon fontSize="small" />
+          </IconButton>
         </Box>
       </Typography>
       <Grid container spacing={0}>
@@ -312,6 +327,7 @@ UnfallBox.propTypes = {
   onNextClick: PropTypes.func,
   accident: PropTypes.object,
   hideNext: PropTypes.bool,
+  positionChanged: PropTypes.bool,
 };
 
 UnfallBox.defaultProps = {
