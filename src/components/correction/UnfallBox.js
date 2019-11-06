@@ -63,12 +63,6 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(1.5),
     },
   },
-  infoHeader: {
-    color: theme.palette.text.primary,
-  },
-  infoDefinitionList: {
-    color: theme.palette.text.primary,
-  },
   infoDefinitionTitle: {
     fontWeight: 500,
   },
@@ -166,10 +160,7 @@ const UnfallBox = ({
 
   const information = (
     <>
-      <Typography variant="h6" component="h6" className={classes.infoHeader}>
-        Unfalldetails
-      </Typography>
-      <dl className={classes.infoDefinitionList}>
+      <dl>
         <dt className={classes.infoDefinitionTitle}>Kategorie</dt>
         <dd className={classes.infoDefinition}>
           <MetaDisplay
@@ -223,17 +214,18 @@ const UnfallBox = ({
             size="small"
             className={classes.infoButton}
             information={information}
+            dialogTitle="Unfalldetails"
             dialog
           />
-          <IconButton
-            aria-label="Direktlink zu diesem Unfall"
-            title="Direktlink zu diesem Unfall"
-            component={Link}
-            to={`/korrektur/${accident.accident_id}`}
-            size="small"
-          >
-            <LinkIcon />
-          </IconButton>
+          <Link to={`/korrektur/${accident.accident_id}`}>
+            <IconButton
+              aria-label="Direktlink zu diesem Unfall"
+              title="Direktlink zu diesem Unfall"
+              size="small"
+            >
+              <LinkIcon />
+            </IconButton>
+          </Link>
         </Box>
       </Typography>
       <Grid container spacing={0}>

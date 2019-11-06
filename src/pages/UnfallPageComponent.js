@@ -142,9 +142,6 @@ const UnfallPageComponent = ({
 
   const information = (
     <>
-      <Typography variant="h6" component="h6">
-        Unfallort korrigieren
-      </Typography>
       <Typography variant="body1" gutterBottom>
         Für jeden Unfall wird von der Polizei auch der Unfallort erhoben. Die
         Angaben umfassen einen &quot;Unfallort&quot; und eine
@@ -175,6 +172,7 @@ const UnfallPageComponent = ({
               information={information}
               className={classes.infoButton}
               dialog
+              dialogTitle="Unfallort korrigieren"
             />
           </Box>
           <Grid container spacing={1} className={classes.mainGrid}>

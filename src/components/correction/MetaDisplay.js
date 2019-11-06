@@ -14,7 +14,7 @@ const MetaDisplayInner = ({ id, title, description, category }) => {
         </>
       ) : (
         <Button
-          small
+          small="true"
           onClick={() => {
             setShowDescription(true);
           }}
@@ -42,10 +42,10 @@ const MetaDisplay = ({ results, ...props }) => {
     return (
       <>
         {results.map((props, index) => (
-          <>
-            <MetaDisplayInner key={props.id} {...props} />
+          <React.Fragment key={`${index}-${props.id}`}>
+            <MetaDisplayInner {...props} />
             {index !== results.length - 1 && <br />}
-          </>
+          </React.Fragment>
         ))}
       </>
     );

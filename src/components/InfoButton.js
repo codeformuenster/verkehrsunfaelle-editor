@@ -14,7 +14,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InfoIcon from '@material-ui/icons/Info';
 import HelpIcon from '@material-ui/icons/Help';
 
-const InfoButton = ({ icon, information, className, dialog, size }) => {
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  dialogText: {
+    color: theme.palette.text.primary,
+  },
+}));
+
+const InfoButton = ({
+  icon,
+  information,
+  className,
+  dialog,
+  size,
+  dialogTitle,
+}) => {
+  const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
@@ -33,9 +50,13 @@ const InfoButton = ({ icon, information, className, dialog, size }) => {
           aria-describedby="alert-dialog-description"
           aria-labelledby="alert-dialog-title"
         >
-          <DialogTitle id="alert-dialog-title"></DialogTitle>
+          <DialogTitle id="alert-dialog-title">{dialogTitle}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText
+              component="div"
+              id="alert-dialog-description"
+              className={classes.dialogText}
+            >
               {information}
             </DialogContentText>
           </DialogContent>
@@ -101,6 +122,7 @@ InfoButton.propTypes = {
   ]).isRequired,
   className: PropTypes.string,
   dialog: PropTypes.bool,
+  dialogTitle: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['inherit', 'default', 'small', 'large']),
 };
 
