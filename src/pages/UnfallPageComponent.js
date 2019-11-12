@@ -286,6 +286,7 @@ UnfallPageComponent.propTypes = {
   accidentPosition: PropTypes.shape({
     lat: PropTypes.number,
     lng: PropTypes.number,
+    initial: PropTypes.bool,
   }),
   accident: PropTypes.shape({
     error: PropTypes.oneOfType([
