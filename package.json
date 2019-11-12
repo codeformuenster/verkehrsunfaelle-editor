@@ -9,15 +9,15 @@
     "lint": "eslint -c .eslintrc src"
   },
   "dependencies": {
-    "@babel/core": "7.7.0",
+    "@babel/core": "7.7.2",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
-    "@material-ui/core": "^4.6.0",
+    "@material-ui/core": "^4.6.1",
     "@material-ui/icons": "^4.5.1",
     "@reach/router": "^1.2.1",
-    "@sentry/browser": "^5.7.1",
+    "@sentry/browser": "^5.8.0",
     "@svgr/webpack": "4.3.3",
-    "@typescript-eslint/eslint-plugin": "2.6.1",
-    "@typescript-eslint/parser": "2.6.1",
+    "@typescript-eslint/eslint-plugin": "2.7.0",
+    "@typescript-eslint/parser": "2.7.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
@@ -32,7 +32,7 @@
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-loader": "3.0.2",
-    "eslint-plugin-flowtype": "4.3.0",
+    "eslint-plugin-flowtype": "4.4.1",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.16.0",
@@ -45,7 +45,7 @@
     "jest": "24.9.0",
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.9.0",
-    "jest-watch-typeahead": "0.4.0",
+    "jest-watch-typeahead": "0.4.2",
     "kinto-http": "^4.7.3",
     "ky": "^0.15.0",
     "leaflet": "^1.5.1",
@@ -70,7 +70,7 @@
     "semver": "6.3.0",
     "style-loader": "1.0.0",
     "terser-webpack-plugin": "2.2.1",
-    "ts-pnp": "1.1.4",
+    "ts-pnp": "1.1.5",
     "webpack": "4.41.2",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dev-server": "3.9.0",
@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.5.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.1"
   },
   "browserslist": {
     "production": [
