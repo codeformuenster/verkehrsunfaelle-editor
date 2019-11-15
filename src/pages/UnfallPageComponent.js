@@ -235,11 +235,7 @@ const UnfallPageComponent = ({
               <UnfallBox
                 accident={accident}
                 loading={isLoading}
-                onSaveClick={
-                  accidentPosition.lat === null
-                    ? undefined
-                    : bogus => handleSaveClick(bogus)
-                }
+                onSaveClick={bogus => handleSaveClick(bogus)}
                 onNextClick={reloadAccident}
                 saveError={saveError}
                 hideNext={hideNext}
