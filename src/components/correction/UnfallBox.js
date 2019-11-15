@@ -117,33 +117,30 @@ const UnfallBox = ({
   let actionBox = null;
 
   if (authorized) {
-    if (loading) {
-      actionBox = <LoadingBox minHeight="60px" />;
-    } else {
-      actionBox = (
-        <>
-          <Button
-            variant="outlined"
-            className={classes.actionButton}
-            onClick={() => onSaveClick(true)}
-          >
-            <WarningIcon className={classes.actionIcon} />
-            Ort unbestimmbar
-          </Button>
-          <Button
-            color="primary"
-            variant="outlined"
-            className={classes.actionButton}
-            disabled={typeof onSaveClick === 'undefined'}
-            onClick={() => onSaveClick(false)}
-          >
-            <SaveIcon className={classes.actionIcon} />
-            {positionChanged === true ? 'Position' : 'Änderung'}{' '}
-            {username === 'Anonym' ? 'Anonym ' : null}speichern
-          </Button>
-        </>
-      );
-    }
+    actionBox = (
+      <>
+        <Button
+          variant="outlined"
+          className={classes.actionButton}
+          disabled={loading}
+          onClick={() => onSaveClick(true)}
+        >
+          <WarningIcon className={classes.actionIcon} />
+          Ort unbestimmbar
+        </Button>
+        <Button
+          color="primary"
+          variant="outlined"
+          className={classes.actionButton}
+          disabled={loading || typeof onSaveClick === 'undefined'}
+          onClick={() => onSaveClick(false)}
+        >
+          <SaveIcon className={classes.actionIcon} />
+          {positionChanged === true ? 'Position' : 'Änderung'}{' '}
+          {username === 'Anonym' ? 'Anonym ' : null}speichern
+        </Button>
+      </>
+    );
   } else {
     actionBox = (
       <Box flexDirection="column" border={1} m={1} pb={1}>
@@ -242,77 +239,85 @@ const UnfallBox = ({
         </Box>
       </Typography>
       <Grid container spacing={0}>
-        <Grid item xs={12}>
-          <Typography
-            variant="h6"
-            align="center"
-            className={classes.accidentProperty}
-          >
-            <PlaceName place={accident.place} quotes={true} /> /{' '}
-            <PlaceName place={accident.place_near} quotes={true} />
-          </Typography>
-          <Typography
-            variant="caption"
-            component="h6"
-            color="textSecondary"
-            align="center"
-          >
-            Unfallort / Unfallhöhe
-          </Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            className={classes.accidentPropertySmaller}
-          >
-            <PlaceName
-              place={categoryText ? categoryText.title : ''}
-              quotes={true}
-            />
-          </Typography>
-          <Typography
-            variant="caption"
-            component="h6"
-            color="textSecondary"
-            align="center"
-          >
-            Kategorie
-          </Typography>
-        </Grid>
-        <Grid item xs={4} align="center">
-          <Participants {...accident} />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            className={classes.accidentPropertySmaller}
-          >
-            <TimeOfAccident date={accident.date} />
-          </Typography>
-          <Typography
-            variant="caption"
-            component="h6"
-            color="textSecondary"
-            align="center"
-          >
-            Zeitpunkt
-          </Typography>
-        </Grid>
-        {saveError && (
+        {loading === true ? (
           <Grid item xs={12}>
-            <Box className={classes.saveErrorBox}>
-              <Typography variant="body2">
-                <WarningIcon /> Korrektur konnte nicht gespeichert werden. Bitte
-                probieren Sie es später noch ein mal.
-              </Typography>
-            </Box>
+            <LoadingBox minHeight="170px" />
           </Grid>
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <Typography
+                variant="h6"
+                align="center"
+                className={classes.accidentProperty}
+              >
+                <PlaceName place={accident.place} quotes={true} /> /{' '}
+                <PlaceName place={accident.place_near} quotes={true} />
+              </Typography>
+              <Typography
+                variant="caption"
+                component="h6"
+                color="textSecondary"
+                align="center"
+              >
+                Unfallort / Unfallhöhe
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography
+                variant="subtitle1"
+                align="center"
+                className={classes.accidentPropertySmaller}
+              >
+                <PlaceName
+                  place={categoryText ? categoryText.title : ''}
+                  quotes={true}
+                />
+              </Typography>
+              <Typography
+                variant="caption"
+                component="h6"
+                color="textSecondary"
+                align="center"
+              >
+                Kategorie
+              </Typography>
+            </Grid>
+            <Grid item xs={4} align="center">
+              <Participants {...accident} />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                variant="subtitle1"
+                align="center"
+                className={classes.accidentPropertySmaller}
+              >
+                <TimeOfAccident date={accident.date} />
+              </Typography>
+              <Typography
+                variant="caption"
+                component="h6"
+                color="textSecondary"
+                align="center"
+              >
+                Zeitpunkt
+              </Typography>
+            </Grid>
+            {saveError && (
+              <Grid item xs={12}>
+                <Box className={classes.saveErrorBox}>
+                  <Typography variant="body2">
+                    <WarningIcon /> Korrektur konnte nicht gespeichert werden.
+                    Bitte probieren Sie es später noch ein mal.
+                  </Typography>
+                </Box>
+              </Grid>
+            )}
+            <Grid item xs={12}>
+              <Box className={classes.actionBox}>{actionBox}</Box>
+            </Grid>
+          </>
         )}
-        <Grid item xs={12}>
-          <Box className={classes.actionBox}>{actionBox}</Box>
-        </Grid>
       </Grid>
     </Paper>
   );
