@@ -119,9 +119,7 @@ const questionsAndAnswers = [
         <br />
         <br />
         Wenn Du Dich aber einloggst, dann erscheinst Du auch (wenn Du möchtest)
-        in der Highscore-Liste. Schaffst Du es, am meisten Unfälle zu
-        korrigieren? Die ersten drei der Rangliste am 1.1.2020 bekommen jeweils
-        ein Bier o.ä. von uns ausgegeben!
+        in der Highscore-Liste.
         <br />
         <br />
         Der Grund für das Einloggen ist, dass wir Missbrauch vermeiden wollen.
@@ -179,7 +177,7 @@ const questionsAndAnswers = [
         Kurz gesagt: Mittelfristig bekommst Du eine sicherere
         Verkehrsinfrastruktur, weil es mit den Unfalldaten möglich ist,
         besonders gefährliche Orte zu identifizieren und dann hoffentlich zu
-        entschärfen. Und Du kannst ein Bier, Kaffee oder Softdrink gewinnen!
+        entschärfen.
         <br />
         <br />
         Lange Antwort: In Münster gibt es im Vergleich zu anderen NRW-Städten
