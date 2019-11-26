@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Map from '../components/map/Map';
 import UnfallBox from '../components/correction/UnfallBox';
-import InfoButton from '../components/InfoButton';
+import CorrectionHelp from '../components/CorrectionHelp';
 import Link from '../components/Link';
 import ErrorBoundary from 'react-error-boundary';
 import * as Sentry from '@sentry/browser';
@@ -46,13 +46,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column-reverse',
     [theme.breakpoints.up('lg')]: {
       flexDirection: 'unset',
-    },
-  },
-  infoButton: {
-    marginLeft: 'auto',
-    padding: theme.spacing(0),
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
     },
   },
   infoBox: {
@@ -140,21 +133,6 @@ const UnfallPageComponent = ({
     saveAccident(bogus);
   };
 
-  const information = (
-    <>
-      <Typography variant="body1" gutterBottom>
-        Für jeden Unfall wird von der Polizei auch der Unfallort erhoben. Die
-        Angaben umfassen einen &quot;Unfallort&quot; und eine
-        &quot;Unfallhöhe&quot;. Aus den Angaben der Polizei haben wir
-        automatisiert versucht, den Ort herauszufinden.
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        Du kannst eine Korrektur vorschlagen, in dem du in der Karte den Marker
-        verschiebst und rechts auf &quot;Speichern&quot; klickst.
-      </Typography>
-    </>
-  );
-
   return (
     <>
       <Container>
@@ -167,13 +145,7 @@ const UnfallPageComponent = ({
             >
               Unfallort korrigieren
             </Typography>
-            <InfoButton
-              icon="help"
-              information={information}
-              className={classes.infoButton}
-              dialog
-              dialogTitle="Unfallort korrigieren"
-            />
+            <CorrectionHelp buttonOnly />
           </Box>
           <Grid container spacing={1} className={classes.mainGrid}>
             <Grid item lg={8} xs={12}>
@@ -242,7 +214,7 @@ const UnfallPageComponent = ({
                 positionChanged={accidentPosition.initial}
               />
               <Box className={classes.infoBox} mt={2}>
-                {information}
+                <CorrectionHelp />
               </Box>
             </Grid>
           </Grid>
