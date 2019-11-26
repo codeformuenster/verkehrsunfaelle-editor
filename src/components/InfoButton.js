@@ -66,18 +66,20 @@ const InfoButton = ({
             </Button>
           </DialogActions>
         </Dialog>
-        <IconButton
-          color="inherit"
-          aria-label={icon === 'help' ? 'Hilfe' : 'Info'}
-          className={className}
-          onClick={handleOpen}
-        >
-          {icon === 'help' ? (
-            <HelpIcon fontSize={size} />
-          ) : (
-            <InfoIcon fontSize={size} />
-          )}
-        </IconButton>
+        <Tooltip arrow title={dialogTitle}>
+          <IconButton
+            color="inherit"
+            aria-label={icon === 'help' ? 'Hilfe' : 'Info'}
+            className={className}
+            onClick={handleOpen}
+          >
+            {icon === 'help' ? (
+              <HelpIcon fontSize={size} />
+            ) : (
+              <InfoIcon fontSize={size} />
+            )}
+          </IconButton>
+        </Tooltip>
       </>
     );
   } else {

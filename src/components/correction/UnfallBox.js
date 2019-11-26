@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import InfoButton from '../InfoButton';
 import LoadingBox from '../LoadingBox';
 import Link from '../Link';
@@ -218,24 +219,28 @@ const UnfallBox = ({
             dialog
           />
           {!hideNext && (
+            <Tooltip title="Nächster Unfall" arrow>
+              <IconButton
+                size="small"
+                className={classes.miniButton}
+                onClick={onNextClick}
+                aria-label="Nächster Unfall"
+              >
+                <RefreshIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          )}
+          <Tooltip title="Direktlink zu diesem Unfall" arrow>
             <IconButton
+              component={ReachLink}
               size="small"
               className={classes.miniButton}
-              onClick={onNextClick}
-              aria-label="Nächster Unfall"
+              to={`/korrektur/${accident.accident_id}`}
+              aria-label="Direktlink zu diesem Unfall"
             >
-              <RefreshIcon fontSize="small" />
+              <LinkIcon fontSize="small" />
             </IconButton>
-          )}
-          <IconButton
-            component={ReachLink}
-            size="small"
-            className={classes.miniButton}
-            to={`/korrektur/${accident.accident_id}`}
-            aria-label="Direktlink zu diesem Unfall"
-          >
-            <LinkIcon fontSize="small" />
-          </IconButton>
+          </Tooltip>
         </Box>
       </Typography>
       <Grid container spacing={0}>
