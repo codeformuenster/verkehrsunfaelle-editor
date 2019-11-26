@@ -119,7 +119,7 @@ const DataPage = () => {
             Verkehrsunfälle in Münster - Daten
           </Typography>
           <Typography variant="body1" align="justify" gutterBottom>
-            Diese Seite beinhaltet Informationen Fortschritt der
+            Diese Seite beinhaltet Informationen zum Fortschritt der
             Korrektur/Validierung, Downloadlinks zu den Rohdaten, und in Zukunft
             den finalen Datensatz.
           </Typography>
