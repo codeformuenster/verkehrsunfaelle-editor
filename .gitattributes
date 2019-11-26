@@ -1,0 +1,4 @@
+public/unfall_kein_ort.webm filter=lfs diff=lfs merge=lfs -text
+public/unfall_nicht_ok.webm filter=lfs diff=lfs merge=lfs -text
+public/unfall_ok.webm filter=lfs diff=lfs merge=lfs -text
+public/unfall_verschiebe.webm filter=lfs diff=lfs merge=lfs -text
