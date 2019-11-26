@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#ee1020',
     textTransform: 'uppercase',
     transform: 'rotate(-40grad)',
-    display: 'inline-block',
+    display: 'none',
     fontSize: '0.9rem',
     fontWeight: '700',
     position: 'absolute',
