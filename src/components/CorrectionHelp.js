@@ -76,7 +76,7 @@ Video.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-}
+};
 
 const correctionHelpOpener = (
   <>
@@ -185,7 +185,7 @@ const CorrectionHelp = ({ buttonOnly }) => {
 };
 
 CorrectionHelp.propTypes = {
-  buttonOnly: PropTypes.bool
-}
+  buttonOnly: PropTypes.bool,
+};
 
 export default CorrectionHelp;
