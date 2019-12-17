@@ -15,7 +15,6 @@ import LoadingBox from '../LoadingBox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import MuiLink from '@material-ui/core/Link';
 import Geocoder from './Geocoder';
 
 import 'leaflet/dist/leaflet.css';
@@ -202,34 +201,15 @@ const UnfallMap = ({
           <Typography variant="body1">
             Dieser Unfall hat noch keinen maschinenlesbaren Ort.
           </Typography>
-          <Typography variant="body1" gutterBottom>
-            Benutze die{' '}
-            <MuiLink
-              className={classes.searchLinkSpan}
-              component="span"
-              onClick={() => {
-                setExpandSearchOnce(true);
-                setDismissPositionMissing(true);
-              }}
-            >
-              Suche
-            </MuiLink>
-            , oder füge einen Marker in der Kartenmitte hinzu.
-          </Typography>
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              const [lat, lng] = viewportState.center;
-              onMarkerDragEnd({
-                lat,
-                lng,
-                reallyInitial: true,
-              });
-              setViewportState({ ...viewportState, zoom: 17 });
+                setExpandSearchOnce(true);
+                setDismissPositionMissing(true);
             }}
           >
-            Marker hinzufügen
+            Suche öffnen
           </Button>
         </Paper>
       )}
