@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
@@ -63,6 +64,20 @@ const Video = ({ src, title, description }) => {
   );
 };
 
+Video.propTypes = {
+  src: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.string,
+  ]).isRequired,
+  description: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.string,
+  ]).isRequired,
+}
+
 const correctionHelpOpener = (
   <>
     <Typography variant="body1" gutterBottom>
@@ -94,16 +109,19 @@ const correctionHelpInformation = (
             Der auf der Karte markierte Ort ist <strong>nicht</strong> korrekt
           </>
         }
+        // eslint-disable-next-line max-len
         description="Die Ortsangaben passen nicht zu dem auf der Karte markierten Ort."
       />
       <Video
         src="unfall_nicht_ok.webm"
         title="Die Ortsangaben sind unvollständig / existieren nicht"
+        // eslint-disable-next-line max-len
         description="Bei den Ortsangaben fehlt etwas oder beschreiben einen nicht existierenden Ort."
       />
       <Video
         src="unfall_kein_ort.webm"
         title="Die Karte enhält keinen Ort"
+        // eslint-disable-next-line max-len
         description="Für diesen Unfall existiert kein Vorschlag for einen passenden Ort."
       />
     </Box>
@@ -162,9 +180,12 @@ const CorrectionHelp = ({ buttonOnly }) => {
           </MuiLink>
         </Box>
       )}
-      {/* <span >Hilfe</span> */}
     </>
   );
 };
+
+CorrectionHelp.propTypes = {
+  buttonOnly: PropTypes.bool
+}
 
 export default CorrectionHelp;
