@@ -124,6 +124,16 @@ const UnfallMap = ({
           map.setZoom(maxZoom);
         }
       }}
+      onViewportChange={
+        Browser.mobile && markerLat !== null
+          ? ({ center }) => {
+              onMarkerDragEnd({
+                lat: center[0],
+                lng: center[1],
+              });
+            }
+          : undefined
+      }
       onViewportChanged={viewport => {
         setViewportState(viewport);
       }}
@@ -187,9 +197,9 @@ const UnfallMap = ({
       {markerLat && markerLon && (
         <Marker
           position={[markerLat, markerLon]}
-          draggable={true}
+          draggable={!Browser.mobile}
           autoPan={true}
-          onDragEnd={onMarkerDragEnd}
+          onDragEnd={Browser.mobile ? undefined : onMarkerDragEnd}
         >
           {Browser.mobile ? null : <Popup>{popupContent}</Popup>}
         </Marker>
@@ -205,8 +215,8 @@ const UnfallMap = ({
             variant="contained"
             color="primary"
             onClick={() => {
-                setExpandSearchOnce(true);
-                setDismissPositionMissing(true);
+              setExpandSearchOnce(true);
+              setDismissPositionMissing(true);
             }}
           >
             Suche öffnen
