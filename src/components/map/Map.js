@@ -9,7 +9,7 @@ import {
   LayersControl,
   LayerGroup,
 } from 'react-leaflet';
-import { CRS } from 'leaflet';
+import { CRS, Browser } from 'leaflet';
 import { makeStyles } from '@material-ui/core/styles';
 import LoadingBox from '../LoadingBox';
 import Paper from '@material-ui/core/Paper';
@@ -191,7 +191,7 @@ const UnfallMap = ({
           autoPan={true}
           onDragEnd={onMarkerDragEnd}
         >
-          <Popup>{popupContent}</Popup>
+          {Browser.mobile ? null : <Popup>{popupContent}</Popup>}
         </Marker>
       )}
       {loading && <LoadingBox className={classes.loadingOverlay} />}
