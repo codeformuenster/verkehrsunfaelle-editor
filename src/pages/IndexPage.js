@@ -60,8 +60,9 @@ export default function IndexPage() {
           <Typography variant="body1" align="justify" gutterBottom>
             Diese Seite soll dabei helfen, den Datensatz zu verbessern. Jeder
             kann dabei mithelfen, Fehler des Computers bei der Erkennung des
-            Unfallortes zu korrigieren. Es ist ganz einfach und macht sogar
-            Spaß!
+            Unfallortes zu korrigieren. Es ist ganz einfach! Dazu gibt es Dir
+            das wohlige Gefühl, einen Beitrag zu einer sichereren
+            Verkehrsinfrastruktur für alle zu leisten!
           </Typography>
         </Box>
         <Box my={4}>
