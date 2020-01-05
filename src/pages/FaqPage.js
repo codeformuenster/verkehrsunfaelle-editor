@@ -64,7 +64,16 @@ const questionsAndAnswers = [
         >
           zu visualisieren und einfach zugänglich
         </Link>{' '}
-        zu machen (Folien eines Vortrages auf dem &quot;Forum Citizen Science
+        zu machen. Die &quot;Westfälischen Nachrichten&quot; haben{' '}
+        <Link
+          target="_blank"
+          // eslint-disable-next-line max-len
+          href="https://www.wn.de/Muenster/Stadtteile/Hiltrup/4007359-Interaktive-Unfallkarte-zeigt-Gefahrenpunkte-in-Hiltrup-Hier-kracht-es-am-Haeufigsten"
+          rel="noopener"
+        >
+          einen Bericht über unser Projekt geschrieben
+        </Link>
+        . Folien eines Vortrages auf dem &quot;Forum Citizen Science
         2019&quot; mit weiteren Infos und Quellen zum Projekt{' '}
         <Link
           target="_blank"
@@ -74,7 +83,7 @@ const questionsAndAnswers = [
         >
           finden sich hier
         </Link>
-        ). Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
+        . Bedauerlicherweise werden die Orte der Verkehrsunfälle in einem nur
         schwer maschinenlesbaren Format aufgenommen (z.B.: &apos;Kappenberger
         Damm, Höhe Kriegerweg&apos;). Wir haben es uns nun zur Aufgabe gemacht
         alle Unfälle durchzugehen und den korrekten Ort einzupflegen. Da es so
